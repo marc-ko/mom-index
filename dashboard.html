@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>宝妈指数 · Mom Index</title>
+<title>Mom Index</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,7 +18,29 @@ body {
   border-bottom: 1px solid #334155;
   padding: 20px 32px;
   text-align: center;
+  position: relative;
 }
+.lang-switch {
+  position: absolute;
+  right: 24px;
+  top: 18px;
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+}
+.lang-switch button {
+  border: 0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #94a3b8;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+}
+.lang-switch button.active { background: #334155; color: #f8fafc; }
 .header h1 {
   font-size: 28px;
   background: linear-gradient(135deg, #f59e0b, #ef4444);
@@ -26,13 +48,8 @@ body {
   -webkit-text-fill-color: transparent;
   margin-bottom: 4px;
 }
-.header .subtitle {
-  color: #94a3b8;
-  font-size: 14px;
-}
+.header .subtitle { color: #94a3b8; font-size: 14px; }
 .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
-
-/* 指数卡片网格 */
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 32px; }
 .card {
   background: #1e293b;
@@ -42,27 +59,31 @@ body {
   position: relative;
   overflow: hidden;
 }
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-}
-.card.nasdaq::before   { background: linear-gradient(90deg, #3b82f6, #06b6d4); }
-.card.gold::before     { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
-.card.cpo::before      { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.card.nasdaq::before { background: linear-gradient(90deg, #3b82f6, #06b6d4); }
+.card.gold::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.card.cpo::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
 .card.semiconductor::before { background: linear-gradient(90deg, #10b981, #34d399); }
-
 .card .sector-name { font-size: 13px; color: #94a3b8; margin-bottom: 8px; }
 .card .index-value { font-size: 48px; font-weight: 800; margin-bottom: 4px; }
 .card .index-label { font-size: 14px; color: #64748b; margin-bottom: 12px; }
 .card .signal { font-size: 13px; padding: 4px 10px; border-radius: 6px; display: inline-block; }
-.card .signal.red    { background: rgba(239,68,68,0.15); color: #f87171; }
+.card .signal.red { background: rgba(239,68,68,0.15); color: #f87171; }
 .card .signal.orange { background: rgba(251,146,60,0.15); color: #fb923c; }
 .card .signal.yellow { background: rgba(250,204,21,0.15); color: #facc15; }
-.card .signal.green  { background: rgba(34,197,94,0.15); color: #4ade80; }
-.card .signal.blue   { background: rgba(59,130,246,0.15); color: #60a5fa; }
-
+.card .signal.green { background: rgba(34,197,94,0.15); color: #4ade80; }
+.card .signal.blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.metric-pair { margin-top: 14px; display: flex; gap: 8px; }
+.metric-box { flex: 1; border-radius: 8px; padding: 8px; text-align: center; }
+.metric-box.buy { background: rgba(34,197,94,0.08); }
+.metric-box.sell { background: rgba(239,68,68,0.08); }
+.metric-value { font-size: 20px; font-weight: 700; }
+.metric-box.buy .metric-value { color: #4ade80; }
+.metric-box.sell .metric-value { color: #f87171; }
+.metric-label { font-size: 10px; color: #64748b; }
+.ratio-row { margin-top: 8px; display: flex; align-items: center; gap: 6px; font-size: 10px; color: #64748b; }
+.ratio-bar { flex: 1; height: 5px; background: #2d1f1f; border-radius: 3px; overflow: hidden; display: flex; }
+.ratio-fill { height: 100%; background: linear-gradient(90deg,#22c55e,#4ade80); }
 .card .detail-row {
   display: flex; justify-content: space-between;
   margin-top: 12px; padding-top: 12px;
@@ -70,60 +91,31 @@ body {
   font-size: 12px; color: #64748b;
 }
 .card .detail-row span { color: #cbd5e1; }
-
-/* 图表区域 */
 .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 24px; }
-.chart-box {
-  background: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 12px;
-  padding: 20px;
-}
+.chart-box { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; }
 .chart-box h3 { font-size: 16px; margin-bottom: 16px; color: #e2e8f0; }
-
-/* Top 小白帖 */
-.top-posts {
-  background: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 24px;
-}
+.top-posts { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; margin-top: 24px; }
 .top-posts h3 { font-size: 16px; margin-bottom: 16px; }
-.post-item {
-  padding: 12px;
-  border-bottom: 1px solid #334155;
-  font-size: 13px;
-}
+.post-item { padding: 12px; border-bottom: 1px solid #334155; font-size: 13px; }
 .post-item:last-child { border-bottom: none; }
 .post-item .post-title { color: #e2e8f0; margin-bottom: 4px; }
 .post-item .post-meta { color: #64748b; font-size: 11px; }
 .post-item .post-reason { color: #94a3b8; font-size: 12px; margin-top: 4px; font-style: italic; }
-.post-badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  margin-right: 8px;
-}
-.post-badge.pure   { background: rgba(239,68,68,0.2); color: #fca5a5; }
-.post-badge.semi   { background: rgba(251,146,60,0.2); color: #fdba74; }
-
-/* 图例 */
+.post-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 8px; }
+.post-badge.pure { background: rgba(239,68,68,0.2); color: #fca5a5; }
+.post-badge.semi { background: rgba(251,146,60,0.2); color: #fdba74; }
 .legend { display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #94a3b8; }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-.legend-dot.nasdaq   { background: #06b6d4; }
-.legend-dot.gold     { background: #fbbf24; }
-.legend-dot.cpo      { background: #a78bfa; }
+.legend-dot.nasdaq { background: #06b6d4; }
+.legend-dot.gold { background: #fbbf24; }
+.legend-dot.cpo { background: #a78bfa; }
 .legend-dot.semiconductor { background: #34d399; }
-
-.footer { text-align: center; padding: 32px; color: #475569; font-size: 12px; }
-
-/* 加载状态 */
+.footer { text-align: center; padding: 32px; color: #475569; font-size: 12px; line-height: 1.7; }
 .loading { text-align: center; padding: 60px; color: #64748b; }
-
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+  .header { padding-top: 64px; }
+  .lang-switch { left: 50%; right: auto; transform: translateX(-50%); }
   .charts { grid-template-columns: 1fr; }
   .card .index-value { font-size: 36px; }
 }
@@ -132,50 +124,122 @@ body {
 <body>
 
 <div class="header">
-  <h1>👩‍👧 宝妈指数</h1>
-  <div class="subtitle">当小白开始讨论投资，就是该警惕的时候</div>
+  <div class="lang-switch" aria-label="Language selector">
+    <button type="button" data-lang-button="en">EN</button>
+    <button type="button" data-lang-button="zh">中文</button>
+  </div>
+  <h1 data-i18n="title">Mom Index</h1>
+  <div class="subtitle" data-i18n="subtitle">When beginners start talking markets, pay attention.</div>
   <div class="subtitle" id="update-time" style="margin-top:4px"></div>
 </div>
 
 <div class="container">
-  <!-- 四个板块指数卡片 -->
   <div class="cards" id="cards"></div>
 
-  <!-- 图例 -->
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot nasdaq"></div>纳斯达克</div>
-    <div class="legend-item"><div class="legend-dot gold"></div>黄金</div>
-    <div class="legend-item"><div class="legend-dot cpo"></div>CPO通信</div>
-    <div class="legend-item"><div class="legend-dot semiconductor"></div>半导体</div>
-  </div>
+  <div class="legend" id="legend"></div>
 
-  <!-- 历史曲线 -->
-  <div class="charts">
-    <div class="chart-box"><h3>📈 纳斯达克 — 宝妈指数走势</h3><canvas id="chart-nasdaq"></canvas></div>
-    <div class="chart-box"><h3>🥇 黄金 — 宝妈指数走势</h3><canvas id="chart-gold"></canvas></div>
-    <div class="chart-box"><h3>🔌 CPO通信 — 宝妈指数走势</h3><canvas id="chart-cpo"></canvas></div>
-    <div class="chart-box"><h3>💾 半导体 — 宝妈指数走势</h3><canvas id="chart-semiconductor"></canvas></div>
-  </div>
+  <div class="charts" id="charts"></div>
 
-  <!-- Top 小白帖 -->
   <div class="top-posts" id="top-posts">
-    <h3>🔥 今日最"小白"的帖子</h3>
-    <div class="loading">加载中...</div>
+    <h3 data-i18n="topPostsTitle">Hottest beginner-signal posts today</h3>
+    <div class="loading" data-i18n="loading">Loading...</div>
   </div>
 </div>
 
 <div class="footer">
-  宝妈指数 v1.0 — 数据来源: 东方财富股吧 · 小红书 · 抖音<br>
-  指数越高 = 小白越活跃 = 市场情绪越危险<br>
-  <span style="color:#64748b">⚠️ 仅供参考，不构成投资建议</span>
+  <div data-i18n="footerSource">Mom Index v1.0 - Sources: Eastmoney Guba and Rednote/Xiaohongshu</div>
+  <div data-i18n="footerMeaning">Higher index = more active beginners = more dangerous crowd sentiment</div>
+  <span style="color:#64748b" data-i18n="footerDisclaimer">Research only. Not financial advice.</span>
 </div>
 
 <script>
-const SECTOR_NAMES = {
-  nasdaq: '纳斯达克',
-  gold: '黄金', 
-  cpo: 'CPO通信',
-  semiconductor: '半导体'
+const I18N = {
+  en: {
+    title: 'Mom Index',
+    subtitle: 'When beginners start talking markets, pay attention.',
+    updated: date => `Updated ${date}`,
+    noData: 'No data yet. Run pipeline.py first.',
+    loading: 'Loading...',
+    loadFailed: message => `Data failed to load: ${message}. Run pipeline.py to generate dashboard data.`,
+    momIndex: 'Mom Index',
+    momBuy: 'Mom Buy',
+    momSell: 'Mom Sell',
+    sell: 'Sell',
+    buy: 'Buy',
+    beginnerPosts: 'Beginner posts',
+    buySellRatio: 'Buy/Sell ratio',
+    chase: 'FOMO buying',
+    balanced: 'Balanced',
+    panic: 'Panic selling',
+    chartSuffix: 'Mom Index Trend',
+    tooltipLabel: value => `Mom Index: ${value}`,
+    topPostsTitle: 'Hottest beginner-signal posts today',
+    noTopPosts: 'No high-signal beginner posts today.',
+    pureBeginner: 'Pure beginner',
+    semiBeginner: 'Beginner-ish',
+    scoreUnit: 'pts',
+    reasoningPrefix: 'Reasoning',
+    footerSource: 'Mom Index v1.0 - Sources: Eastmoney Guba and Rednote/Xiaohongshu',
+    footerMeaning: 'Higher index = more active beginners = more dangerous crowd sentiment',
+    footerDisclaimer: 'Research only. Not financial advice.',
+    sectors: {
+      nasdaq: 'Nasdaq',
+      gold: 'Gold',
+      cpo: 'CPO / Communications',
+      semiconductor: 'Semiconductor'
+    },
+    signalText: idx => {
+      if (idx >= 75) return 'Extreme heat - strong contrarian warning';
+      if (idx >= 60) return 'High alert - retail crowding is elevated';
+      if (idx >= 40) return 'Warming up - retail attention is rising';
+      if (idx >= 20) return 'Normal range - activity is present';
+      return 'Very cold - beginners are quiet';
+    },
+    intent: { buy: 'Buy', sell: 'Sell', neutral: 'Watch' }
+  },
+  zh: {
+    title: '宝妈指数',
+    subtitle: '当小白开始讨论投资，就是该警惕的时候',
+    updated: date => `更新于 ${date}`,
+    noData: '暂无数据，请先运行 pipeline.py',
+    loading: '加载中...',
+    loadFailed: message => `数据加载失败: ${message}。请先运行 pipeline.py 生成数据。`,
+    momIndex: '宝妈指数',
+    momBuy: '宝妈买入',
+    momSell: '宝妈卖出',
+    sell: '卖出',
+    buy: '买入',
+    beginnerPosts: '小白帖',
+    buySellRatio: '买卖比',
+    chase: '追涨',
+    balanced: '平衡',
+    panic: '恐慌',
+    chartSuffix: '宝妈指数走势',
+    tooltipLabel: value => `宝妈指数: ${value}`,
+    topPostsTitle: '今日最“小白”的帖子',
+    noTopPosts: '今日暂无典型小白帖',
+    pureBeginner: '纯小白',
+    semiBeginner: '偏小白',
+    scoreUnit: '分',
+    reasoningPrefix: '推理',
+    footerSource: '宝妈指数 v1.0 - 数据来源: 东方财富股吧 · 小红书/Rednote',
+    footerMeaning: '指数越高 = 小白越活跃 = 市场情绪越危险',
+    footerDisclaimer: '仅供研究参考，不构成投资建议',
+    sectors: {
+      nasdaq: '纳斯达克',
+      gold: '黄金',
+      cpo: 'CPO通信',
+      semiconductor: '半导体'
+    },
+    signalText: idx => {
+      if (idx >= 75) return '极度狂热 - 擦鞋童时刻';
+      if (idx >= 60) return '高度警惕 - 小白大量涌入';
+      if (idx >= 40) return '开始升温 - 需保持关注';
+      if (idx >= 20) return '正常区间 - 小白参与适中';
+      return '极度冷清 - 小白沉默不语';
+    },
+    intent: { buy: '买入', sell: '卖出', neutral: '观望' }
+  }
 };
 
 const SECTOR_COLORS = {
@@ -184,6 +248,19 @@ const SECTOR_COLORS = {
   cpo: '#a78bfa',
   semiconductor: '#34d399'
 };
+
+const CHART_ICONS = {
+  nasdaq: '📈',
+  gold: '🥇',
+  cpo: '🔌',
+  semiconductor: '💾'
+};
+
+let currentLang = localStorage.getItem('mom-index-lang') || 'en';
+let dashboardData = null;
+let charts = [];
+
+function tr(key) { return I18N[currentLang][key]; }
 
 function getSignalClass(idx) {
   if (idx >= 75) return 'red';
@@ -201,73 +278,111 @@ function getEmoji(idx) {
   return '🔵';
 }
 
+function mapIntentLabel(intent, fallback) {
+  const clean = (intent || '').toLowerCase();
+  if (clean in tr('intent')) return tr('intent')[clean];
+  if (!fallback) return '';
+  if (fallback.includes('买')) return tr('intent').buy;
+  if (fallback.includes('卖')) return tr('intent').sell;
+  if (fallback.includes('观')) return tr('intent').neutral;
+  return fallback;
+}
+
+function setStaticText() {
+  document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const value = tr(key);
+    if (typeof value === 'string') el.textContent = value;
+  });
+  document.querySelectorAll('[data-lang-button]').forEach(button => {
+    button.classList.toggle('active', button.dataset.langButton === currentLang);
+  });
+}
+
+function renderLegend() {
+  document.getElementById('legend').innerHTML = Object.keys(SECTOR_COLORS).map(key => `
+    <div class="legend-item"><div class="legend-dot ${key}"></div>${tr('sectors')[key]}</div>
+  `).join('');
+}
+
 function renderCards(data) {
   const container = document.getElementById('cards');
   const latest = data.latest;
   if (!latest) {
-    container.innerHTML = '<div class="loading">暂无数据，请先运行 pipeline.py</div>';
+    container.innerHTML = `<div class="loading">${tr('noData')}</div>`;
+    document.getElementById('update-time').textContent = '';
     return;
   }
 
-  document.getElementById('update-time').textContent = 
-    `更新于 ${latest.date}`;
+  document.getElementById('update-time').textContent = tr('updated')(latest.date);
 
   container.innerHTML = Object.entries(latest.sectors).map(([key, sector]) => {
     const cls = getSignalClass(sector.index);
     const d = sector.details || {};
+    const buyCount = d.buy_count || 0;
+    const sellCount = d.sell_count || 0;
+    const buyWidth = (buyCount / Math.max(buyCount, sellCount, 1)) * 100;
+    const ratio = d.buy_sell_ratio || 0;
+    const ratioLabel = ratio > 1.5 ? tr('chase') : ratio > 0.8 ? tr('balanced') : tr('panic');
+    const ratioColor = ratio > 1.5 ? '#f87171' : ratio > 0.8 ? '#facc15' : '#4ade80';
+
     return `
       <div class="card ${key}">
-        <div class="sector-name">${getEmoji(sector.index)} ${SECTOR_NAMES[key]}</div>
+        <div class="sector-name">${getEmoji(sector.index)} ${tr('sectors')[key]}</div>
         <div class="index-value">${sector.index}</div>
-        <div class="index-label">宝妈指数</div>
-        <div class="signal ${cls}">${sector.interpretation}</div>
-        <!-- 买入/卖出子指数 -->
-        <div style="margin-top:14px; display:flex; gap:8px;">
-          <div style="flex:1; background:rgba(34,197,94,0.08); border-radius:8px; padding:8px; text-align:center;">
-            <div style="font-size:20px; font-weight:700; color:#4ade80;">${d.mom_buy_index ?? 0}</div>
-            <div style="font-size:10px; color:#64748b;">🟢 宝妈买入</div>
+        <div class="index-label">${tr('momIndex')}</div>
+        <div class="signal ${cls}">${tr('signalText')(sector.index)}</div>
+        <div class="metric-pair">
+          <div class="metric-box buy">
+            <div class="metric-value">${d.mom_buy_index ?? 0}</div>
+            <div class="metric-label">${tr('momBuy')}</div>
           </div>
-          <div style="flex:1; background:rgba(239,68,68,0.08); border-radius:8px; padding:8px; text-align:center;">
-            <div style="font-size:20px; font-weight:700; color:#f87171;">${d.mom_sell_index ?? 0}</div>
-            <div style="font-size:10px; color:#64748b;">🔴 宝妈卖出</div>
+          <div class="metric-box sell">
+            <div class="metric-value">${d.mom_sell_index ?? 0}</div>
+            <div class="metric-label">${tr('momSell')}</div>
           </div>
         </div>
-        <!-- 买卖比进度条 -->
-        <div style="margin-top:8px; display:flex; align-items:center; gap:6px; font-size:10px; color:#64748b;">
-          <span>卖出 ${d.sell_count||0}</span>
-          <div style="flex:1; height:5px; background:#2d1f1f; border-radius:3px; overflow:hidden; display:flex;">
-            <div style="width:${(d.buy_count||0)/(Math.max(d.buy_count||0, d.sell_count||0, 1))*100}%; height:100%; background:linear-gradient(90deg,#22c55e,#4ade80);"></div>
-          </div>
-          <span>买入 ${d.buy_count||0}</span>
+        <div class="ratio-row">
+          <span>${tr('sell')} ${sellCount}</span>
+          <div class="ratio-bar"><div class="ratio-fill" style="width:${buyWidth}%"></div></div>
+          <span>${tr('buy')} ${buyCount}</span>
         </div>
         <div class="detail-row">
-          <span>小白帖</span><span>${d.newbie_posts || 0}/${d.valid_posts || d.total_posts || 0} (${d.newbie_ratio || 0}%)</span>
+          <span>${tr('beginnerPosts')}</span><span>${d.newbie_posts || 0}/${d.valid_posts || d.total_posts || 0} (${d.newbie_ratio || 0}%)</span>
         </div>
         <div class="detail-row">
-          <span>买卖比</span><span style="color:${(d.buy_sell_ratio||0)>1.5?'#f87171':(d.buy_sell_ratio||0)>0.8?'#facc15':'#4ade80'}">${d.buy_sell_ratio||0}:1 ${(d.buy_sell_ratio||0)>1.5?'🔥追涨':(d.buy_sell_ratio||0)>0.8?'⚖️平衡':'🩸恐慌'}</span>
+          <span>${tr('buySellRatio')}</span><span style="color:${ratioColor}">${ratio}:1 ${ratioLabel}</span>
         </div>
       </div>
     `;
   }).join('');
 }
 
-function renderCharts(data) {
+function renderChartShells(data) {
   const history = data.sector_history || {};
-  
+  document.getElementById('charts').innerHTML = Object.keys(history).map(sector => `
+    <div class="chart-box"><h3>${CHART_ICONS[sector] || '📈'} ${tr('sectors')[sector]} - ${tr('chartSuffix')}</h3><canvas id="chart-${sector}"></canvas></div>
+  `).join('');
+}
+
+function renderCharts(data) {
+  charts.forEach(chart => chart.destroy());
+  charts = [];
+  renderChartShells(data);
+  const history = data.sector_history || {};
+
   Object.entries(history).forEach(([sector, records]) => {
-    const canvasId = `chart-${sector}`;
-    const canvas = document.getElementById(canvasId);
+    const canvas = document.getElementById(`chart-${sector}`);
     if (!canvas || !records.length) return;
-    
-    const ctx = canvas.getContext('2d');
+
     const color = SECTOR_COLORS[sector] || '#94a3b8';
-    
-    new Chart(ctx, {
+    charts.push(new Chart(canvas.getContext('2d'), {
       type: 'line',
       data: {
-        labels: records.map(r => r.date.slice(5)), // MM-DD
+        labels: records.map(r => r.date.slice(5)),
         datasets: [{
-          label: SECTOR_NAMES[sector],
+          label: tr('sectors')[sector],
           data: records.map(r => r.index),
           borderColor: color,
           backgroundColor: color + '20',
@@ -289,82 +404,90 @@ function renderCharts(data) {
             bodyColor: '#cbd5e1',
             borderColor: '#334155',
             borderWidth: 1,
-            callbacks: {
-              label: ctx => `宝妈指数: ${ctx.parsed.y}`
-            }
+            callbacks: { label: ctx => tr('tooltipLabel')(ctx.parsed.y) }
           }
         },
         scales: {
-          y: {
-            min: 0, max: 100,
-            grid: { color: '#33415533' },
-            ticks: { color: '#64748b', callback: v => v },
-          },
-          x: {
-            grid: { color: '#33415533' },
-            ticks: { color: '#64748b', maxTicksLimit: 10 },
-          }
-        },
-        // 危险区间背景
-        // 通过 annotation 插件可以实现，这里保持简洁
+          y: { min: 0, max: 100, grid: { color: '#33415533' }, ticks: { color: '#64748b' } },
+          x: { grid: { color: '#33415533' }, ticks: { color: '#64748b', maxTicksLimit: 10 } }
+        }
       }
-    });
+    }));
   });
 }
 
 function renderTopPosts(data) {
   const container = document.getElementById('top-posts');
   const latest = data.latest;
+  container.innerHTML = `<h3>${tr('topPostsTitle')}</h3>`;
   if (!latest) {
-    container.innerHTML += '<div class="loading">暂无数据</div>';
+    container.innerHTML += `<div class="loading">${tr('noData')}</div>`;
     return;
   }
 
-  // 从所有板块收集 top 小白帖
   let allTop = [];
   Object.entries(latest.sectors).forEach(([sector, sdata]) => {
     (sdata.top_newbie_posts || []).forEach(p => {
-      allTop.push({ ...p, sector: SECTOR_NAMES[sector] });
+      allTop.push({ ...p, sector: tr('sectors')[sector] });
     });
   });
 
-  // 按分数排序
   allTop.sort((a, b) => b.score - a.score);
   allTop = allTop.slice(0, 8);
 
   if (!allTop.length) {
-    container.innerHTML += '<div class="loading">今日暂无典型小白帖</div>';
+    container.innerHTML += `<div class="loading">${tr('noTopPosts')}</div>`;
     return;
   }
 
   const badgeClass = score => score >= 50 ? 'pure' : 'semi';
-  const badgeText = score => score >= 50 ? '纯小白' : '偏小白';
+  const badgeText = score => score >= 50 ? tr('pureBeginner') : tr('semiBeginner');
 
-  container.innerHTML += allTop.map(p => `
-  <div class="post-item">
-    <div class="post-title">
-      <span class="post-badge ${badgeClass(p.score)}">${badgeText(p.score)} ${p.score}分</span>
-      <span style="color:#64748b;font-size:11px">[${p.sector}]</span>
-      ${p.intent_label ? `<span style="font-size:11px;margin-left:4px">${p.intent_label}</span>` : ''}
-      ${p.title}
-    </div>
-    ${p.reasoning ? `<div class="post-reason">📝 ${p.reasoning}</div>` : ''}
-    ${p.key_signals ? p.key_signals.map(s => `<div class="post-meta">▸ ${s}</div>`).join('') : ''}
-  </div>
-  `).join('');
+  container.innerHTML += allTop.map(p => {
+    const intent = mapIntentLabel(p.intent, p.intent_label);
+    return `
+      <div class="post-item">
+        <div class="post-title">
+          <span class="post-badge ${badgeClass(p.score)}">${badgeText(p.score)} ${p.score}${tr('scoreUnit')}</span>
+          <span style="color:#64748b;font-size:11px">[${p.sector}]</span>
+          ${intent ? `<span style="font-size:11px;margin-left:4px">${intent}</span>` : ''}
+          ${p.title}
+        </div>
+        ${p.reasoning ? `<div class="post-reason">${tr('reasoningPrefix')}: ${p.reasoning}</div>` : ''}
+        ${p.key_signals ? p.key_signals.map(s => `<div class="post-meta">- ${s}</div>`).join('') : ''}
+      </div>
+    `;
+  }).join('');
 }
 
-// 加载数据
+function renderAll() {
+  setStaticText();
+  renderLegend();
+  if (!dashboardData) return;
+  renderCards(dashboardData);
+  renderCharts(dashboardData);
+  renderTopPosts(dashboardData);
+}
+
+document.querySelectorAll('[data-lang-button]').forEach(button => {
+  button.addEventListener('click', () => {
+    currentLang = button.dataset.langButton;
+    localStorage.setItem('mom-index-lang', currentLang);
+    renderAll();
+  });
+});
+
+setStaticText();
+renderLegend();
+
 fetch('data/dashboard_data.json')
   .then(r => r.json())
   .then(data => {
-    renderCards(data);
-    renderCharts(data);
-    renderTopPosts(data);
+    dashboardData = data;
+    renderAll();
   })
   .catch(err => {
-    document.getElementById('cards').innerHTML = 
-      `<div class="loading">⚠️ 数据加载失败: ${err.message}<br>请先运行 pipeline.py 生成数据</div>`;
+    document.getElementById('cards').innerHTML = `<div class="loading">${tr('loadFailed')(err.message)}</div>`;
   });
 </script>
 </body>
