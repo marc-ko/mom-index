@@ -1,202 +1,213 @@
-# 👩‍👧 宝妈指数 (Mom Index)
+# Mom Index
 
-追踪中文社交平台上散户/小白/宝妈的投资讨论热度。**指数越高，散户情绪越极端，市场越危险**——基于"擦鞋童理论"的行为金融学反向指标。
+> English fork of the original project by [mihang123/mom-index](https://github.com/mihang123/mom-index). This fork keeps the core idea and dashboard, adds Rednote/Xiaohongshu Playwright collection work, fixes the sub-index formula, and documents the workflow in English.
 
-## 核心原理
+Mom Index tracks retail-investor, beginner, and "mom investor" discussion heat across Chinese social platforms. The higher the index, the more extreme retail sentiment appears to be, making it a contrarian behavioral-finance signal inspired by the shoeshine-boy theory.
 
+Live dashboard: [https://marc-ko.github.io/mom-index/](https://marc-ko.github.io/mom-index/)
+
+The dashboard may contain both English and Chinese. The data sources, search terms, and classification signals are Chinese-language by nature, while this README explains the fork and workflow in English.
+
+## Core Idea
+
+```text
+When market tips reach everyday non-professional investors, the crowd may already be late.
 ```
-当菜市场大妈和宝妈都在讨论股票，就是该离场的时候。
-                         — Joseph Kennedy, 1929
+
+Each covered sector is scored independently with three visible metrics:
+
+| Metric | Meaning |
+| --- | --- |
+| **Mom Index** | Overall retail sentiment heat, from 0 to 100 |
+| **Mom Buy** | FOMO / chase-buying pressure, from 0 to 100 |
+| **Mom Sell** | Panic-selling pressure, from 0 to 100 |
+
+## Reading The Index
+
+| Range | Signal | Interpretation |
+| --- | --- | --- |
+| 0-20 | Very cold | Beginners are quiet; could indicate low retail participation |
+| 20-40 | Normal | Retail activity is present but not extreme |
+| 40-60 | Warming up | Retail attention is rising; watch closely |
+| 60-75 | High alert | Retail crowding is elevated |
+| 75-100 | Extreme heat | Shoeshine-boy moment; strong contrarian warning |
+
+## Covered Sectors
+
+| Sector | Eastmoney Guba Code | ETF |
+| --- | --- | --- |
+| Nasdaq | `of159941` | `513100` |
+| Gold | `of518880` | `518880` |
+| CPO / Communications | `of515880` | `515880` |
+| Semiconductor | `of512480` | `512480` |
+
+## Current Data Flow
+
+1. Scrape Eastmoney Guba board titles for the tracked ETF sectors.
+2. Scrape Rednote/Xiaohongshu search results through Playwright using a local logged-in browser profile.
+3. Classify posts with keyword-based beginner, sentiment, and buy/sell intent signals.
+4. Calculate sector indices and buy/sell sub-indices.
+5. Write JSON data into `data/` and sync it into `frontend/data/` for the static dashboard.
+
+## Rednote / Xiaohongshu Login
+
+Use a persistent Playwright profile so you can log in once and reuse the saved session. Cookies stay inside the local browser profile and are not printed, exported, or committed.
+
+```bash
+# First-time setup: install the Chromium runtime used by Playwright
+python -m playwright install chromium
+
+# Open Rednote with a persistent local profile and log in manually
+python xhs_profile.py
+
+# Run the complete collection and index pipeline after login
+python pipeline.py
 ```
 
-四个板块独立计算，每个板块有三个指标：
+The profile is stored at `.browser_profiles/xhs/` by default. It is ignored by Git and should remain local.
 
-| 指标 | 含义 |
-|------|------|
-| **宝妈指数** | 综合情绪热度 (0-100) |
-| 🟢 **宝妈买入** | 追涨情绪强度 (0-100) |
-| 🔴 **宝妈卖出** | 割肉恐慌强度 (0-100) |
+Useful environment variables:
 
-## 指数解读
+| Variable | Purpose |
+| --- | --- |
+| `MOM_INDEX_XHS_PROFILE` | Override the Playwright profile directory |
+| `MOM_INDEX_REDNOTE_BASE_URL` | Override the Rednote base URL, default `https://www.rednote.com` |
+| `MOM_INDEX_XHS_HEADLESS` | Set to `1` for headless collection after login is stable |
+| `MOM_INDEX_PROXY` | Optional proxy for Eastmoney requests, for example `http://127.0.0.1:7890` |
 
-| 区间 | 信号 | 建议 |
-|------|------|------|
-| 0-20 | 🔵 极度冷清 | 小白沉默，可能是底部 |
-| 20-40 | 🟢 正常区间 | 维持现有策略 |
-| 40-60 | 🟡 开始升温 | 关注，准备减仓 |
-| 60-75 | 🟠 高度警惕 | 大幅减仓 |
-| 75-100 | 🔴 极度狂热 | 擦鞋童时刻，清仓 |
+## Quick Start
 
-## 覆盖板块
+```bash
+# Install Python dependencies
+pip install -r requirements.txt
+python -m playwright install chromium
 
-| 板块 | 股吧代码 | ETF |
-|------|----------|-----|
-| 纳斯达克 | of159941 | 513100 |
-| 黄金 | of518880 | 518880 |
-| CPO通信 | of515880 | 515880 |
-| 半导体 | of512480 | 512480 |
+# Optional but recommended before Rednote scraping
+python xhs_profile.py
 
-## 最近数据
+# Run data collection, analysis, and index generation
+python pipeline.py
 
-> 2026-06-21 | 来源：东方财富股吧（310条）+ 小红书模拟数据（54条小白帖）
-> 市场背景：科技牛市(CPO+半导体持续上涨) + 黄金阴跌(从高位回撤20%) + 纳指高位震荡
-
-| 板块 | 指数 | 买入 | 卖出 | 买卖比 | 小白占比 | 信号 |
-|------|------|------|------|--------|----------|------|
-| CPO通信 | 60.4 | 51.9 | 20.9 | 5:1 | 30.2% | 🟠 高度警惕 — FOMO追涨 |
-| 黄金 | 51.8 | 0.0 | 64.1 | 0:∞ | 32.6% | 🟡 开始升温 — 恐慌割肉 |
-| 纳斯达克 | 50.4 | 46.2 | 0.0 | ∞:0 | 27.9% | 🟡 开始升温 — 温和追涨 |
-| 半导体 | 43.5 | 59.6 | 0.0 | ∞:0 | 31.1% | 🟡 开始升温 — 跟风买入 |
-
-> ⚠️ 当前小红书数据为模拟数据（真实 API 不可用）。接入真实小红书数据后指数可能进一步上升。
-
-## 项目结构
-
+# Serve the local dashboard
+cd frontend
+python -m http.server 8765
 ```
+
+Open [http://localhost:8765/dashboard.html](http://localhost:8765/dashboard.html).
+
+## Project Structure
+
+```text
 mom-index/
-├── pipeline.py                  # 主流程：采集→分析→指数→存储
-├── sync_data.py                 # 数据同步脚本（data/ → frontend/data/）
+├── pipeline.py                  # Main flow: collect -> analyze -> index -> store
+├── sync_data.py                 # Data sync helper: data/ -> frontend/data/
+├── xhs_profile.py               # Rednote login/profile helper, no cookie export
 ├── collectors/
-│   ├── anti_detection.py        # 反检测核心：UA轮换+隐身+延迟
-│   ├── guba_collector.py        # 东方财富股吧采集（✅ 生产可用）
-│   ├── xhs_collector.py         # 小红书 rnote.dev API（⚠️ 需充值）
-│   └── xhs_playwright.py        # 小红书 Playwright 方案（⚠️ 需登录态）
+│   ├── anti_detection.py        # User-agent rotation, stealth scripts, delays
+│   ├── guba_collector.py        # Eastmoney Guba scraper
+│   ├── xhs_collector.py         # Legacy rnote.dev API path
+│   └── xhs_playwright.py        # Rednote/Xiaohongshu Playwright scraper
 ├── analyzer/
-│   ├── llm_analyzer.py          # 多维度分类引擎（40+信号词库）
-│   └── index_calculator.py      # 指数计算（含买入/卖出子指数）
+│   ├── llm_analyzer.py          # Keyword-based classification engine
+│   └── index_calculator.py      # Mom Index and buy/sell sub-index formulas
 ├── frontend/
-│   ├── dashboard.html           # 看板页面（Chart.js 暗色主题）
-│   └── data/                    # 前端数据（pipeline 自动同步）
+│   ├── dashboard.html           # Static dashboard using Chart.js
+│   └── data/                    # Dashboard JSON data
 ├── data/
-│   ├── dashboard_data.json      # 前端数据源
-│   ├── history.json             # 完整历史记录
-│   └── xhs_posts.json           # 小红书采集缓存
+│   ├── dashboard_data.json      # Main dashboard data source
+│   ├── history.json             # Historical records
+│   └── xhs_posts.json           # Rednote/XHS collection cache
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
 
+## Data Sources
 
-## Rednote Playwright 登录
+| Source | Status | Notes |
+| --- | --- | --- |
+| Eastmoney Guba | Working | Public ETF board pages, no login required |
+| Rednote / Xiaohongshu via Playwright | Experimental | Requires a local logged-in browser profile |
+| rnote.dev API | Legacy / optional | Requires external service quota |
+| x-mcp path | Legacy / unstable | Login/search flow may be blocked by platform risk controls |
 
-```bash
-# 首次使用：打开 Rednote 登录窗口，登录状态会保存在本地 .browser_profiles/xhs/
-python xhs_profile.py
+## Classification Method
 
-# 安装 Playwright 浏览器（首次环境需要）
-python -m playwright install chromium
+The current classifier is rule-based. It scores title text using Chinese-language beginner-investor signals such as:
 
-# 登录后运行完整 pipeline
-python pipeline.py
+| Signal Dimension | Weight Direction | Examples |
+| --- | --- | --- |
+| Self-identified beginner | Positive | 小白, 新手, 宝妈 |
+| Knowledge-seeking | Positive | 怎么买, 在哪看, 请教 |
+| Decision dependence | Positive | 该不该, 要不要, 还能买吗 |
+| Panic emotion | Positive | 亏麻了, 好慌, 心态崩了 |
+| Herd behavior | Positive | 听博主说, 朋友推荐 |
+| Excessive optimism | Positive | 梭哈, 满仓干, 稳赚 |
+| Professional terminology | Negative | PE, PB, 估值, 溢价率 |
+
+Buy/sell intent is detected with Chinese trigger phrases such as:
+
+- Buy/FOMO: 上车, 冲, 加仓, 买了, 还能买吗, 想买, 心动
+- Sell/panic: 割肉, 止损, 清仓, 亏了, 要不要走, 跌麻了
+
+## Index Formula
+
+```text
+Mom Index = beginner_ratio * 0.40
+          + beginner_intensity * 0.25
+          + sentiment_extremity * 0.20
+          + signal_purity * 0.15
+
+Mom Buy  = beginner_buy_ratio * 50
+         + beginner_heat * 30
+         + buy_intensity * 20
+
+Mom Sell = beginner_sell_ratio * 50
+         + beginner_heat * 30
+         + sell_intensity * 20
 ```
 
-> `.browser_profiles/` 只保存在本机，不会提交到 GitHub。
-## 快速开始
+This fork intentionally does not include raw collection volume as an `activity_signal` in the formula, because page sample size can make the index look more confident than the underlying data deserves.
 
-```bash
-cd ~/Desktop/mom-index
+## Dashboard
 
-# 运行数据采集 + 分析 + 指数计算（自动同步到 frontend/data/）
-python pipeline.py
+The static dashboard includes:
 
-# 启动前端看板（默认 8765 端口）
-cd frontend && python -m http.server 8765
+- Sector index cards with buy/sell sub-indices
+- Historical index lines powered by Chart.js
+- Recent high-signal beginner posts with classification reasoning
+- Dark responsive layout
+- Chinese labels where they are closer to the source data semantics
 
-# 浏览器打开
-# http://localhost:8765/dashboard.html
-```
+## Known Limitations
 
-## 数据源
+- Guba has a lower beginner-signal density than Rednote/Xiaohongshu.
+- Rednote/Xiaohongshu scraping depends on an authenticated local Playwright profile and can be affected by platform risk controls.
+- The classifier is keyword-based, not a full semantic LLM pipeline.
+- There is no market backtest yet, so this should be treated as an exploratory sentiment indicator.
+- This project is for research and learning only. It is not investment advice.
 
-| 数据源 | 状态 | 日采集量 | 说明 |
-|--------|------|----------|------|
-| 东方财富股吧 | ✅ 稳定 | ~307条 | 4个ETF吧，无需cookie，无风控 |
-| 小红书 (rnote.dev) | ⚠️ 需充值 | 0 | 免费额度仅够一轮 |
-| 小红书 (x-mcp) | ⚠️ 登录通/搜索风控 | 0 | 扩展已装，搜索被XHS风控 |
-| 小红书 (Playwright) | ⚠️ 需登录态 | 0 | 隐身脚本已就绪，缺登录cookie |
+## Roadmap
 
-## 分析方法
+- [ ] More stable Rednote/Xiaohongshu collection
+- [ ] Replace or augment keyword rules with semantic classification
+- [ ] Add Weibo/Douyin-style social sources
+- [ ] Scheduled daily collection
+- [ ] Daily push notification through Telegram/WeChat/etc.
+- [ ] Historical backtest against sector price data
 
-### 小白判定（40+信号词库）
+## Tech Stack
 
-每条帖子匹配多维度信号，每条判定带可读推理：
+- Python + `requests` + `playwright`
+- Chart.js 4.x
+- Static HTML/CSS dashboard
+- Eastmoney Guba HTML parsing
+- Rednote/Xiaohongshu Playwright scraping
 
-```
-帖子「黄金亏了20%了要不要割肉啊😭」
-  命中: 决策依赖(+7) + 情绪恐慌(+5)
-  意图: 🔴 卖出（命中"割肉""亏了"）
-  得分: 58分 → 判定「纯小白」
-```
+## Attribution
 
-信号维度：
-
-| 维度 | 权重 | 示例 |
-|------|------|------|
-| 身份自述 | +8 | "小白"、"宝妈"、"新手" |
-| 知识求助 | +6 | "怎么买"、"在哪看"、"请教" |
-| 决策依赖 | +7 | "该不该"、"要不要"、"还能买吗" |
-| 情绪恐慌 | +5 | "亏麻了"、"好慌"、"心态崩了" |
-| 跟风行为 | +6 | "听博主说"、"朋友推荐" |
-| 过度乐观 | +4 | "梭哈"、"满仓干"、"稳赚" |
-| 专业术语 | -5 | PE/PB/估值/溢价率（扣分项） |
-
-### 意图判定
-
-60+ 关键词区分买入/卖出意图：
-
-- 🟢 买入：上车、冲、加仓、买了、还能买吗、想买、心动...
-- 🔴 卖出：割肉、止损、清仓、亏了、要不要走、跌麻了...
-
-## 指数公式
-
-```
-宝妈指数 = 小白占比×0.40 + 小白强度×0.25 + 情绪极端度×0.20 + 信号纯度×0.15
-
-宝妈买入 = 买入小白占比×50 + 小白热度×30 + 买入强度×20
-宝妈卖出 = 卖出小白占比×50 + 小白热度×30 + 卖出强度×20
-```
-
-## 前端看板
-
-- 四板块指数卡片（实时数值 + 买入/卖出子指标）
-- 30天历史曲线（Chart.js）
-- 今日典型小白帖（含推理过程）
-- 暗色主题，响应式布局
-
-## 反检测系统
-
-`collectors/anti_detection.py` — 从 AIMail_Agent 项目搬过来的三件套：
-
-| 能力 | 说明 |
-|------|------|
-| **请求头轮换** | 7个 Chrome/Edge UA 随机切换 + Sec-CH-UA 指纹头 |
-| **人类延迟** | 高斯分布，每10次停5-15s，每50次停30-60s |
-| **隐身脚本** | 8条 — webdriver/plugins/hardwareConcurrency 全部伪造 |
-| **Playwright 参数** | 20+ 启动参数隐藏自动化痕迹 |
-
-## 已知局限
-
-- **股吧小白占比低**：5-20% 是正常的，真正的小白信号需要小红书数据
-- **关键词规则限制**：非 LLM 语义理解，会漏掉隐含信号、误判部分 spam
-- **缺少回测**：尚未用历史行情数据验证指数与市场顶底的相关性
-- **单日快照**：一次采集只是一个数据点，需要持续运行积累
-
-## 待解决
-
-- [ ] 小红书稳定数据源（rnote.dev 充值 或 x-mcp 解风控）
-- [ ] LLM 语义分类替换关键词规则
-- [ ] 抖音/微博数据源扩展
-- [ ] 定时自动采集（cron job）
-- [ ] 每日宝妈指数自动推送（微信/Telegram）
-- [ ] 回测验证：拿历史数据验证指数与市场顶底的相关性
-
-## 技术栈
-
-- Python 3.14 + requests + playwright
-- Chart.js 4.x + 原生 HTML/CSS
-- 东方财富股吧 HTML 解析
-- 小红书 rnote.dev API / x-mcp MCP 协议
+This repository is an English fork of [mihang123/mom-index](https://github.com/mihang123/mom-index). Credit for the original concept and project foundation belongs to the original owner. Changes in this fork focus on English documentation, Rednote/Xiaohongshu Playwright handling, formula cleanup, and GitHub Pages publishing.
 
 ## License
 
-MIT — 仅供学习研究，不构成投资建议。
-
+MIT. Research/education only; not financial advice.
