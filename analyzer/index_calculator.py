@@ -25,7 +25,7 @@ def compute_sector_index(analysis_results: List) -> Dict:
     1. 小白占比 (40%) — 该板块中小白帖的比例
     2. 小白强度 (25%) — 小白帖的平均得分
     3. 情绪极端度 (20%) — 贪婪/恐慌的情绪极端程度
-    4. 热度信号 (15%) — 该板块的讨论活跃度
+    4. 信号纯度 (15%) — 小白帖中纯小白占比，避免采样量影响指数
     """
     if not analysis_results:
         return {
@@ -55,9 +55,9 @@ def compute_sector_index(analysis_results: List) -> Dict:
     sentiments = [abs(r.sentiment_score) for r in newbie_posts]
     avg_sentiment = sum(sentiments) / max(len(sentiments), 1) * 100
     
-    # 维度4: 热度信号 (0-100) — 小白帖占比越高 + 纯小白越多 = 信号越强
+    # 维度4: 信号纯度 (0-100) — 小白帖中纯小白越多，信号越强。
+    # 不使用采集量作为 activity_signal，避免页面采样数量误导指数。
     purity_signal = (len(pure_newbie) / max(newbie_count, 1)) * 100 if newbie_count > 0 else 0
-    activity_signal = min(100, len(valid_posts) / 80 * 100)  # 80条为满热度
     
     # 综合指数
     index = (
@@ -81,14 +81,14 @@ def compute_sector_index(analysis_results: List) -> Dict:
     # 买入指数: 小白买入占比(50%) + 小白热度(30%) + 买入强度(20%)
     mom_buy_index = round(min(100, (
         buy_ratio * 100 * 0.50 +
-        (avg_newbie_score / 100) * buy_ratio * 30 * 0.30 +
+        (avg_newbie_score / 100) * buy_ratio * 30 +
         buy_intensity * 100 * 0.20
     )), 1)
     
     # 卖出指数: 小白卖出占比(50%) + 小白热度(30%) + 卖出强度(20%)
     mom_sell_index = round(min(100, (
         sell_ratio * 100 * 0.50 +
-        (avg_newbie_score / 100) * sell_ratio * 30 * 0.30 +
+        (avg_newbie_score / 100) * sell_ratio * 30 +
         sell_intensity * 100 * 0.20
     )), 1)
     
@@ -108,7 +108,6 @@ def compute_sector_index(analysis_results: List) -> Dict:
             "avg_newbie_score": round(avg_newbie_score, 1),
             "avg_sentiment": round(avg_sentiment, 1),
             "purity_signal": round(purity_signal, 1),
-            "activity": round(activity_signal, 1),
             # 买入/卖出子指数
             "mom_buy_index": mom_buy_index,
             "mom_sell_index": mom_sell_index,
@@ -212,3 +211,5 @@ def get_dashboard_data() -> Dict:
         "sector_history": sector_history,
         "record_count": len(records),
     }
+
+

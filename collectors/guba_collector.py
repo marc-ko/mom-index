@@ -6,6 +6,7 @@ import re
 import html as html_mod
 import requests
 import time
+import os
 from datetime import datetime
 from typing import List, Dict, Optional
 
@@ -18,7 +19,17 @@ SECTORS = {
     "semiconductor": {"name": "半导体", "code": "of512480", "etf": "512480"},
 }
 
-PROXY = {"http": "http://127.0.0.1:7890", "https": "http://127.0.0.1:7890"}
+def _get_proxy():
+    """Use a proxy only when explicitly configured.
+
+    Set MOM_INDEX_PROXY=http://host:port if you want traffic routed through a
+    local proxy. By default we go direct; the old hardcoded 127.0.0.1:7890 made
+    scraping fail whenever that proxy was not running.
+    """
+    proxy = os.environ.get("MOM_INDEX_PROXY", "").strip()
+    if not proxy:
+        return None
+    return {"http": proxy, "https": proxy}
 
 _ad = get_anti_detection()
 
@@ -27,8 +38,16 @@ def fetch_board(code: str) -> str:
     """获取股吧页面HTML — 使用反检测请求头"""
     url = f"https://guba.eastmoney.com/list,{code}.html"
     headers = _ad.get_common_headers(referer="https://guba.eastmoney.com")
-    resp = requests.get(url, headers=headers, proxies=PROXY, timeout=15)
-    resp.encoding = 'utf-8'
+    proxy = _get_proxy()
+    try:
+        resp = requests.get(url, headers=headers, proxies=proxy, timeout=15)
+    except requests.exceptions.ProxyError:
+        if not proxy:
+            raise
+        print(f"    代理不可用，改用直连: {code}")
+        resp = requests.get(url, headers=headers, timeout=15)
+    resp.raise_for_status()
+    resp.encoding = "utf-8"
     return resp.text
 
 
@@ -89,3 +108,5 @@ if __name__ == "__main__":
     data = collect_all()
     for k, v in data.items():
         print(f"{k}: {len(v)} posts")
+
+

@@ -11,7 +11,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(__file__))
 
 from collectors.guba_collector import collect_all as collect_guba
-from collectors.xhs_collector import collect_all as collect_xhs
+from collectors.xhs_playwright import collect_all as collect_xhs
 from analyzer.llm_analyzer import analyze_all
 from analyzer.index_calculator import (
     compute_sector_index, add_record, get_dashboard_data, SECTOR_NAMES
@@ -38,14 +38,14 @@ def run_pipeline():
     for sector, posts in guba_data.items():
         all_posts[sector] = all_posts.get(sector, []) + posts
     
-    # 小红书 (如果有API Key)
+    # 小红书 (Playwright)
     print("  [小红书]")
     try:
         xhs_data = collect_xhs()
         for sector, posts in xhs_data.items():
             all_posts[sector] = all_posts.get(sector, []) + posts
     except Exception as e:
-        print(f"  小红书采集跳过: {e}")
+        print(f"  小红书 Playwright 采集跳过: {e}")
     
     total_collected = sum(len(v) for v in all_posts.values())
     print(f"\n  共采集 {total_collected} 条帖子\n")
@@ -195,3 +195,4 @@ if __name__ == "__main__":
         history["records"].sort(key=lambda r: r["date"])
         save_history(history)
         print(f"  已生成 {len(history['records'])} 天历史数据")
+

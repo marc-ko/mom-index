@@ -75,6 +75,21 @@ mom-index/
 └── README.md
 ```
 
+
+## Rednote Playwright 登录
+
+```bash
+# 首次使用：打开 Rednote 登录窗口，登录状态会保存在本地 .browser_profiles/xhs/
+python xhs_profile.py
+
+# 安装 Playwright 浏览器（首次环境需要）
+python -m playwright install chromium
+
+# 登录后运行完整 pipeline
+python pipeline.py
+```
+
+> `.browser_profiles/` 只保存在本机，不会提交到 GitHub。
 ## 快速开始
 
 ```bash
@@ -184,3 +199,4 @@ cd frontend && python -m http.server 8765
 ## License
 
 MIT — 仅供学习研究，不构成投资建议。
+

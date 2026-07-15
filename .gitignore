@@ -30,3 +30,15 @@ desktop.ini
 
 # Chrome profiles (Playwright)
 *.pw_profile/
+# Local Playwright login/session data
+.browser_profiles/
+
+# Local Sites deployment wrapper
+site/
+
+# Local scraper/debug scratch scripts
+xhs_direct_inspect.py
+xhs_dom_inspect.py
+xhs_inspect.py
+xhs_smoke.py
+xhs_ui_search.py
