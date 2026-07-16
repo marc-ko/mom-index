@@ -98,3 +98,4 @@ try {
 }
 
 Write-Log "Daily run finished"
+exit 0
