@@ -96,6 +96,10 @@ body {
 .chart-box h3 { font-size: 16px; margin-bottom: 16px; color: #e2e8f0; }
 .top-posts { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; margin-top: 24px; }
 .top-posts h3 { font-size: 16px; margin-bottom: 16px; }
+.sector-post-group { border-top: 1px solid #334155; padding-top: 16px; margin-top: 16px; }
+.sector-post-group:first-of-type { border-top: 0; padding-top: 0; }
+.sector-post-title { display: flex; align-items: center; gap: 8px; color: #e2e8f0; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.sector-post-count { color: #64748b; font-size: 11px; font-weight: 500; }
 .post-item { padding: 12px; border-bottom: 1px solid #334155; font-size: 13px; }
 .post-item:last-child { border-bottom: none; }
 .post-item .post-title { color: #e2e8f0; margin-bottom: 4px; }
@@ -179,6 +183,7 @@ const I18N = {
     tooltipLabel: value => `Mom Index: ${value}`,
     topPostsTitle: 'Hottest beginner-signal posts today',
     noTopPosts: 'No high-signal beginner posts today.',
+    sectorNoTopPosts: 'No high-signal posts in this category.',
     publicPostsHidden: 'Post titles are hidden on the public dashboard to avoid republishing scraped platform content. Local runs still keep the raw post cache.',
     hiddenSectorSummary: d => `${d.newbie_posts || 0} beginner-signal posts / ${d.valid_posts || d.total_posts || 0} valid posts`,
     pureBeginner: 'Pure beginner',
@@ -224,6 +229,7 @@ const I18N = {
     tooltipLabel: value => `宝妈指数: ${value}`,
     topPostsTitle: '今日最“小白”的帖子',
     noTopPosts: '今日暂无典型小白帖',
+    sectorNoTopPosts: '这个分类暂无典型小白帖',
     publicPostsHidden: '公开 dashboard 不展示原帖标题，避免二次发布抓取平台内容。本机运行仍会保留原始缓存。',
     hiddenSectorSummary: d => `${d.newbie_posts || 0} 条小白信号 / ${d.valid_posts || d.total_posts || 0} 条有效帖子`,
     pureBeginner: '纯小白',
@@ -433,17 +439,12 @@ function renderTopPosts(data) {
     return;
   }
 
-  let allTop = [];
-  Object.entries(latest.sectors).forEach(([sector, sdata]) => {
-    (sdata.top_newbie_posts || []).forEach(p => {
-      allTop.push({ ...p, sector: tr('sectors')[sector] });
-    });
-  });
+  const sectorEntries = Object.entries(latest.sectors);
+  const totalVisiblePosts = sectorEntries.reduce((count, [, sdata]) => {
+    return count + (sdata.top_newbie_posts || []).slice(0, 5).length;
+  }, 0);
 
-  allTop.sort((a, b) => b.score - a.score);
-  allTop = allTop.slice(0, 8);
-
-  if (!allTop.length) {
+  if (!totalVisiblePosts) {
     const hasSignals = Object.values(latest.sectors || {}).some(s => (s.details || {}).newbie_posts > 0);
     if (!hasSignals) {
       container.innerHTML += `<div class="loading">${tr('noTopPosts')}</div>`;
@@ -467,18 +468,37 @@ function renderTopPosts(data) {
   const badgeClass = score => score >= 50 ? 'pure' : 'semi';
   const badgeText = score => score >= 50 ? tr('pureBeginner') : tr('semiBeginner');
 
-  container.innerHTML += allTop.map(p => {
-    const intent = mapIntentLabel(p.intent, p.intent_label);
+  container.innerHTML += sectorEntries.map(([sector, sdata]) => {
+    const topPosts = (sdata.top_newbie_posts || []).slice(0, 5);
+    const sectorName = tr('sectors')[sector] || sector;
+    let postsHtml;
+    if (!topPosts.length) {
+      postsHtml = `<div class="post-item"><div class="post-meta">${tr('sectorNoTopPosts')}</div></div>`;
+    } else {
+      postsHtml = topPosts.map(p => {
+        const intent = mapIntentLabel(p.intent, p.intent_label);
+        return `
+          <div class="post-item">
+            <div class="post-title">
+              <span class="post-badge ${badgeClass(p.score)}">${badgeText(p.score)} ${p.score}${tr('scoreUnit')}</span>
+              ${intent ? `<span style="font-size:11px;margin-left:4px">${intent}</span>` : ''}
+              ${p.title}
+            </div>
+            ${p.reasoning ? `<div class="post-reason">${tr('reasoningPrefix')}: ${p.reasoning}</div>` : ''}
+            ${p.key_signals ? p.key_signals.map(s => `<div class="post-meta">- ${s}</div>`).join('') : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
     return `
-      <div class="post-item">
-        <div class="post-title">
-          <span class="post-badge ${badgeClass(p.score)}">${badgeText(p.score)} ${p.score}${tr('scoreUnit')}</span>
-          <span style="color:#64748b;font-size:11px">[${p.sector}]</span>
-          ${intent ? `<span style="font-size:11px;margin-left:4px">${intent}</span>` : ''}
-          ${p.title}
+      <div class="sector-post-group">
+        <div class="sector-post-title">
+          <span class="legend-dot ${sector}"></span>
+          <span>${sectorName}</span>
+          <span class="sector-post-count">${topPosts.length}/5</span>
         </div>
-        ${p.reasoning ? `<div class="post-reason">${tr('reasoningPrefix')}: ${p.reasoning}</div>` : ''}
-        ${p.key_signals ? p.key_signals.map(s => `<div class="post-meta">- ${s}</div>`).join('') : ''}
+        ${postsHtml}
       </div>
     `;
   }).join('');
