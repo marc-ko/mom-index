@@ -1,0 +1,84 @@
+name: Create Daily Mom Index Issue
+
+on:
+  push:
+    paths:
+      - ".github/ISSUE_TEMPLATE.md"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Parse issue template
+        id: template
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import os
+
+          template = Path(".github/ISSUE_TEMPLATE.md").read_text(encoding="utf-8")
+          if not template.startswith("---\n"):
+              raise SystemExit("ISSUE_TEMPLATE.md must start with YAML front matter")
+
+          _, front_matter, body = template.split("---", 2)
+          fields = {}
+          for line in front_matter.splitlines():
+              if ":" not in line:
+                  continue
+              key, value = line.split(":", 1)
+              fields[key.strip()] = value.strip()
+
+          title = fields.get("title")
+          labels = fields.get("labels", "")
+          if not title:
+              raise SystemExit("ISSUE_TEMPLATE.md front matter is missing title")
+
+          Path("issue-body.md").write_text(body.lstrip(), encoding="utf-8")
+          Path("issue-title.txt").write_text(title, encoding="utf-8")
+          Path("issue-labels.txt").write_text(labels, encoding="utf-8")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"title={title}\n")
+              out.write(f"labels={labels}\n")
+          PY
+
+      - name: Check for existing open issue
+        id: existing
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          gh issue list --state open --limit 100 --json title > open-issues.json
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          title = Path("issue-title.txt").read_text(encoding="utf-8")
+          issues = json.loads(Path("open-issues.json").read_text(encoding="utf-8"))
+          exists = any(issue.get("title") == title for issue in issues)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"exists={'true' if exists else 'false'}\n")
+          PY
+
+      - name: Create issue
+        if: steps.existing.outputs.exists != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          title="$(cat issue-title.txt)"
+          labels="$(cat issue-labels.txt)"
+          if [ -n "$labels" ]; then
+            gh issue create --title "$title" --body-file issue-body.md --label "$labels"
+          else
+            gh issue create --title "$title" --body-file issue-body.md
+          fi

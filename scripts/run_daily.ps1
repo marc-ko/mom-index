@@ -1,5 +1,6 @@
 param(
   [switch]$PublishPages,
+  [switch]$PushReport,
   [string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
   [string]$PagesWorktree = "C:\dev\mom-index-pages"
 )
@@ -32,6 +33,48 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Log "Pipeline completed"
+
+python scripts/generate_issue_template.py 2>&1 | Tee-Object -FilePath $logFile -Append
+if ($LASTEXITCODE -ne 0) {
+  Write-Log "Issue template generation failed with exit code $LASTEXITCODE"
+  exit $LASTEXITCODE
+}
+
+Write-Log "Issue template generated"
+
+if ($PushReport) {
+  Write-Log "Preparing safe daily report commit for marcko"
+  $reportPaths = @(
+    ".github/ISSUE_TEMPLATE.md",
+    "data/dashboard_data.json",
+    "data/history.json",
+    "frontend/data/dashboard_data.json",
+    "frontend/data/history.json"
+  )
+
+  git add -- $reportPaths 2>&1 | Tee-Object -FilePath $logFile -Append
+
+  git diff --cached --quiet
+  $reportDiffExit = $LASTEXITCODE
+  if ($reportDiffExit -eq 0) {
+    Write-Log "No safe report changes to push"
+    git reset -- $reportPaths 2>&1 | Tee-Object -FilePath $logFile -Append
+  } else {
+    $date = Get-Date -Format "yyyy-MM-dd"
+    git commit -m "Update daily mom index report $date" 2>&1 | Tee-Object -FilePath $logFile -Append
+    if ($LASTEXITCODE -ne 0) {
+      Write-Log "Report commit failed with exit code $LASTEXITCODE"
+      exit $LASTEXITCODE
+    }
+
+    git push marcko HEAD 2>&1 | Tee-Object -FilePath $logFile -Append
+    if ($LASTEXITCODE -ne 0) {
+      Write-Log "Report push failed with exit code $LASTEXITCODE"
+      exit $LASTEXITCODE
+    }
+    Write-Log "Pushed safe daily report changes to marcko"
+  }
+}
 
 if (-not $PublishPages) {
   Write-Log "PublishPages not set; leaving results local only"

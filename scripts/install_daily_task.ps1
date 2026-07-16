@@ -2,7 +2,8 @@ param(
   [string]$TaskName = "MomIndexDaily",
   [string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
   [string]$Time = "08:00",
-  [switch]$PublishPages
+  [switch]$PublishPages,
+  [switch]$PushReport
 )
 
 $ErrorActionPreference = "Stop"
@@ -16,6 +17,9 @@ $arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$runner`""
 if ($PublishPages) {
   $arguments += " -PublishPages"
 }
+if ($PushReport) {
+  $arguments += " -PushReport"
+}
 
 $taskRun = "powershell.exe $arguments"
 
@@ -27,4 +31,9 @@ if ($PublishPages) {
   Write-Host "Publish mode: sanitized GitHub Pages data only; raw scraped JSON is not published."
 } else {
   Write-Host "Publish mode: off; results stay local."
+}
+if ($PushReport) {
+  Write-Host "Report mode: safe daily report files are pushed to marcko, triggering the issue workflow."
+} else {
+  Write-Host "Report mode: off; daily issue template is generated locally only."
 }

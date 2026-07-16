@@ -111,6 +111,24 @@ The scheduled runner executes `python pipeline.py`. With `-PublishPages`, it
 publishes only sanitized GitHub Pages data to `gh-pages`: raw scraped caches and
 top post text are not published.
 
+To also create a daily GitHub issue report, install the task with `-PushReport`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/install_daily_task.ps1 -Time 08:00 -PublishPages -PushReport
+```
+
+After a successful local run, `-PushReport` generates `.github/ISSUE_TEMPLATE.md`
+from `data/dashboard_data.json`, commits only the safe public report files, and
+pushes them to the `marcko` remote. The GitHub Actions workflow then opens a
+dated issue from that template. In the GitHub repository settings, make sure
+Actions are allowed to create issues with the repository `GITHUB_TOKEN`.
+
+You can generate the issue template without running the full pipeline:
+
+```bash
+python scripts/generate_issue_template.py
+```
+
 ## Project Structure
 
 ```text
