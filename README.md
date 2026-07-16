@@ -95,11 +95,30 @@ python -m http.server 8765
 
 Open [http://localhost:8765/dashboard.html](http://localhost:8765/dashboard.html).
 
+## Daily Local Schedule
+
+This project should run on the local Windows machine when Rednote/Xiaohongshu
+collection is enabled, because Playwright depends on the local logged-in browser
+profile in `.browser_profiles/xhs/`.
+
+Install an 8:00 AM daily Windows scheduled task:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/install_daily_task.ps1 -Time 08:00 -PublishPages
+```
+
+The scheduled runner executes `python pipeline.py`. With `-PublishPages`, it
+publishes only sanitized GitHub Pages data to `gh-pages`: raw scraped caches and
+top post text are not published.
+
 ## Project Structure
 
 ```text
 mom-index/
 ├── pipeline.py                  # Main flow: collect -> analyze -> index -> store
+├── scripts/
+│   ├── install_daily_task.ps1    # Register Windows Task Scheduler job
+│   └── run_daily.ps1             # Daily pipeline runner and sanitized Pages publish
 ├── sync_data.py                 # Data sync helper: data/ -> frontend/data/
 ├── xhs_profile.py               # Rednote login/profile helper, no cookie export
 ├── collectors/

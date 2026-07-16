@@ -11,7 +11,14 @@ from typing import List, Dict, Optional
 # 设置环境变量 RNODE_API_KEY 或直接填入
 API_KEY = os.environ.get("RNODE_API_KEY", "")
 API_BASE = "https://rnote.dev/api/v2"
-PROXY = {"http": "http://127.0.0.1:7890", "https": "http://127.0.0.1:7890"}
+USE_SAMPLE_DATA = os.environ.get("MOM_INDEX_USE_SAMPLE_XHS", "0").lower() in {"1", "true", "yes"}
+
+
+def _get_proxy():
+    proxy = os.environ.get("MOM_INDEX_PROXY", "").strip()
+    if not proxy:
+        return None
+    return {"http": proxy, "https": proxy}
 
 SEARCH_KEYWORDS = {
     # 用小白的语言去搜，才能找到小白
@@ -32,7 +39,7 @@ def search_notes(keyword: str, count: int = 20) -> List[Dict]:
             f"{API_BASE}/crawler/search/notes",
             params={"keyword": keyword, "count": count, "sort": "general"},
             headers={"X-API-Key": API_KEY, "User-Agent": "mom-index/1.0"},
-            proxies=PROXY,
+            proxies=_get_proxy(),
             timeout=15,
         )
         if resp.status_code == 200:
@@ -62,7 +69,7 @@ def get_note_detail(note_id: str) -> Optional[Dict]:
             f"{API_BASE}/crawler/note/image",
             params={"note_id": note_id},
             headers={"X-API-Key": API_KEY},
-            proxies=PROXY,
+            proxies=_get_proxy(),
             timeout=15,
         )
         if resp.status_code == 200:
@@ -184,7 +191,7 @@ def _gen_sample_posts() -> Dict[str, List[Dict]]:
 
 
 def collect_all() -> Dict[str, List[Dict]]:
-    """采集所有板块的小红书数据。API不可用时使用模拟数据。"""
+    """采集所有板块的小红书数据。默认不使用模拟数据，避免污染结果。"""
     if API_KEY:
         result = {}
         for sector_key, keywords in SEARCH_KEYWORDS.items():
@@ -201,12 +208,15 @@ def collect_all() -> Dict[str, List[Dict]]:
             result[sector_key] = unique
             print(f"  [小红书-{sector_key}] 采集到 {len(unique)} 条")
         return result
-    else:
-        print("  ⚠️ 无 API Key，使用模拟小红书数据（26条）")
+    if USE_SAMPLE_DATA:
+        print("  ⚠️ 无 API Key，按 MOM_INDEX_USE_SAMPLE_XHS=1 使用模拟小红书数据")
         sample = _gen_sample_posts()
         for sector, posts in sample.items():
             print(f"  [小红书-模拟-{sector}] {len(posts)} 条")
         return sample
+
+    print("  ⚠️ 未配置 RNODE_API_KEY，跳过 legacy rnote.dev 小红书采集")
+    return {sector: [] for sector in SEARCH_KEYWORDS}
 
 if __name__ == "__main__":
     if not API_KEY:

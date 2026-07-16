@@ -5,10 +5,9 @@
 import re
 import html as html_mod
 import requests
-import time
 import os
 from datetime import datetime
-from typing import List, Dict, Optional
+from typing import List, Dict
 
 from .anti_detection import get_anti_detection
 
@@ -53,24 +52,32 @@ def fetch_board(code: str) -> str:
 
 def parse_posts(html_content: str) -> List[Dict]:
     """解析帖子列表"""
-    title_pattern = re.compile(
-        r'<a[^>]*href="(/news,[^"]*)"[^>]*title="([^"]*)"[^>]*>',
-        re.DOTALL
+    block_pattern = re.compile(
+        r'<div\s+class="articleh\s+normal_post"[^>]*>(.*?)</div>',
+        re.DOTALL | re.IGNORECASE,
     )
-    read_pattern = re.compile(r'<cite[^>]*class="[^"]*l1[^"]*"[^>]*>(.*?)</cite>', re.DOTALL)
-    reply_pattern = re.compile(r'<cite[^>]*class="[^"]*l2[^"]*"[^>]*>(.*?)</cite>', re.DOTALL)
-    author_pattern = re.compile(r'<cite[^>]*class="[^"]*l4[^"]*"[^>]*>.*?<a[^>]*>(.*?)</a>', re.DOTALL)
-    date_pattern = re.compile(r'<cite[^>]*class="[^"]*l5[^"]*"[^>]*>(.*?)</cite>', re.DOTALL)
+    span_pattern = re.compile(
+        r'<span\s+class="(?P<class>l[1-5])"[^>]*>(?P<body>.*?)</span>',
+        re.DOTALL | re.IGNORECASE,
+    )
+    link_pattern = re.compile(
+        r'<a[^>]*href="(?P<href>/news,[^"]+)"[^>]*(?:title="(?P<title>[^"]*)")?[^>]*>(?P<text>.*?)</a>',
+        re.DOTALL | re.IGNORECASE,
+    )
 
-    titles = title_pattern.findall(html_content)
-    reads = read_pattern.findall(html_content)
-    replies = reply_pattern.findall(html_content)
-    authors = author_pattern.findall(html_content)
-    dates = date_pattern.findall(html_content)
+    def clean_text(value: str) -> str:
+        value = re.sub(r"<[^>]+>", "", value)
+        return html_mod.unescape(value).strip()
 
     posts = []
-    for i, (url, title) in enumerate(titles):
-        title = html_mod.unescape(title.strip())
+    for block in block_pattern.findall(html_content):
+        spans = {m.group("class").lower(): m.group("body") for m in span_pattern.finditer(block)}
+        match = link_pattern.search(spans.get("l3", ""))
+        if not match:
+            continue
+
+        url = match.group("href")
+        title = html_mod.unescape((match.group("title") or clean_text(match.group("text"))).strip())
         if not title or title == '点击开始搜索':
             continue
         posts.append({
@@ -78,10 +85,10 @@ def parse_posts(html_content: str) -> List[Dict]:
             "title": title,
             "url": f"https://guba.eastmoney.com{url}",
             "platform": "guba",
-            "author": authors[i].strip() if i < len(authors) else "未知",
-            "reads": reads[i].strip() if i < len(reads) else "0",
-            "replies": replies[i].strip() if i < len(replies) else "0",
-            "date": dates[i].strip() if i < len(dates) else "未知",
+            "author": clean_text(spans.get("l4", "")) or "未知",
+            "reads": clean_text(spans.get("l1", "")) or "0",
+            "replies": clean_text(spans.get("l2", "")) or "0",
+            "date": clean_text(spans.get("l5", "")) or "未知",
             "collected_at": datetime.now().isoformat(),
         })
     return posts

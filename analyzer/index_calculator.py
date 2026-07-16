@@ -40,9 +40,9 @@ def compute_sector_index(analysis_results: List) -> Dict:
     valid_posts = [r for r in analysis_results if r.level != "垃圾帖"]
     spam_count = total - len(valid_posts)
     
-    # 小白帖（分数 >= 20）
-    newbie_posts = [r for r in analysis_results if r.newbie_score >= 20]
-    pure_newbie = [r for r in analysis_results if r.newbie_score >= 50]
+    # 小白帖（分数 >= 20）— 只从有效帖子中计算，避免垃圾帖污染比例。
+    newbie_posts = [r for r in valid_posts if r.newbie_score >= 20]
+    pure_newbie = [r for r in valid_posts if r.newbie_score >= 50]
     newbie_count = len(newbie_posts)
     
     # 维度1: 小白占比 (0-100) — 基于有效帖子

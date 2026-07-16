@@ -18,6 +18,37 @@ from analyzer.index_calculator import (
 )
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+SECTORS = ("nasdaq", "gold", "cpo", "semiconductor")
+MIN_GUBA_POSTS_PER_SECTOR = int(os.environ.get("MOM_INDEX_MIN_GUBA_POSTS", "20"))
+ALLOW_PARTIAL_GUBA = os.environ.get("MOM_INDEX_ALLOW_PARTIAL_GUBA", "0").lower() in {"1", "true", "yes"}
+
+
+def _validate_guba_data(guba_data):
+    """Abort instead of saving a misleading partial scrape day."""
+    missing = []
+    for sector in SECTORS:
+        count = len(guba_data.get(sector, []))
+        if count < MIN_GUBA_POSTS_PER_SECTOR:
+            missing.append(f"{sector}={count}")
+
+    if missing and not ALLOW_PARTIAL_GUBA:
+        raise RuntimeError(
+            "Guba scrape incomplete; refusing to save partial dashboard data. "
+            f"Problem sectors: {', '.join(missing)}. "
+            "Retry later, or set MOM_INDEX_ALLOW_PARTIAL_GUBA=1 to override."
+        )
+
+    if missing:
+        print(f"  ⚠️ Guba partial data allowed by env override: {', '.join(missing)}")
+
+
+def _save_xhs_posts(xhs_data):
+    """Persist raw Rednote/XHS scrape output for local audit/debugging."""
+    os.makedirs(DATA_DIR, exist_ok=True)
+    xhs_file = os.path.join(DATA_DIR, "xhs_posts.json")
+    with open(xhs_file, "w", encoding="utf-8") as f:
+        json.dump(xhs_data, f, ensure_ascii=False, indent=2)
+    print(f"  小红书原始结果已保存: {xhs_file}")
 
 
 def run_pipeline():
@@ -35,6 +66,7 @@ def run_pipeline():
     # 东方财富股吧
     print("  [东方财富股吧]")
     guba_data = collect_guba()
+    _validate_guba_data(guba_data)
     for sector, posts in guba_data.items():
         all_posts[sector] = all_posts.get(sector, []) + posts
     
@@ -42,6 +74,7 @@ def run_pipeline():
     print("  [小红书]")
     try:
         xhs_data = collect_xhs()
+        _save_xhs_posts(xhs_data)
         for sector, posts in xhs_data.items():
             all_posts[sector] = all_posts.get(sector, []) + posts
     except Exception as e:
@@ -170,29 +203,5 @@ def interpret(idx):
 
 
 if __name__ == "__main__":
-    # 先跑真实采集
-    dashboard = run_pipeline()
-    
-    # 如果历史数据不够，补充模拟数据
-    if dashboard["record_count"] < 5:
-        print("\n📝 历史数据不足，生成30天模拟数据用于前端展示...")
-        sample = generate_sample_history(30)
-        from analyzer.index_calculator import save_history
-        # 合并：保留真实数据，补充模拟历史
-        existing = dashboard.get("sector_history", {})
-        real_dates = set()
-        if dashboard["latest"]:
-            real_dates.add(dashboard["latest"]["date"])
-        
-        history = {"records": []}
-        for r in sample["records"]:
-            if r["date"] not in real_dates:
-                history["records"].append(r)
-        # 再加回真实记录
-        history["records"].extend([
-            r for r in sample["records"] if r["date"] in real_dates
-        ])
-        history["records"].sort(key=lambda r: r["date"])
-        save_history(history)
-        print(f"  已生成 {len(history['records'])} 天历史数据")
+    run_pipeline()
 

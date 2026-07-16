@@ -7,12 +7,12 @@ printed or exported.
 """
 import argparse
 import asyncio
+import hashlib
 import json
 import os
-import re
 from datetime import datetime
 from typing import Dict, List
-from urllib.parse import quote
+from urllib.parse import quote, urljoin
 
 from playwright.async_api import BrowserContext, Page, async_playwright
 from .anti_detection import get_anti_detection
@@ -135,21 +135,36 @@ async def _extract_posts(page: Page, keyword: str, limit: int) -> List[Dict]:
         print(f"    ⚠️ XHS 仍需要登录: {keyword}")
         return posts
 
-    titles = await page.locator("section.note-item a.title, section.note-item .title").evaluate_all(
+    items = await page.locator("section.note-item").evaluate_all(
         """
-        els => els.map(e => (e.innerText || e.textContent || '').trim()).filter(Boolean)
+        els => els.map(section => {
+          const titleEl = section.querySelector('a.title, .title');
+          const linkEl =
+            section.querySelector('a.title[href]') ||
+            section.querySelector('a[href*="/explore/"]') ||
+            section.querySelector('a[href*="/discovery/item"]') ||
+            section.querySelector('a[href]');
+          return {
+            title: (titleEl?.innerText || titleEl?.textContent || '').trim(),
+            href: linkEl?.getAttribute('href') || linkEl?.href || ''
+          };
+        }).filter(item => item.title)
         """
     )
 
     seen = set()
-    for title in titles:
-        if title in seen:
+    for item in items:
+        title = item["title"][:100]
+        url = urljoin(f"{REDNOTE_BASE_URL}/", item.get("href") or "")
+        key = f"{keyword}\0{url}\0{title}"
+        if key in seen:
             continue
-        seen.add(title)
+        seen.add(key)
+        post_id = hashlib.sha1(key.encode("utf-8")).hexdigest()[:16]
         posts.append({
-            "id": f"xhs_{abs(hash((keyword, title)))}",
-            "title": title[:100],
-            "url": "",
+            "id": f"xhs_{post_id}",
+            "title": title,
+            "url": url,
             "platform": "xiaohongshu",
             "keyword": keyword,
             "collected_at": datetime.now().isoformat(),

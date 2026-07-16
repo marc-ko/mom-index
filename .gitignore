@@ -42,3 +42,7 @@ xhs_dom_inspect.py
 xhs_inspect.py
 xhs_smoke.py
 xhs_ui_search.py
+
+# Local scheduled-run artifacts
+logs/
+.tmp-public-data/
