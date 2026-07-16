@@ -104,6 +104,10 @@ body {
 .post-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 8px; }
 .post-badge.pure { background: rgba(239,68,68,0.2); color: #fca5a5; }
 .post-badge.semi { background: rgba(251,146,60,0.2); color: #fdba74; }
+.privacy-note { padding: 16px; color: #94a3b8; font-size: 13px; line-height: 1.6; }
+.privacy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; margin-top: 12px; }
+.privacy-chip { border: 1px solid #334155; border-radius: 8px; padding: 10px; background: rgba(15,23,42,0.35); }
+.privacy-chip strong { color: #e2e8f0; display: block; margin-bottom: 2px; }
 .legend { display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #94a3b8; }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
@@ -175,6 +179,8 @@ const I18N = {
     tooltipLabel: value => `Mom Index: ${value}`,
     topPostsTitle: 'Hottest beginner-signal posts today',
     noTopPosts: 'No high-signal beginner posts today.',
+    publicPostsHidden: 'Post titles are hidden on the public dashboard to avoid republishing scraped platform content. Local runs still keep the raw post cache.',
+    hiddenSectorSummary: d => `${d.newbie_posts || 0} beginner-signal posts / ${d.valid_posts || d.total_posts || 0} valid posts`,
     pureBeginner: 'Pure beginner',
     semiBeginner: 'Beginner-ish',
     scoreUnit: 'pts',
@@ -218,6 +224,8 @@ const I18N = {
     tooltipLabel: value => `宝妈指数: ${value}`,
     topPostsTitle: '今日最“小白”的帖子',
     noTopPosts: '今日暂无典型小白帖',
+    publicPostsHidden: '公开 dashboard 不展示原帖标题，避免二次发布抓取平台内容。本机运行仍会保留原始缓存。',
+    hiddenSectorSummary: d => `${d.newbie_posts || 0} 条小白信号 / ${d.valid_posts || d.total_posts || 0} 条有效帖子`,
     pureBeginner: '纯小白',
     semiBeginner: '偏小白',
     scoreUnit: '分',
@@ -436,7 +444,23 @@ function renderTopPosts(data) {
   allTop = allTop.slice(0, 8);
 
   if (!allTop.length) {
-    container.innerHTML += `<div class="loading">${tr('noTopPosts')}</div>`;
+    const hasSignals = Object.values(latest.sectors || {}).some(s => (s.details || {}).newbie_posts > 0);
+    if (!hasSignals) {
+      container.innerHTML += `<div class="loading">${tr('noTopPosts')}</div>`;
+      return;
+    }
+
+    container.innerHTML += `
+      <div class="privacy-note">
+        ${tr('publicPostsHidden')}
+        <div class="privacy-grid">
+          ${Object.entries(latest.sectors).map(([sector, sdata]) => {
+            const d = sdata.details || {};
+            return `<div class="privacy-chip"><strong>${tr('sectors')[sector]}</strong>${tr('hiddenSectorSummary')(d)}</div>`;
+          }).join('')}
+        </div>
+      </div>
+    `;
     return;
   }
 
