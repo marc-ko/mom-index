@@ -1,460 +1,96 @@
 {
   "latest": {
-    "date": "2026-07-15",
-    "timestamp": "2026-07-15T15:08:57.769969",
+    "date": "2026-07-16",
+    "timestamp": "2026-07-16T11:13:41.827046",
     "sectors": {
       "nasdaq": {
-        "index": 18.8,
+        "index": 17.0,
         "interpretation": "🔵 极度冷清 — 小白沉默不语，可能是市场底部信号",
         "details": {
-          "total_posts": 103,
-          "valid_posts": 103,
+          "total_posts": 104,
+          "valid_posts": 104,
           "spam_posts": 0,
-          "newbie_posts": 17,
-          "pure_newbie": 1,
-          "newbie_ratio": 16.5,
-          "avg_newbie_score": 31.3,
-          "avg_sentiment": 17.6,
-          "purity_signal": 5.9,
-          "mom_buy_index": 21.5,
+          "newbie_posts": 19,
+          "pure_newbie": 0,
+          "newbie_ratio": 18.3,
+          "avg_newbie_score": 30.4,
+          "avg_sentiment": 10.5,
+          "purity_signal": 0.0,
+          "mom_buy_index": 16.4,
           "mom_sell_index": 0.0,
-          "buy_sell_ratio": 5.0,
-          "buy_count": 5,
+          "buy_sell_ratio": 4.0,
+          "buy_count": 4,
           "sell_count": 0
         },
-        "top_newbie_posts": [
-          {
-            "title": "新手小白，股友们今天可以加仓吗？",
-            "score": 50.0,
-            "level": "纯小白",
-            "reasoning": "帖子「新手小白，股友们今天可以加仓吗？...」 命中1个小信号: 身份自述(8分)。 以问句结尾，在寻求答案 综合得分50.0分， 判定为「纯小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "buy",
-            "intent_label": "🟢 买入",
-            "key_signals": [
-              "「身份自述」明确自称小白/新手/刚入门/宝妈 (命中: 小白, 新手)"
-            ]
-          },
-          {
-            "title": "请问-8.47是不是要涨9个多点才能盈利啊？",
-            "score": 42.0,
-            "level": "偏小白",
-            "reasoning": "帖子「请问-8.47是不是要涨9个多点才能盈利啊？...」 命中1个小信号: 知识求助(6分)。 以问句结尾，在寻求答案 综合得分42.0分， 判定为「偏小白」 (置信度: low)。",
-            "sentiment": 1.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「知识求助」在问基础问题（怎么买/在哪看/什么意思） (命中: 请问)"
-            ]
-          },
-          {
-            "title": "3个方法教会小白看美股",
-            "score": 42.0,
-            "level": "偏小白",
-            "reasoning": "帖子「3个方法教会小白看美股...」 命中1个小信号: 身份自述(8分)。 综合得分42.0分， 判定为「偏小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「身份自述」明确自称小白/新手/刚入门/宝妈 (命中: 小白)"
-            ]
-          },
-          {
-            "title": "新手4w块勇闯美股的第9天",
-            "score": 42.0,
-            "level": "偏小白",
-            "reasoning": "帖子「新手4w块勇闯美股的第9天...」 命中1个小信号: 身份自述(8分)。 综合得分42.0分， 判定为「偏小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「身份自述」明确自称小白/新手/刚入门/宝妈 (命中: 新手)"
-            ]
-          },
-          {
-            "title": "新手买美股？看这篇就够了✅",
-            "score": 42.0,
-            "level": "偏小白",
-            "reasoning": "帖子「新手买美股？看这篇就够了✅...」 命中1个小信号: 身份自述(8分)。 综合得分42.0分， 判定为「偏小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「身份自述」明确自称小白/新手/刚入门/宝妈 (命中: 新手)"
-            ]
-          }
-        ]
+        "top_newbie_posts": []
       },
       "gold": {
-        "index": 18.3,
+        "index": 16.8,
         "interpretation": "🔵 极度冷清 — 小白沉默不语，可能是市场底部信号",
         "details": {
           "total_posts": 93,
           "valid_posts": 93,
           "spam_posts": 0,
           "newbie_posts": 14,
-          "pure_newbie": 2,
+          "pure_newbie": 1,
           "newbie_ratio": 15.1,
-          "avg_newbie_score": 29.1,
+          "avg_newbie_score": 27.4,
           "avg_sentiment": 14.3,
-          "purity_signal": 14.3,
-          "mom_buy_index": 12.4,
+          "purity_signal": 7.1,
+          "mom_buy_index": 0.0,
           "mom_sell_index": 12.2,
-          "buy_sell_ratio": 2.0,
-          "buy_count": 2,
+          "buy_sell_ratio": 0.0,
+          "buy_count": 0,
           "sell_count": 1
         },
-        "top_newbie_posts": [
-          {
-            "title": "使劲砸，跌这点怎么买？",
-            "score": 54.0,
-            "level": "纯小白",
-            "reasoning": "帖子「使劲砸，跌这点怎么买？...」 命中1个小信号: 知识求助(6分)。 标题极短+情绪化，典型小白特征 以问句结尾，在寻求答案 综合得分54.0分， 判定为「纯小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「知识求助」在问基础问题（怎么买/在哪看/什么意思） (命中: 怎么买)"
-            ]
-          },
-          {
-            "title": "新手支付宝买黄金怎么选？",
-            "score": 50.0,
-            "level": "纯小白",
-            "reasoning": "帖子「新手支付宝买黄金怎么选？...」 命中1个小信号: 身份自述(8分)。 以问句结尾，在寻求答案 综合得分50.0分， 判定为「纯小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「身份自述」明确自称小白/新手/刚入门/宝妈 (命中: 新手)"
-            ]
-          },
-          {
-            "title": "📕想买黄金不知道怎么买？一篇讲透",
-            "score": 34.0,
-            "level": "中间派",
-            "reasoning": "帖子「📕想买黄金不知道怎么买？一篇讲透...」 命中1个小信号: 知识求助(6分)。 综合得分34.0分， 判定为「中间派」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "buy",
-            "intent_label": "🟢 买入",
-            "key_signals": [
-              "「知识求助」在问基础问题（怎么买/在哪看/什么意思） (命中: 怎么买)"
-            ]
-          },
-          {
-            "title": "先别管抄底了，先搞懂黄金怎么买吧",
-            "score": 34.0,
-            "level": "中间派",
-            "reasoning": "帖子「先别管抄底了，先搞懂黄金怎么买吧...」 命中1个小信号: 知识求助(6分)。 综合得分34.0分， 判定为「中间派」 (置信度: low)。",
-            "sentiment": 1.0,
-            "intent": "buy",
-            "intent_label": "🟢 买入",
-            "key_signals": [
-              "「知识求助」在问基础问题（怎么买/在哪看/什么意思） (命中: 怎么买)"
-            ]
-          },
-          {
-            "title": "自从割肉后，每天做t不过夜，再也不焦虑了。",
-            "score": 30.0,
-            "level": "中间派",
-            "reasoning": "帖子「自从割肉后，每天做t不过夜，再也不焦虑了。...」 命中1个小信号: 情绪恐慌(5分)。 综合得分30.0分， 判定为「中间派」 (置信度: low)。",
-            "sentiment": -1.0,
-            "intent": "sell",
-            "intent_label": "🔴 卖出",
-            "key_signals": [
-              "「情绪恐慌」表达明显的恐惧/焦虑/后悔情绪 (命中: 割肉)"
-            ]
-          }
-        ]
+        "top_newbie_posts": []
       },
       "cpo": {
-        "index": 19.5,
+        "index": 23.5,
+        "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+        "details": {
+          "total_posts": 96,
+          "valid_posts": 96,
+          "spam_posts": 0,
+          "newbie_posts": 8,
+          "pure_newbie": 0,
+          "newbie_ratio": 8.3,
+          "avg_newbie_score": 30.5,
+          "avg_sentiment": 62.5,
+          "purity_signal": 0.0,
+          "mom_buy_index": 15.4,
+          "mom_sell_index": 24.8,
+          "buy_sell_ratio": 0.5,
+          "buy_count": 1,
+          "sell_count": 2
+        },
+        "top_newbie_posts": []
+      },
+      "semiconductor": {
+        "index": 18.5,
         "interpretation": "🔵 极度冷清 — 小白沉默不语，可能是市场底部信号",
         "details": {
-          "total_posts": 94,
-          "valid_posts": 94,
+          "total_posts": 95,
+          "valid_posts": 95,
           "spam_posts": 0,
-          "newbie_posts": 10,
-          "pure_newbie": 0,
-          "newbie_ratio": 10.6,
-          "avg_newbie_score": 28.8,
-          "avg_sentiment": 40.0,
-          "purity_signal": 0.0,
-          "mom_buy_index": 27.5,
+          "newbie_posts": 15,
+          "pure_newbie": 1,
+          "newbie_ratio": 15.8,
+          "avg_newbie_score": 28.9,
+          "avg_sentiment": 20.0,
+          "purity_signal": 6.7,
+          "mom_buy_index": 21.6,
           "mom_sell_index": 0.0,
           "buy_sell_ratio": 4.0,
           "buy_count": 4,
           "sell_count": 0
         },
-        "top_newbie_posts": [
-          {
-            "title": "新人报道，建个小仓",
-            "score": 42.0,
-            "level": "偏小白",
-            "reasoning": "帖子「新人报道，建个小仓...」 命中1个小信号: 身份自述(8分)。 综合得分42.0分， 判定为「偏小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「身份自述」明确自称小白/新手/刚入门/宝妈 (命中: 新人)"
-            ]
-          },
-          {
-            "title": "你们都梭哈买吧，",
-            "score": 38.0,
-            "level": "偏小白",
-            "reasoning": "帖子「你们都梭哈买吧，...」 命中1个小信号: 过度乐观(4分)。 标题极短+情绪化，典型小白特征 综合得分38.0分， 判定为「偏小白」 (置信度: low)。",
-            "sentiment": 1.0,
-            "intent": "buy",
-            "intent_label": "🟢 买入",
-            "key_signals": [
-              "「过度乐观」非理性乐观（梭哈/稳赚/必涨/躺赚） (命中: 梭哈)"
-            ]
-          },
-          {
-            "title": "没有经历过2021年的市场，是不懂这个含金量",
-            "score": 34.0,
-            "level": "中间派",
-            "reasoning": "帖子「没有经历过2021年的市场，是不懂这个含金量...」 命中1个小信号: 知识求助(6分)。 综合得分34.0分， 判定为「中间派」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「知识求助」在问基础问题（怎么买/在哪看/什么意思） (命中: 不懂)"
-            ]
-          },
-          {
-            "title": "收盘价就是最低价，太惨了",
-            "score": 30.0,
-            "level": "中间派",
-            "reasoning": "帖子「收盘价就是最低价，太惨了...」 命中1个小信号: 情绪恐慌(5分)。 综合得分30.0分， 判定为「中间派」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「情绪恐慌」表达明显的恐惧/焦虑/后悔情绪 (命中: 太惨)"
-            ]
-          },
-          {
-            "title": "散户真是整个市场的宝藏看到涨就往里冲太可爱了",
-            "score": 26.0,
-            "level": "中间派",
-            "reasoning": "帖子「散户真是整个市场的宝藏看到涨就往里冲太可爱了...」 命中1个小信号: 过度乐观(4分)。 综合得分26.0分， 判定为「中间派」 (置信度: low)。",
-            "sentiment": 1.0,
-            "intent": "buy",
-            "intent_label": "🟢 买入",
-            "key_signals": [
-              "「过度乐观」非理性乐观（梭哈/稳赚/必涨/躺赚） (命中: 冲)"
-            ]
-          }
-        ]
-      },
-      "semiconductor": {
-        "index": 18.9,
-        "interpretation": "🔵 极度冷清 — 小白沉默不语，可能是市场底部信号",
-        "details": {
-          "total_posts": 94,
-          "valid_posts": 94,
-          "spam_posts": 0,
-          "newbie_posts": 18,
-          "pure_newbie": 1,
-          "newbie_ratio": 19.1,
-          "avg_newbie_score": 28.4,
-          "avg_sentiment": 16.7,
-          "purity_signal": 5.6,
-          "mom_buy_index": 10.5,
-          "mom_sell_index": 14.5,
-          "buy_sell_ratio": 1.0,
-          "buy_count": 2,
-          "sell_count": 2
-        },
-        "top_newbie_posts": [
-          {
-            "title": "新手小白买基金怎么选？CPO还是半导体？",
-            "score": 50.0,
-            "level": "纯小白",
-            "reasoning": "帖子「新手小白买基金怎么选？CPO还是半导体？...」 命中1个小信号: 身份自述(8分)。 以问句结尾，在寻求答案 综合得分50.0分， 判定为「纯小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「身份自述」明确自称小白/新手/刚入门/宝妈 (命中: 小白, 新手)"
-            ]
-          },
-          {
-            "title": "长鑫周四打新！半导体还能不能拿？",
-            "score": 46.0,
-            "level": "偏小白",
-            "reasoning": "帖子「长鑫周四打新！半导体还能不能拿？...」 命中1个小信号: 决策依赖(7分)。 以问句结尾，在寻求答案 综合得分46.0分， 判定为「偏小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「决策依赖」请求他人替自己做投资决策（该不该/要不要/能不能） (命中: 能不能)"
-            ]
-          },
-          {
-            "title": "新手收藏✨半导体材料 12 大细分赛道",
-            "score": 42.0,
-            "level": "偏小白",
-            "reasoning": "帖子「新手收藏✨半导体材料 12 大细分赛道...」 命中1个小信号: 身份自述(8分)。 综合得分42.0分， 判定为「偏小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「身份自述」明确自称小白/新手/刚入门/宝妈 (命中: 新手)"
-            ]
-          },
-          {
-            "title": "小白入行半导体",
-            "score": 42.0,
-            "level": "偏小白",
-            "reasoning": "帖子「小白入行半导体...」 命中1个小信号: 身份自述(8分)。 综合得分42.0分， 判定为「偏小白」 (置信度: low)。",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "「身份自述」明确自称小白/新手/刚入门/宝妈 (命中: 小白)"
-            ]
-          },
-          {
-            "title": "还没放出来量，没人割肉，明天大概率继续下跌5个点，量就能放出来了",
-            "score": 30.0,
-            "level": "中间派",
-            "reasoning": "帖子「还没放出来量，没人割肉，明天大概率继续下跌5个点，量就能放出来了...」 命中1个小信号: 情绪恐慌(5分)。 综合得分30.0分， 判定为「中间派」 (置信度: low)。",
-            "sentiment": -1.0,
-            "intent": "sell",
-            "intent_label": "🔴 卖出",
-            "key_signals": [
-              "「情绪恐慌」表达明显的恐惧/焦虑/后悔情绪 (命中: 割肉)"
-            ]
-          }
-        ]
+        "top_newbie_posts": []
       }
     }
   },
   "sector_history": {
     "nasdaq": [
-      {
-        "date": "2026-06-01",
-        "index": 33.5
-      },
-      {
-        "date": "2026-06-01",
-        "index": 34.6
-      },
-      {
-        "date": "2026-06-01",
-        "index": 41.9
-      },
-      {
-        "date": "2026-06-01",
-        "index": 36.1
-      },
-      {
-        "date": "2026-06-01",
-        "index": 38.9
-      },
-      {
-        "date": "2026-06-01",
-        "index": 35.0
-      },
-      {
-        "date": "2026-06-01",
-        "index": 37.4
-      },
-      {
-        "date": "2026-06-01",
-        "index": 33.6
-      },
-      {
-        "date": "2026-06-01",
-        "index": 38.5
-      },
-      {
-        "date": "2026-06-01",
-        "index": 36.7
-      },
-      {
-        "date": "2026-06-01",
-        "index": 40.9
-      },
-      {
-        "date": "2026-06-02",
-        "index": 37.6
-      },
-      {
-        "date": "2026-06-03",
-        "index": 35.7
-      },
-      {
-        "date": "2026-06-04",
-        "index": 35.1
-      },
-      {
-        "date": "2026-06-05",
-        "index": 39.4
-      },
-      {
-        "date": "2026-06-06",
-        "index": 31.1
-      },
-      {
-        "date": "2026-06-07",
-        "index": 39.3
-      },
-      {
-        "date": "2026-06-08",
-        "index": 29.8
-      },
-      {
-        "date": "2026-06-09",
-        "index": 33.4
-      },
-      {
-        "date": "2026-06-10",
-        "index": 39.5
-      },
-      {
-        "date": "2026-06-11",
-        "index": 35.2
-      },
-      {
-        "date": "2026-06-12",
-        "index": 33.7
-      },
-      {
-        "date": "2026-06-13",
-        "index": 35.8
-      },
-      {
-        "date": "2026-06-14",
-        "index": 34.5
-      },
-      {
-        "date": "2026-06-15",
-        "index": 36.0
-      },
-      {
-        "date": "2026-06-16",
-        "index": 40.1
-      },
-      {
-        "date": "2026-06-17",
-        "index": 43.1
-      },
-      {
-        "date": "2026-06-18",
-        "index": 40.8
-      },
-      {
-        "date": "2026-06-19",
-        "index": 45.3
-      },
-      {
-        "date": "2026-06-20",
-        "index": 48.5
-      },
       {
         "date": "2026-06-21",
         "index": 22.8
@@ -462,129 +98,13 @@
       {
         "date": "2026-07-15",
         "index": 18.8
+      },
+      {
+        "date": "2026-07-16",
+        "index": 17.0
       }
     ],
     "gold": [
-      {
-        "date": "2026-06-01",
-        "index": 29.9
-      },
-      {
-        "date": "2026-06-01",
-        "index": 29.7
-      },
-      {
-        "date": "2026-06-01",
-        "index": 25.6
-      },
-      {
-        "date": "2026-06-01",
-        "index": 27.4
-      },
-      {
-        "date": "2026-06-01",
-        "index": 31.4
-      },
-      {
-        "date": "2026-06-01",
-        "index": 34.6
-      },
-      {
-        "date": "2026-06-01",
-        "index": 33.1
-      },
-      {
-        "date": "2026-06-01",
-        "index": 29.2
-      },
-      {
-        "date": "2026-06-01",
-        "index": 32.7
-      },
-      {
-        "date": "2026-06-01",
-        "index": 28.5
-      },
-      {
-        "date": "2026-06-01",
-        "index": 24.1
-      },
-      {
-        "date": "2026-06-02",
-        "index": 26.5
-      },
-      {
-        "date": "2026-06-03",
-        "index": 25.5
-      },
-      {
-        "date": "2026-06-04",
-        "index": 29.9
-      },
-      {
-        "date": "2026-06-05",
-        "index": 23.5
-      },
-      {
-        "date": "2026-06-06",
-        "index": 28.3
-      },
-      {
-        "date": "2026-06-07",
-        "index": 31.8
-      },
-      {
-        "date": "2026-06-08",
-        "index": 30.1
-      },
-      {
-        "date": "2026-06-09",
-        "index": 26.1
-      },
-      {
-        "date": "2026-06-10",
-        "index": 30.8
-      },
-      {
-        "date": "2026-06-11",
-        "index": 34.4
-      },
-      {
-        "date": "2026-06-12",
-        "index": 29.8
-      },
-      {
-        "date": "2026-06-13",
-        "index": 29.5
-      },
-      {
-        "date": "2026-06-14",
-        "index": 27.7
-      },
-      {
-        "date": "2026-06-15",
-        "index": 35.2
-      },
-      {
-        "date": "2026-06-16",
-        "index": 34.9
-      },
-      {
-        "date": "2026-06-17",
-        "index": 44.6
-      },
-      {
-        "date": "2026-06-18",
-        "index": 44.1
-      },
-      {
-        "date": "2026-06-19",
-        "index": 50.5
-      },
-      {
-        "date": "2026-06-20",
-        "index": 55.6
-      },
       {
         "date": "2026-06-21",
         "index": 35.9
@@ -592,129 +112,13 @@
       {
         "date": "2026-07-15",
         "index": 18.3
+      },
+      {
+        "date": "2026-07-16",
+        "index": 16.8
       }
     ],
     "cpo": [
-      {
-        "date": "2026-06-01",
-        "index": 15.5
-      },
-      {
-        "date": "2026-06-01",
-        "index": 24.3
-      },
-      {
-        "date": "2026-06-01",
-        "index": 26.8
-      },
-      {
-        "date": "2026-06-01",
-        "index": 23.4
-      },
-      {
-        "date": "2026-06-01",
-        "index": 23.9
-      },
-      {
-        "date": "2026-06-01",
-        "index": 23.9
-      },
-      {
-        "date": "2026-06-01",
-        "index": 28.5
-      },
-      {
-        "date": "2026-06-01",
-        "index": 25.4
-      },
-      {
-        "date": "2026-06-01",
-        "index": 24.1
-      },
-      {
-        "date": "2026-06-01",
-        "index": 19.4
-      },
-      {
-        "date": "2026-06-01",
-        "index": 25.7
-      },
-      {
-        "date": "2026-06-02",
-        "index": 25.3
-      },
-      {
-        "date": "2026-06-03",
-        "index": 23.1
-      },
-      {
-        "date": "2026-06-04",
-        "index": 21.2
-      },
-      {
-        "date": "2026-06-05",
-        "index": 25.3
-      },
-      {
-        "date": "2026-06-06",
-        "index": 25.9
-      },
-      {
-        "date": "2026-06-07",
-        "index": 25.0
-      },
-      {
-        "date": "2026-06-08",
-        "index": 22.7
-      },
-      {
-        "date": "2026-06-09",
-        "index": 21.0
-      },
-      {
-        "date": "2026-06-10",
-        "index": 19.6
-      },
-      {
-        "date": "2026-06-11",
-        "index": 17.4
-      },
-      {
-        "date": "2026-06-12",
-        "index": 21.7
-      },
-      {
-        "date": "2026-06-13",
-        "index": 25.1
-      },
-      {
-        "date": "2026-06-14",
-        "index": 20.9
-      },
-      {
-        "date": "2026-06-15",
-        "index": 24.9
-      },
-      {
-        "date": "2026-06-16",
-        "index": 35.2
-      },
-      {
-        "date": "2026-06-17",
-        "index": 37.1
-      },
-      {
-        "date": "2026-06-18",
-        "index": 42.9
-      },
-      {
-        "date": "2026-06-19",
-        "index": 48.8
-      },
-      {
-        "date": "2026-06-20",
-        "index": 56.0
-      },
       {
         "date": "2026-06-21",
         "index": 29.5
@@ -722,129 +126,13 @@
       {
         "date": "2026-07-15",
         "index": 19.5
+      },
+      {
+        "date": "2026-07-16",
+        "index": 23.5
       }
     ],
     "semiconductor": [
-      {
-        "date": "2026-06-01",
-        "index": 33.0
-      },
-      {
-        "date": "2026-06-01",
-        "index": 35.0
-      },
-      {
-        "date": "2026-06-01",
-        "index": 35.0
-      },
-      {
-        "date": "2026-06-01",
-        "index": 27.0
-      },
-      {
-        "date": "2026-06-01",
-        "index": 28.5
-      },
-      {
-        "date": "2026-06-01",
-        "index": 28.6
-      },
-      {
-        "date": "2026-06-01",
-        "index": 28.3
-      },
-      {
-        "date": "2026-06-01",
-        "index": 27.8
-      },
-      {
-        "date": "2026-06-01",
-        "index": 33.1
-      },
-      {
-        "date": "2026-06-01",
-        "index": 33.6
-      },
-      {
-        "date": "2026-06-01",
-        "index": 30.7
-      },
-      {
-        "date": "2026-06-02",
-        "index": 32.9
-      },
-      {
-        "date": "2026-06-03",
-        "index": 24.2
-      },
-      {
-        "date": "2026-06-04",
-        "index": 24.3
-      },
-      {
-        "date": "2026-06-05",
-        "index": 32.4
-      },
-      {
-        "date": "2026-06-06",
-        "index": 27.3
-      },
-      {
-        "date": "2026-06-07",
-        "index": 33.4
-      },
-      {
-        "date": "2026-06-08",
-        "index": 24.6
-      },
-      {
-        "date": "2026-06-09",
-        "index": 33.1
-      },
-      {
-        "date": "2026-06-10",
-        "index": 30.6
-      },
-      {
-        "date": "2026-06-11",
-        "index": 28.8
-      },
-      {
-        "date": "2026-06-12",
-        "index": 31.1
-      },
-      {
-        "date": "2026-06-13",
-        "index": 30.9
-      },
-      {
-        "date": "2026-06-14",
-        "index": 29.6
-      },
-      {
-        "date": "2026-06-15",
-        "index": 29.9
-      },
-      {
-        "date": "2026-06-16",
-        "index": 36.6
-      },
-      {
-        "date": "2026-06-17",
-        "index": 33.9
-      },
-      {
-        "date": "2026-06-18",
-        "index": 35.9
-      },
-      {
-        "date": "2026-06-19",
-        "index": 37.7
-      },
-      {
-        "date": "2026-06-20",
-        "index": 42.8
-      },
       {
         "date": "2026-06-21",
         "index": 28.5
@@ -852,8 +140,12 @@
       {
         "date": "2026-07-15",
         "index": 18.9
+      },
+      {
+        "date": "2026-07-16",
+        "index": 18.5
       }
     ]
   },
-  "record_count": 32
+  "record_count": 3
 }
