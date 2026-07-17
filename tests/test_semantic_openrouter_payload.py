@@ -1,4 +1,5 @@
 import json
+import re
 import unittest
 
 from analyzer.semantic_classifier import (
@@ -49,6 +50,12 @@ class SemanticOpenRouterPayloadTests(unittest.TestCase):
         self.assertIn('"author_is_beginner": 95', prompt)
         self.assertIn('"targets_beginners": 95', prompt)
         self.assertIn('"spam_or_marketing": 95', prompt)
+        examples = re.findall(r"示例帖子：(.*?)\n示例 JSON：(\{.*?\})", prompt)
+        self.assertEqual(len(examples), 3)
+        for example_post, example_json in examples:
+            with self.subTest(example_post=example_post):
+                for evidence in json.loads(example_json)["evidence"]:
+                    self.assertIn(evidence, example_post)
         self.assertIn("板块：沪深300", prompt)
         self.assertIn("标题：我现在应该割肉吗？", prompt)
         self.assertIn("正文：已经亏了15%，完全不知道怎么办。", prompt)
