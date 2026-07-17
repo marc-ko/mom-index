@@ -10,7 +10,7 @@ import requests
 from analyzer.semantic_types import SemanticClassification
 
 
-CLASSIFIER_VERSION = "semantic-openrouter-free-v1"
+CLASSIFIER_VERSION = "semantic-openrouter-free-v2"
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 DEFAULT_REMOTE_MODEL = "openrouter/free"
 CACHE_FILE = Path(__file__).resolve().parents[1] / ".semantic_cache.json"
@@ -75,23 +75,35 @@ def build_semantic_prompt(post: Dict, sector: str) -> str:
     title = post.get("title", "") or ""
     content = post.get("content", "") or ""
     return f"""
-Classify this Chinese retail-investing social post.
+请分析以下简体中文零售投资社区帖子。
 
-Critical distinction:
-- author_is_beginner means the author appears to be a real beginner asking or reacting.
-- targets_beginners means the content is written for beginners, such as guides, tutorials, or marketing.
-- Do not treat educational content as beginner-authored unless the author shows their own confusion or decision dependence.
+核心区分：
+- author_is_beginner 表示作者本人是小白：作者亲自表现出基础知识不足、依赖他人替自己决策，或以新手方式困惑和反应。
+- targets_beginners 表示内容面向小白：内容写给新手阅读，但作者可能是教育者、有经验的投资者或营销人员。
+- 教程、总结、转载、引用别人的新手问题、反问、玩梗或营销话术，本身都不能证明作者是小白。必须依据作者本人的表达立场和上下文评分。
+- 证据不足、作者身份不清或语气有歧义时，应降低 confidence，不要虚构背景。
 
-Return strict JSON with these numeric fields from 0 to 100 unless otherwise stated:
-author_is_beginner, targets_beginners, decision_dependence, basic_knowledge_gap,
-spam_or_marketing, professional_depth, confidence.
-Return fomo_or_panic from -100 panic/fear to +100 FOMO/greed.
-Return investment_intent as one of: buy, sell, hold, unknown.
-Return evidence as a short list of exact phrases from the post.
+只返回一个合法 JSON 对象，字段要求如下：
+- author_is_beginner、targets_beginners、decision_dependence、basic_knowledge_gap、spam_or_marketing、professional_depth、confidence：0 到 100 的数字。
+- fomo_or_panic：-100 到 100 的数字；-100 表示极度恐慌，100 表示极度追涨或贪婪。
+- investment_intent：只能是 buy、sell、hold、unknown 之一。
+- evidence：简短数组，每一项必须逐字摘自帖子原文。
 
-Sector: {sector}
-Title: {title}
-Content: {content}
+以下示例只用于说明分类边界：
+
+示例帖子：请问亏8%要涨多少才能回本？
+示例 JSON：{{"author_is_beginner": 95, "targets_beginners": 5, "decision_dependence": 75, "basic_knowledge_gap": 95, "fomo_or_panic": -30, "investment_intent": "hold", "spam_or_marketing": 0, "professional_depth": 0, "confidence": 95, "evidence": ["请问", "亏8%", "涨多少才能回本"]}}
+
+示例帖子：新手买美股？看这篇就够了
+示例 JSON：{{"author_is_beginner": 5, "targets_beginners": 95, "decision_dependence": 0, "basic_knowledge_gap": 0, "fomo_or_panic": 0, "investment_intent": "unknown", "spam_or_marketing": 10, "professional_depth": 40, "confidence": 90, "evidence": ["新手买美股", "看这篇就够了"]}}
+
+示例帖子：小白无脑定投攻略，评论区领取资料
+示例 JSON：{{"author_is_beginner": 5, "targets_beginners": 95, "decision_dependence": 0, "basic_knowledge_gap": 0, "fomo_or_panic": 20, "investment_intent": "buy", "spam_or_marketing": 95, "professional_depth": 10, "confidence": 95, "evidence": ["小白", "无脑定投攻略", "评论区领取资料"]}}
+
+现在分析真实帖子：
+板块：{sector}
+标题：{title}
+正文：{content}
 """.strip()
 
 
@@ -102,7 +114,11 @@ def build_openrouter_payload(post: Dict, sector: str) -> Dict:
         "messages": [
             {
                 "role": "system",
-                "content": "You are a strict JSON classifier for Chinese retail-investing posts. Return JSON only.",
+                "content": (
+                    "你是一个严格的 JSON 分类器，负责分析简体中文零售投资社区帖子。"
+                    "只返回一个合法 JSON 对象，不要使用 Markdown 代码块，不要输出解释，"
+                    "也不要增加指定字段以外的字段。"
+                ),
             },
             {"role": "user", "content": build_semantic_prompt(post, sector)},
         ],
