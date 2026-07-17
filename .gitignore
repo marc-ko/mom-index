@@ -49,3 +49,6 @@ logs/
 
 # Local semantic classifier cache; may reflect private API-backed results.
 .semantic_cache.json
+
+# Local Git worktrees.
+.worktrees/
