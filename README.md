@@ -187,6 +187,32 @@ Buy/sell intent is detected with Chinese trigger phrases such as:
 - Buy/FOMO: 上车, 冲, 加仓, 买了, 还能买吗, 想买, 心动
 - Sell/panic: 割肉, 止损, 清仓, 亏了, 要不要走, 跌麻了
 
+### Semantic Classification Mode
+
+The default classifier remains deterministic and can run offline. For more
+accurate classification, set:
+
+```powershell
+$env:MOM_INDEX_CLASSIFIER="semantic"
+```
+
+Semantic mode separates `author_is_beginner` from `targets_beginners`, so a
+post like `新手买美股？看这篇就够了` is treated as beginner-facing education,
+not automatically as a beginner-authored post.
+
+Optional OpenRouter-backed semantic classification uses the free models router:
+
+```powershell
+$env:MOM_INDEX_CLASSIFIER="semantic"
+$env:MOM_INDEX_SEMANTIC_PROVIDER="openrouter"
+$env:MOM_INDEX_SEMANTIC_MODEL="openrouter/free"
+$env:OPENROUTER_API_KEY="..."
+```
+
+Without `OPENROUTER_API_KEY`, semantic mode uses the deterministic local
+fallback. The key should only be supplied through the shell environment and
+must not be committed.
+
 ## Index Formula
 
 ```text

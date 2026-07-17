@@ -6,6 +6,9 @@ from typing import Dict, List, Tuple
 from dataclasses import dataclass, field
 from datetime import datetime
 import json
+import os
+
+from analyzer.semantic_classifier import classify_semantic
 
 # ============================================================
 # 信号定义库
@@ -147,6 +150,27 @@ def analyze_post(post: Dict, sector: str) -> AnalysisResult:
         platform=post.get("platform", "unknown"),
         sector=sector,
     )
+
+    if os.environ.get("MOM_INDEX_CLASSIFIER", "keyword").lower() == "semantic":
+        semantic = classify_semantic(post, sector)
+        result.newbie_score = semantic.to_newbie_score()
+        result.newbie_confidence = "high" if semantic.confidence >= 75 else "medium" if semantic.confidence >= 50 else "low"
+        result.level = semantic.level
+        result.reasoning = (
+            "语义分类: "
+            f"作者小白={semantic.author_is_beginner:.0f}, "
+            f"面向小白={semantic.targets_beginners:.0f}, "
+            f"决策依赖={semantic.decision_dependence:.0f}, "
+            f"基础缺口={semantic.basic_knowledge_gap:.0f}, "
+            f"营销={semantic.spam_or_marketing:.0f}, "
+            f"专业深度={semantic.professional_depth:.0f}. "
+            f"证据: {', '.join(semantic.evidence[:3]) or '无明确短语'}."
+        )
+        result.sentiment_score = semantic.sentiment_score
+        result.intent = semantic.intent
+        result.intent_strength = semantic.intent_strength
+        result.key_signals = semantic.key_signals
+        return result
     
     # 1. 逐信号匹配
     matched_newbie = []

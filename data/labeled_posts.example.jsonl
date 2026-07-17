@@ -1,0 +1,5 @@
+{"sector":"nasdaq","post":{"title":"请问-8.47是不是要涨9个多点才能盈利啊？"},"expected_label":"actual_beginner_question"}
+{"sector":"nasdaq","post":{"title":"新手买美股？看这篇就够了"},"expected_label":"beginner_education"}
+{"sector":"gold","post":{"title":"小白无脑定投黄金攻略，评论区领取资料"},"expected_label":"marketing_or_creator_content"}
+{"sector":"cpo","post":{"title":"满仓干主力冲鸭"},"expected_label":"emotional_retail_post"}
+{"sector":"semiconductor","post":{"title":"半导体估值分位和库存周期的关系"},"expected_label":"professional_or_data_driven"}

@@ -46,3 +46,6 @@ xhs_ui_search.py
 # Local scheduled-run artifacts
 logs/
 .tmp-public-data/
+
+# Local semantic classifier cache; may reflect private API-backed results.
+.semantic_cache.json
