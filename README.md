@@ -108,8 +108,8 @@ powershell -ExecutionPolicy Bypass -File scripts/install_daily_task.ps1 -Time 08
 ```
 
 The scheduled runner executes `python pipeline.py`. With `-PublishPages`, it
-publishes only sanitized GitHub Pages data to `gh-pages`: raw scraped caches and
-top post text are not published.
+publishes the generated dashboard and history JSON to `gh-pages`, including the
+top 5 beginner-signal posts per sector. Raw scraped caches are not published.
 
 To also create a daily GitHub issue report, install the task with `-PushReport`:
 
@@ -136,7 +136,7 @@ mom-index/
 ├── pipeline.py                  # Main flow: collect -> analyze -> index -> store
 ├── scripts/
 │   ├── install_daily_task.ps1    # Register Windows Task Scheduler job
-│   └── run_daily.ps1             # Daily pipeline runner and sanitized Pages publish
+│   └── run_daily.ps1             # Daily pipeline runner and Pages publish
 ├── sync_data.py                 # Data sync helper: data/ -> frontend/data/
 ├── xhs_profile.py               # Rednote login/profile helper, no cookie export
 ├── collectors/

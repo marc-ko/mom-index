@@ -81,34 +81,13 @@ if (-not $PublishPages) {
   exit 0
 }
 
-Write-Log "Preparing sanitized GitHub Pages payload"
+Write-Log "Preparing GitHub Pages payload"
 
 $tmpPublic = Join-Path $RepoRoot ".tmp-public-data"
 New-Item -ItemType Directory -Force -Path $tmpPublic | Out-Null
 
-@'
-import copy
-import json
-from pathlib import Path
-
-repo = Path.cwd()
-out = repo / ".tmp-public-data"
-
-def sanitize_record(record):
-    record = copy.deepcopy(record)
-    for sector in (record.get("sectors") or {}).values():
-        sector["top_newbie_posts"] = []
-    return record
-
-history = json.loads((repo / "data" / "history.json").read_text(encoding="utf-8"))
-history["records"] = [sanitize_record(r) for r in history.get("records", [])]
-(out / "history.json").write_text(json.dumps(history, ensure_ascii=False, indent=2), encoding="utf-8")
-
-dashboard = json.loads((repo / "data" / "dashboard_data.json").read_text(encoding="utf-8"))
-if dashboard.get("latest"):
-    dashboard["latest"] = sanitize_record(dashboard["latest"])
-(out / "dashboard_data.json").write_text(json.dumps(dashboard, ensure_ascii=False, indent=2), encoding="utf-8")
-'@ | python -
+Copy-Item -LiteralPath (Join-Path $RepoRoot "data\dashboard_data.json") -Destination (Join-Path $tmpPublic "dashboard_data.json") -Force
+Copy-Item -LiteralPath (Join-Path $RepoRoot "data\history.json") -Destination (Join-Path $tmpPublic "history.json") -Force
 
 if (-not (Test-Path -LiteralPath $PagesWorktree)) {
   Write-Log "Creating gh-pages worktree at $PagesWorktree"
@@ -134,7 +113,7 @@ try {
     $date = Get-Date -Format "yyyy-MM-dd"
     git commit -m "Update daily dashboard data $date" 2>&1 | Tee-Object -FilePath $logFile -Append
     git push marcko gh-pages 2>&1 | Tee-Object -FilePath $logFile -Append
-    Write-Log "Published sanitized dashboard data to gh-pages"
+    Write-Log "Published dashboard data to gh-pages"
   }
 } finally {
   Pop-Location
