@@ -28,7 +28,7 @@ schtasks /Create /TN $TaskName /SC DAILY /ST $Time /TR $taskRun /F | Out-Host
 Write-Host "Installed scheduled task '$TaskName' for $Time local Windows time."
 Write-Host "Runner: $runner"
 if ($PublishPages) {
-  Write-Host "Publish mode: sanitized GitHub Pages data only; raw scraped JSON is not published."
+  Write-Host "Publish mode: dashboard and history JSON are published to GitHub Pages; raw scraped JSON is not published."
 } else {
   Write-Host "Publish mode: off; results stay local."
 }

@@ -104,7 +104,7 @@ profile in `.browser_profiles/xhs/`.
 Install an 8:00 AM daily Windows scheduled task:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scripts/install_daily_task.ps1 -Time 08:00 -PublishPages
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install_daily_task.ps1 -Time 08:00 -PublishPages
 ```
 
 The scheduled runner executes `python pipeline.py`. With `-PublishPages`, it
@@ -114,7 +114,7 @@ top 5 beginner-signal posts per sector. Raw scraped caches are not published.
 To also create a daily GitHub issue report, install the task with `-PushReport`:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scripts/install_daily_task.ps1 -Time 08:00 -PublishPages -PushReport
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install_daily_task.ps1 -Time 08:00 -PublishPages -PushReport
 ```
 
 After a successful local run, `-PushReport` generates `.github/ISSUE_TEMPLATE.md`
