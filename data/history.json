@@ -3063,6 +3063,96 @@
           "top_newbie_posts": []
         }
       }
+    },
+    {
+      "date": "2026-07-17",
+      "timestamp": "2026-07-17T08:03:10.233985",
+      "sectors": {
+        "nasdaq": {
+          "index": 16.4,
+          "interpretation": "🔵 极度冷清 — 小白沉默不语，可能是市场底部信号",
+          "details": {
+            "total_posts": 103,
+            "valid_posts": 103,
+            "spam_posts": 0,
+            "newbie_posts": 18,
+            "pure_newbie": 0,
+            "newbie_ratio": 17.5,
+            "avg_newbie_score": 33.2,
+            "avg_sentiment": 5.6,
+            "purity_signal": 0.0,
+            "mom_buy_index": 7.3,
+            "mom_sell_index": 0.0,
+            "buy_sell_ratio": 1.0,
+            "buy_count": 1,
+            "sell_count": 0
+          },
+          "top_newbie_posts": []
+        },
+        "gold": {
+          "index": 19.7,
+          "interpretation": "🔵 极度冷清 — 小白沉默不语，可能是市场底部信号",
+          "details": {
+            "total_posts": 96,
+            "valid_posts": 96,
+            "spam_posts": 0,
+            "newbie_posts": 16,
+            "pure_newbie": 2,
+            "newbie_ratio": 16.7,
+            "avg_newbie_score": 29.8,
+            "avg_sentiment": 18.8,
+            "purity_signal": 12.5,
+            "mom_buy_index": 0.0,
+            "mom_sell_index": 13.4,
+            "buy_sell_ratio": 0.0,
+            "buy_count": 0,
+            "sell_count": 2
+          },
+          "top_newbie_posts": []
+        },
+        "cpo": {
+          "index": 20.6,
+          "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+          "details": {
+            "total_posts": 94,
+            "valid_posts": 94,
+            "spam_posts": 0,
+            "newbie_posts": 11,
+            "pure_newbie": 0,
+            "newbie_ratio": 11.7,
+            "avg_newbie_score": 27.5,
+            "avg_sentiment": 45.5,
+            "purity_signal": 0.0,
+            "mom_buy_index": 21.2,
+            "mom_sell_index": 25.2,
+            "buy_sell_ratio": 1.0,
+            "buy_count": 3,
+            "sell_count": 3
+          },
+          "top_newbie_posts": []
+        },
+        "semiconductor": {
+          "index": 19.6,
+          "interpretation": "🔵 极度冷清 — 小白沉默不语，可能是市场底部信号",
+          "details": {
+            "total_posts": 91,
+            "valid_posts": 91,
+            "spam_posts": 0,
+            "newbie_posts": 16,
+            "pure_newbie": 1,
+            "newbie_ratio": 17.6,
+            "avg_newbie_score": 31.5,
+            "avg_sentiment": 18.8,
+            "purity_signal": 6.2,
+            "mom_buy_index": 18.9,
+            "mom_sell_index": 15.4,
+            "buy_sell_ratio": 2.0,
+            "buy_count": 4,
+            "sell_count": 2
+          },
+          "top_newbie_posts": []
+        }
+      }
     }
   ]
 }
