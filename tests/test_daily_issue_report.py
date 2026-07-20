@@ -6,6 +6,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "create-daily-issue.yml"
+RUNNER = ROOT / "scripts" / "run_daily.ps1"
+INSTALLER = ROOT / "scripts" / "install_daily_task.ps1"
 
 
 class DailyIssueReportTests(unittest.TestCase):
@@ -103,6 +105,23 @@ class DailyIssueReportTests(unittest.TestCase):
         self.assertIn("gh issue list", workflow)
         self.assertIn("gh issue create", workflow)
         self.assertIn("GITHUB_TOKEN", workflow)
+
+    def test_daily_runner_forces_llm_only_semantic_classifier(self):
+        runner = RUNNER.read_text(encoding="utf-8")
+
+        self.assertIn('MOM_INDEX_CLASSIFIER = "semantic"', runner)
+        self.assertIn('MOM_INDEX_SEMANTIC_PROVIDER = "openrouter"', runner)
+        self.assertIn('MOM_INDEX_SEMANTIC_MODEL = "openrouter/free"', runner)
+        self.assertIn('MOM_INDEX_LLM_ONLY = "1"', runner)
+        self.assertIn("OPENROUTER_API_KEY", runner)
+        self.assertIn("Pages commit failed", runner)
+        self.assertIn("Pages push failed", runner)
+
+    def test_task_installer_preserves_push_report_switch(self):
+        installer = INSTALLER.read_text(encoding="utf-8")
+
+        self.assertIn("[switch]$PushReport", installer)
+        self.assertIn('$arguments += " -PushReport"', installer)
 
 
 if __name__ == "__main__":

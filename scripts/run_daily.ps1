@@ -24,7 +24,23 @@ function Write-Log {
 Write-Log "Starting Mom Index daily pipeline"
 Write-Log "RepoRoot: $RepoRoot"
 
+$userOpenRouterKey = [Environment]::GetEnvironmentVariable("OPENROUTER_API_KEY", "User")
+if (-not $env:OPENROUTER_API_KEY -and $userOpenRouterKey) {
+  $env:OPENROUTER_API_KEY = $userOpenRouterKey
+}
+if (-not $env:OPENROUTER_API_KEY) {
+  Write-Log "OPENROUTER_API_KEY is missing; LLM-only classifier cannot run"
+  exit 1
+}
+
+$env:PYTHONUTF8 = "1"
 $env:PYTHONIOENCODING = "utf-8"
+$env:MOM_INDEX_CLASSIFIER = "semantic"
+$env:MOM_INDEX_SEMANTIC_PROVIDER = "openrouter"
+$env:MOM_INDEX_SEMANTIC_MODEL = "openrouter/free"
+$env:MOM_INDEX_LLM_ONLY = "1"
+
+Write-Log "Classifier mode: semantic/openrouter LLM-only"
 
 python pipeline.py 2>&1 | Tee-Object -FilePath $logFile -Append
 if ($LASTEXITCODE -ne 0) {
@@ -92,7 +108,15 @@ Copy-Item -LiteralPath (Join-Path $RepoRoot "data\history.json") -Destination (J
 if (-not (Test-Path -LiteralPath $PagesWorktree)) {
   Write-Log "Creating gh-pages worktree at $PagesWorktree"
   git fetch marcko gh-pages:gh-pages 2>&1 | Tee-Object -FilePath $logFile -Append
+  if ($LASTEXITCODE -ne 0) {
+    Write-Log "Pages fetch failed with exit code $LASTEXITCODE"
+    exit $LASTEXITCODE
+  }
   git worktree add $PagesWorktree gh-pages 2>&1 | Tee-Object -FilePath $logFile -Append
+  if ($LASTEXITCODE -ne 0) {
+    Write-Log "Pages worktree creation failed with exit code $LASTEXITCODE"
+    exit $LASTEXITCODE
+  }
 }
 
 New-Item -ItemType Directory -Force -Path (Join-Path $PagesWorktree "data") | Out-Null
@@ -112,7 +136,15 @@ try {
   } else {
     $date = Get-Date -Format "yyyy-MM-dd"
     git commit -m "Update daily dashboard data $date" 2>&1 | Tee-Object -FilePath $logFile -Append
+    if ($LASTEXITCODE -ne 0) {
+      Write-Log "Pages commit failed with exit code $LASTEXITCODE"
+      exit $LASTEXITCODE
+    }
     git push marcko gh-pages 2>&1 | Tee-Object -FilePath $logFile -Append
+    if ($LASTEXITCODE -ne 0) {
+      Write-Log "Pages push failed with exit code $LASTEXITCODE"
+      exit $LASTEXITCODE
+    }
     Write-Log "Published dashboard data to gh-pages"
   }
 } finally {

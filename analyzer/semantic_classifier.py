@@ -14,6 +14,8 @@ CLASSIFIER_VERSION = "semantic-openrouter-free-v2"
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 DEFAULT_REMOTE_MODEL = "openrouter/free"
 CACHE_FILE = Path(__file__).resolve().parents[1] / ".semantic_cache.json"
+DEFAULT_OPENROUTER_ATTEMPTS = 3
+MALFORMED_RESPONSE_ERRORS = (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError)
 
 BEGINNER_WORDS = ("小白", "新手", "新人", "萌新", "第一次", "刚入")
 GUIDE_WORDS = ("指南", "攻略", "必看", "一图看懂", "看这篇", "教你", "入门")
@@ -69,6 +71,17 @@ def _to_cache_dict(result: SemanticClassification) -> Dict:
         "confidence": result.confidence,
         "evidence": result.evidence,
     }
+
+
+def _is_enabled(name: str) -> bool:
+    return os.environ.get(name, "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _openrouter_attempts() -> int:
+    try:
+        return max(1, int(os.environ.get("MOM_INDEX_OPENROUTER_ATTEMPTS", DEFAULT_OPENROUTER_ATTEMPTS)))
+    except ValueError:
+        return DEFAULT_OPENROUTER_ATTEMPTS
 
 
 def build_semantic_prompt(post: Dict, sector: str) -> str:
@@ -146,35 +159,52 @@ def parse_semantic_response(text: str) -> SemanticClassification:
 
 
 def classify_semantic(post: Dict, sector: str) -> SemanticClassification:
+    provider = os.environ.get("MOM_INDEX_SEMANTIC_PROVIDER", "fallback").lower()
+    llm_only = _is_enabled("MOM_INDEX_LLM_ONLY")
+    if llm_only and provider != "openrouter":
+        raise RuntimeError("MOM_INDEX_LLM_ONLY requires MOM_INDEX_SEMANTIC_PROVIDER=openrouter")
+    if llm_only and not os.environ.get("OPENROUTER_API_KEY"):
+        raise RuntimeError("MOM_INDEX_LLM_ONLY requires OPENROUTER_API_KEY")
+
     if (
-        os.environ.get("MOM_INDEX_SEMANTIC_PROVIDER", "fallback").lower() == "openrouter"
+        provider == "openrouter"
         and os.environ.get("OPENROUTER_API_KEY")
     ):
         key = _cache_key(post, sector)
         cache = _read_cache()
         if key in cache:
             return parse_semantic_response(json.dumps(cache[key], ensure_ascii=False))
-        try:
-            response = requests.post(
-                OPENROUTER_API_URL,
-                headers={
-                    "Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}",
-                    "Content-Type": "application/json",
-                    "HTTP-Referer": os.environ.get("MOM_INDEX_SITE_URL", "https://marc-ko.github.io/mom-index/"),
-                    "X-OpenRouter-Title": os.environ.get("MOM_INDEX_APP_TITLE", "Mom Index"),
-                },
-                data=json.dumps(build_openrouter_payload(post, sector), ensure_ascii=False).encode("utf-8"),
-                timeout=30,
-            )
-            response.raise_for_status()
-            payload = response.json()
-            text = payload["choices"][0]["message"]["content"]
-            result = parse_semantic_response(text)
-            cache[key] = _to_cache_dict(result)
-            _write_cache(cache)
-            return result
-        except Exception as exc:
-            print(f"  semantic OpenRouter classifier fallback: {exc}")
+        last_error = None
+        for attempt in range(_openrouter_attempts()):
+            try:
+                response = requests.post(
+                    OPENROUTER_API_URL,
+                    headers={
+                        "Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}",
+                        "Content-Type": "application/json",
+                        "HTTP-Referer": os.environ.get("MOM_INDEX_SITE_URL", "https://marc-ko.github.io/mom-index/"),
+                        "X-OpenRouter-Title": os.environ.get("MOM_INDEX_APP_TITLE", "Mom Index"),
+                    },
+                    data=json.dumps(build_openrouter_payload(post, sector), ensure_ascii=False).encode("utf-8"),
+                    timeout=30,
+                )
+                response.raise_for_status()
+                payload = response.json()
+                text = payload["choices"][0]["message"]["content"]
+                result = parse_semantic_response(text)
+                cache[key] = _to_cache_dict(result)
+                _write_cache(cache)
+                return result
+            except MALFORMED_RESPONSE_ERRORS as exc:
+                last_error = exc
+                if attempt < _openrouter_attempts() - 1:
+                    continue
+            except Exception as exc:
+                last_error = exc
+                break
+        if llm_only:
+            raise RuntimeError(f"OpenRouter semantic classifier failed in LLM-only mode: {last_error}") from last_error
+        print(f"  semantic OpenRouter classifier fallback: {last_error}")
 
     return classify_semantic_fallback(post, sector)
 
