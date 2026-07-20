@@ -1,28 +1,41 @@
 {
   "latest": {
-    "date": "2026-07-19",
-    "timestamp": "2026-07-19T08:50:05.064909",
+    "date": "2026-07-20",
+    "timestamp": "2026-07-20T08:48:59.518392",
     "sectors": {
       "nasdaq": {
-        "index": 31.0,
+        "index": 28.8,
         "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
-          "total_posts": 102,
+          "total_posts": 100,
           "valid_posts": 97,
-          "spam_posts": 5,
-          "newbie_posts": 14,
+          "spam_posts": 3,
+          "newbie_posts": 18,
           "pure_newbie": 8,
-          "newbie_ratio": 14.4,
-          "avg_newbie_score": 51.5,
-          "avg_sentiment": 18.9,
-          "purity_signal": 57.1,
-          "mom_buy_index": 10.7,
-          "mom_sell_index": 15.3,
-          "buy_sell_ratio": 0.5,
-          "buy_count": 1,
-          "sell_count": 2
+          "newbie_ratio": 18.6,
+          "avg_newbie_score": 48.6,
+          "avg_sentiment": 13.1,
+          "purity_signal": 44.4,
+          "mom_buy_index": 8.2,
+          "mom_sell_index": 11.6,
+          "buy_sell_ratio": 2.0,
+          "buy_count": 2,
+          "sell_count": 1
         },
         "top_newbie_posts": [
+          {
+            "title": "新手求解答！！",
+            "score": 77.5,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=90, 面向小白=10, 决策依赖=80, 基础缺口=90, 营销=0, 专业深度=0. 证据: 新手求解答！！.",
+            "sentiment": 0.0,
+            "intent": "neutral",
+            "intent_label": "⚪ 观望",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (90/100)",
+              "语义判断: 依赖他人决策 (80/100)"
+            ]
+          },
           {
             "title": "为啥跌了溢价率还这么高？？",
             "score": 69.2,
@@ -37,32 +50,6 @@
             ]
           },
           {
-            "title": "3倍做多纳指100的TQQQ，到底能不能买？",
-            "score": 68.0,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=70, 决策依赖=80, 基础缺口=85, 营销=5, 专业深度=10. 证据: 3倍做多纳指100的TQQQ, 到底能不能买, nasdaq.",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (80/100)"
-            ]
-          },
-          {
-            "title": "还有五个点溢价全杀光吧",
-            "score": 67.8,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=5, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 还有五个点溢价全杀光吧, 五个点, 溢价.",
-            "sentiment": -0.2,
-            "intent": "sell",
-            "intent_label": "🔴 卖出",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (70/100)"
-            ]
-          },
-          {
             "title": "周一的话还会再降，可能会涨一天，另一天就跌",
             "score": 66.5,
             "level": "纯小白",
@@ -73,6 +60,19 @@
             "key_signals": [
               "语义判断: 作者像真实小白 (85/100)",
               "语义判断: 依赖他人决策 (70/100)"
+            ]
+          },
+          {
+            "title": "港美股咋开",
+            "score": 62.8,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=95, 面向小白=0, 决策依赖=10, 基础缺口=90, 营销=0, 专业深度=0. 证据: 港美股咋开.",
+            "sentiment": 0.0,
+            "intent": "neutral",
+            "intent_label": "⚪ 观望",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (95/100)",
+              "语义判断: 基础知识缺口 (90/100)"
             ]
           },
           {
@@ -91,49 +91,36 @@
         ]
       },
       "gold": {
-        "index": 30.2,
+        "index": 28.0,
         "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
-          "total_posts": 98,
-          "valid_posts": 96,
+          "total_posts": 97,
+          "valid_posts": 95,
           "spam_posts": 2,
-          "newbie_posts": 16,
-          "pure_newbie": 7,
-          "newbie_ratio": 16.7,
-          "avg_newbie_score": 47.3,
-          "avg_sentiment": 25.6,
-          "purity_signal": 43.8,
-          "mom_buy_index": 18.5,
-          "mom_sell_index": 11.0,
-          "buy_sell_ratio": 2.0,
-          "buy_count": 4,
+          "newbie_posts": 11,
+          "pure_newbie": 5,
+          "newbie_ratio": 11.6,
+          "avg_newbie_score": 48.8,
+          "avg_sentiment": 21.8,
+          "purity_signal": 45.5,
+          "mom_buy_index": 11.9,
+          "mom_sell_index": 14.8,
+          "buy_sell_ratio": 0.5,
+          "buy_count": 1,
           "sell_count": 2
         },
         "top_newbie_posts": [
           {
-            "title": "新手支付宝买黄金怎么选？",
-            "score": 77.7,
+            "title": "有没有人懂啊？求求了",
+            "score": 67.2,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=90, 面向小白=10, 决策依赖=85, 基础缺口=90, 营销=0, 专业深度=5. 证据: 新手, 支付宝买黄金, 怎么选.",
-            "sentiment": 0.0,
-            "intent": "buy",
-            "intent_label": "🟢 买入",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (90/100)",
-              "语义判断: 依赖他人决策 (85/100)"
-            ]
-          },
-          {
-            "title": "黄金跌到870了，1200块买的人该怎么办？",
-            "score": 71.0,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=70, 决策依赖=80, 基础缺口=85, 营销=5, 专业深度=10. 证据: 黄金跌到870了, 1200块买的人该怎么办？.",
-            "sentiment": -0.4,
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 有没有人懂啊？求求了, 板块：gold, 标题：有没有人懂啊？求求了.",
+            "sentiment": -0.1,
             "intent": "neutral",
             "intent_label": "⚪ 观望",
             "key_signals": [
               "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (80/100)"
+              "语义判断: 依赖他人决策 (70/100)"
             ]
           },
           {
@@ -174,68 +161,42 @@
               "语义判断: 作者像真实小白 (80/100)",
               "语义判断: 基础知识缺口 (70/100)"
             ]
+          },
+          {
+            "title": "我今天买进来了，求主力套我，求美联储加息",
+            "score": 50.2,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=85, 面向小白=20, 决策依赖=10, 基础缺口=80, 营销=5, 专业深度=5. 证据: 板块：gold, 标题：我今天买进来了，求主力套我，求美联储加息.",
+            "sentiment": -0.3,
+            "intent": "buy",
+            "intent_label": "🟢 买入",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (85/100)",
+              "语义判断: 基础知识缺口 (80/100)"
+            ]
           }
         ]
       },
       "cpo": {
-        "index": 33.7,
+        "index": 29.7,
         "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
           "total_posts": 94,
-          "valid_posts": 90,
-          "spam_posts": 4,
-          "newbie_posts": 23,
-          "pure_newbie": 8,
-          "newbie_ratio": 25.6,
-          "avg_newbie_score": 49.5,
-          "avg_sentiment": 29.6,
-          "purity_signal": 34.8,
-          "mom_buy_index": 14.5,
-          "mom_sell_index": 18.8,
-          "buy_sell_ratio": 3.0,
-          "buy_count": 3,
-          "sell_count": 1
+          "valid_posts": 86,
+          "spam_posts": 8,
+          "newbie_posts": 13,
+          "pure_newbie": 7,
+          "newbie_ratio": 15.1,
+          "avg_newbie_score": 48.6,
+          "avg_sentiment": 16.9,
+          "purity_signal": 53.8,
+          "mom_buy_index": 0.0,
+          "mom_sell_index": 0.0,
+          "buy_sell_ratio": 0.0,
+          "buy_count": 0,
+          "sell_count": 0
         },
         "top_newbie_posts": [
-          {
-            "title": "下周继续大幅度的杀跌，没有办法了",
-            "score": 73.2,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=5, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 下周继续大幅度的杀跌, 没有办法了.",
-            "sentiment": -0.8,
-            "intent": "sell",
-            "intent_label": "🔴 卖出",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (70/100)"
-            ]
-          },
-          {
-            "title": "七月初梭哈科技-16w还能回本吗",
-            "score": 70.8,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=80, 基础缺口=85, 营销=5, 专业深度=5. 证据: 七月初, 梭哈科技, -16w.",
-            "sentiment": -0.3,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (80/100)"
-            ]
-          },
-          {
-            "title": "被套了，怎么办",
-            "score": 70.2,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 被套了, 怎么办.",
-            "sentiment": -0.5,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (70/100)"
-            ]
-          },
           {
             "title": "周一反弹站上5日线意思意思",
             "score": 69.8,
@@ -261,27 +222,66 @@
               "语义判断: 作者像真实小白 (80/100)",
               "语义判断: 依赖他人决策 (80/100)"
             ]
+          },
+          {
+            "title": "我持有这些标的，你怎么看？",
+            "score": 67.5,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=80, 基础缺口=75, 营销=0, 专业深度=15. 证据: 我持有这些标的, 你怎么看.",
+            "sentiment": 0.0,
+            "intent": "neutral",
+            "intent_label": "⚪ 观望",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (85/100)",
+              "语义判断: 依赖他人决策 (80/100)"
+            ]
+          },
+          {
+            "title": "负六个点以为抄到底，现在整个人在发抖",
+            "score": 65.8,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=80, 面向小白=0, 决策依赖=60, 基础缺口=70, 营销=0, 专业深度=5. 证据: 负六个点以为抄到底, 现在整个人在发抖.",
+            "sentiment": -0.6,
+            "intent": "neutral",
+            "intent_label": "⚪ 观望",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (80/100)",
+              "语义判断: 依赖他人决策 (60/100)"
+            ]
+          },
+          {
+            "title": "三成仓被套，不知道该难受还是该高兴",
+            "score": 56.2,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=20, 基础缺口=80, 营销=0, 专业深度=0. 证据: 三成仓被套, 不知道该难受还是该高兴.",
+            "sentiment": -0.1,
+            "intent": "neutral",
+            "intent_label": "⚪ 观望",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (85/100)",
+              "语义判断: 基础知识缺口 (80/100)"
+            ]
           }
         ]
       },
       "semiconductor": {
-        "index": 38.6,
-        "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+        "index": 41.8,
+        "interpretation": "🟡 开始升温 — 小白活跃度明显上升，需保持关注",
         "details": {
-          "total_posts": 91,
-          "valid_posts": 88,
-          "spam_posts": 3,
-          "newbie_posts": 23,
-          "pure_newbie": 14,
-          "newbie_ratio": 26.1,
-          "avg_newbie_score": 52.3,
-          "avg_sentiment": 29.8,
-          "purity_signal": 60.9,
-          "mom_buy_index": 16.9,
-          "mom_sell_index": 13.7,
-          "buy_sell_ratio": 2.0,
+          "total_posts": 89,
+          "valid_posts": 87,
+          "spam_posts": 2,
+          "newbie_posts": 19,
+          "pure_newbie": 15,
+          "newbie_ratio": 21.8,
+          "avg_newbie_score": 57.0,
+          "avg_sentiment": 35.0,
+          "purity_signal": 78.9,
+          "mom_buy_index": 22.6,
+          "mom_sell_index": 0.0,
+          "buy_sell_ratio": 4.0,
           "buy_count": 4,
-          "sell_count": 2
+          "sell_count": 0
         },
         "top_newbie_posts": [
           {
@@ -324,16 +324,16 @@
             ]
           },
           {
-            "title": "半导体芯片抄底还是跑？直接说观点！",
-            "score": 68.0,
+            "title": "天塌了 ❗ ❗ 刚进半导体一天要背50个单词",
+            "score": 69.8,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=20, 决策依赖=80, 基础缺口=80, 营销=5, 专业深度=10. 证据: 半导体芯片抄底还是跑？, 直接说观点！.",
-            "sentiment": -0.15,
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=60, 基础缺口=80, 营销=0, 专业深度=10. 证据: 刚进半导体一天要背50个单词, 天塌了, ❗ ❗.",
+            "sentiment": -0.7,
             "intent": "neutral",
             "intent_label": "⚪ 观望",
             "key_signals": [
               "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (80/100)"
+              "语义判断: 依赖他人决策 (60/100)"
             ]
           },
           {
@@ -498,6 +498,10 @@
       {
         "date": "2026-07-19",
         "index": 31.0
+      },
+      {
+        "date": "2026-07-20",
+        "index": 28.8
       }
     ],
     "gold": [
@@ -644,6 +648,10 @@
       {
         "date": "2026-07-19",
         "index": 30.2
+      },
+      {
+        "date": "2026-07-20",
+        "index": 28.0
       }
     ],
     "cpo": [
@@ -790,6 +798,10 @@
       {
         "date": "2026-07-19",
         "index": 33.7
+      },
+      {
+        "date": "2026-07-20",
+        "index": 29.7
       }
     ],
     "semiconductor": [
@@ -936,8 +948,12 @@
       {
         "date": "2026-07-19",
         "index": 38.6
+      },
+      {
+        "date": "2026-07-20",
+        "index": 41.8
       }
     ]
   },
-  "record_count": 36
+  "record_count": 37
 }
