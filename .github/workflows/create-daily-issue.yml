@@ -14,10 +14,8 @@ on:
       - "frontend/dashboard.html"
 
 permissions:
-  contents: write
+  contents: read
   issues: write
-  pages: write
-  id-token: write
 
 jobs:
   create-issue:
@@ -92,34 +90,3 @@ jobs:
           else
             gh issue create --title "$title" --body-file issue-body.md
           fi
-
-      - name: Prepare dashboard Pages artifact
-        shell: bash
-        run: |
-          mkdir -p public/data
-          cp frontend/dashboard.html public/dashboard.html
-          cp data/dashboard_data.json public/data/dashboard_data.json
-          cp data/history.json public/data/history.json
-          cat > public/index.html <<'HTML'
-          <!doctype html>
-          <html lang="zh-CN">
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta http-equiv="refresh" content="0; url=dashboard.html">
-            <title>宝妈指数</title>
-          </head>
-          <body>
-            <p><a href="dashboard.html">Open Mom Index dashboard</a></p>
-          </body>
-          </html>
-          HTML
-
-      - name: Upload dashboard Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
-
-      - name: Publish dashboard to gh-pages
-        id: deployment
-        uses: actions/deploy-pages@v4

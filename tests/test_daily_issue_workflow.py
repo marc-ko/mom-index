@@ -28,16 +28,6 @@ class DailyIssueWorkflowTests(unittest.TestCase):
         self.assertIn('"data/history.json"', self.workflow)
         self.assertIn('"frontend/dashboard.html"', self.workflow)
 
-    def test_publishes_dashboard_to_gh_pages(self):
-        self.assertIn("contents: write", self.workflow)
-        self.assertIn("pages: write", self.workflow)
-        self.assertIn("id-token: write", self.workflow)
-        self.assertIn("Publish dashboard to gh-pages", self.workflow)
-        self.assertIn("actions/upload-pages-artifact", self.workflow)
-        self.assertIn("actions/deploy-pages", self.workflow)
-        self.assertIn("path: public", self.workflow)
-        self.assertNotIn("environment:", self.workflow)
-
 
 if __name__ == "__main__":
     unittest.main()
