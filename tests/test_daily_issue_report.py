@@ -117,6 +117,16 @@ class DailyIssueReportTests(unittest.TestCase):
         self.assertIn("Pages commit failed", runner)
         self.assertIn("Pages push failed", runner)
 
+    def test_daily_runner_captures_logged_native_command_exit_codes(self):
+        runner = RUNNER.read_text(encoding="utf-8")
+
+        self.assertIn("function Invoke-LoggedNative", runner)
+        self.assertIn("$script:LastLoggedNativeExitCode = $LASTEXITCODE", runner)
+        self.assertIn("Invoke-LoggedNative git @('push', 'marcko', 'HEAD')", runner)
+        self.assertIn("Invoke-LoggedNative git @('push', 'marcko', 'gh-pages')", runner)
+        self.assertNotIn("git push marcko HEAD 2>&1 | Tee-Object", runner)
+        self.assertNotIn("git push marcko gh-pages 2>&1 | Tee-Object", runner)
+
     def test_task_installer_preserves_push_report_switch(self):
         installer = INSTALLER.read_text(encoding="utf-8")
 

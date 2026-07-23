@@ -21,6 +21,28 @@ function Write-Log {
   $line | Tee-Object -FilePath $logFile -Append
 }
 
+$script:LastLoggedNativeExitCode = 0
+
+function Invoke-LoggedNative {
+  param(
+    [string]$Command,
+    [string[]]$Arguments
+  )
+
+  $nativeLog = Join-Path $logDir ("native-{0}.log" -f ([guid]::NewGuid().ToString("N")))
+  try {
+    & $Command @Arguments *> $nativeLog
+    $script:LastLoggedNativeExitCode = $LASTEXITCODE
+    if (Test-Path -LiteralPath $nativeLog) {
+      Get-Content -LiteralPath $nativeLog | Tee-Object -FilePath $logFile -Append
+    }
+  } finally {
+    if (Test-Path -LiteralPath $nativeLog) {
+      Remove-Item -LiteralPath $nativeLog -Force
+    }
+  }
+}
+
 Write-Log "Starting Mom Index daily pipeline"
 Write-Log "RepoRoot: $RepoRoot"
 
@@ -68,25 +90,29 @@ if ($PushReport) {
     "frontend/data/history.json"
   )
 
-  git add -- $reportPaths 2>&1 | Tee-Object -FilePath $logFile -Append
+  Invoke-LoggedNative git (@('add', '--') + $reportPaths)
+  if ($script:LastLoggedNativeExitCode -ne 0) {
+    Write-Log "Report stage failed with exit code $script:LastLoggedNativeExitCode"
+    exit $script:LastLoggedNativeExitCode
+  }
 
   git diff --cached --quiet
   $reportDiffExit = $LASTEXITCODE
   if ($reportDiffExit -eq 0) {
     Write-Log "No safe report changes to push"
-    git reset -- $reportPaths 2>&1 | Tee-Object -FilePath $logFile -Append
+    Invoke-LoggedNative git (@('reset', '--') + $reportPaths)
   } else {
     $date = Get-Date -Format "yyyy-MM-dd"
-    git commit -m "Update daily mom index report $date" 2>&1 | Tee-Object -FilePath $logFile -Append
-    if ($LASTEXITCODE -ne 0) {
-      Write-Log "Report commit failed with exit code $LASTEXITCODE"
-      exit $LASTEXITCODE
+    Invoke-LoggedNative git @('commit', '-m', "Update daily mom index report $date")
+    if ($script:LastLoggedNativeExitCode -ne 0) {
+      Write-Log "Report commit failed with exit code $script:LastLoggedNativeExitCode"
+      exit $script:LastLoggedNativeExitCode
     }
 
-    git push marcko HEAD 2>&1 | Tee-Object -FilePath $logFile -Append
-    if ($LASTEXITCODE -ne 0) {
-      Write-Log "Report push failed with exit code $LASTEXITCODE"
-      exit $LASTEXITCODE
+    Invoke-LoggedNative git @('push', 'marcko', 'HEAD')
+    if ($script:LastLoggedNativeExitCode -ne 0) {
+      Write-Log "Report push failed with exit code $script:LastLoggedNativeExitCode"
+      exit $script:LastLoggedNativeExitCode
     }
     Write-Log "Pushed safe daily report changes to marcko"
   }
@@ -107,15 +133,15 @@ Copy-Item -LiteralPath (Join-Path $RepoRoot "data\history.json") -Destination (J
 
 if (-not (Test-Path -LiteralPath $PagesWorktree)) {
   Write-Log "Creating gh-pages worktree at $PagesWorktree"
-  git fetch marcko gh-pages:gh-pages 2>&1 | Tee-Object -FilePath $logFile -Append
-  if ($LASTEXITCODE -ne 0) {
-    Write-Log "Pages fetch failed with exit code $LASTEXITCODE"
-    exit $LASTEXITCODE
+  Invoke-LoggedNative git @('fetch', 'marcko', 'gh-pages:gh-pages')
+  if ($script:LastLoggedNativeExitCode -ne 0) {
+    Write-Log "Pages fetch failed with exit code $script:LastLoggedNativeExitCode"
+    exit $script:LastLoggedNativeExitCode
   }
-  git worktree add $PagesWorktree gh-pages 2>&1 | Tee-Object -FilePath $logFile -Append
-  if ($LASTEXITCODE -ne 0) {
-    Write-Log "Pages worktree creation failed with exit code $LASTEXITCODE"
-    exit $LASTEXITCODE
+  Invoke-LoggedNative git @('worktree', 'add', $PagesWorktree, 'gh-pages')
+  if ($script:LastLoggedNativeExitCode -ne 0) {
+    Write-Log "Pages worktree creation failed with exit code $script:LastLoggedNativeExitCode"
+    exit $script:LastLoggedNativeExitCode
   }
 }
 
@@ -125,25 +151,29 @@ Copy-Item -LiteralPath (Join-Path $tmpPublic "history.json") -Destination (Join-
 
 Push-Location -LiteralPath $PagesWorktree
 try {
-  git status --short 2>&1 | Tee-Object -FilePath $logFile -Append
-  git add data/dashboard_data.json data/history.json
+  Invoke-LoggedNative git @('status', '--short')
+  Invoke-LoggedNative git @('add', 'data/dashboard_data.json', 'data/history.json')
+  if ($script:LastLoggedNativeExitCode -ne 0) {
+    Write-Log "Pages stage failed with exit code $script:LastLoggedNativeExitCode"
+    exit $script:LastLoggedNativeExitCode
+  }
 
   git diff --cached --quiet
   $diffExit = $LASTEXITCODE
   if ($diffExit -eq 0) {
     Write-Log "No public Pages data changes to publish"
-    git reset 2>&1 | Tee-Object -FilePath $logFile -Append
+    Invoke-LoggedNative git @('reset')
   } else {
     $date = Get-Date -Format "yyyy-MM-dd"
-    git commit -m "Update daily dashboard data $date" 2>&1 | Tee-Object -FilePath $logFile -Append
-    if ($LASTEXITCODE -ne 0) {
-      Write-Log "Pages commit failed with exit code $LASTEXITCODE"
-      exit $LASTEXITCODE
+    Invoke-LoggedNative git @('commit', '-m', "Update daily dashboard data $date")
+    if ($script:LastLoggedNativeExitCode -ne 0) {
+      Write-Log "Pages commit failed with exit code $script:LastLoggedNativeExitCode"
+      exit $script:LastLoggedNativeExitCode
     }
-    git push marcko gh-pages 2>&1 | Tee-Object -FilePath $logFile -Append
-    if ($LASTEXITCODE -ne 0) {
-      Write-Log "Pages push failed with exit code $LASTEXITCODE"
-      exit $LASTEXITCODE
+    Invoke-LoggedNative git @('push', 'marcko', 'gh-pages')
+    if ($script:LastLoggedNativeExitCode -ne 0) {
+      Write-Log "Pages push failed with exit code $script:LastLoggedNativeExitCode"
+      exit $script:LastLoggedNativeExitCode
     }
     Write-Log "Published dashboard data to gh-pages"
   }

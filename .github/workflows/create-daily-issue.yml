@@ -1,12 +1,20 @@
 name: Create Daily Mom Index Issue
 
 on:
+  schedule:
+    # GitHub cron uses UTC. 00:00 UTC is 08:00 in Hong Kong.
+    - cron: "0 0 * * *"
+  workflow_dispatch:
   push:
     paths:
+      - ".github/workflows/create-daily-issue.yml"
       - ".github/ISSUE_TEMPLATE.md"
+      - "data/dashboard_data.json"
+      - "data/history.json"
+      - "frontend/dashboard.html"
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 jobs:
@@ -82,3 +90,32 @@ jobs:
           else
             gh issue create --title "$title" --body-file issue-body.md
           fi
+
+      - name: Prepare dashboard Pages artifact
+        shell: bash
+        run: |
+          mkdir -p public/data
+          cp frontend/dashboard.html public/dashboard.html
+          cp data/dashboard_data.json public/data/dashboard_data.json
+          cp data/history.json public/data/history.json
+          cat > public/index.html <<'HTML'
+          <!doctype html>
+          <html lang="zh-CN">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="refresh" content="0; url=dashboard.html">
+            <title>宝妈指数</title>
+          </head>
+          <body>
+            <p><a href="dashboard.html">Open Mom Index dashboard</a></p>
+          </body>
+          </html>
+          HTML
+
+      - name: Publish dashboard to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: public
