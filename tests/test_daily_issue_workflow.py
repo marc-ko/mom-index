@@ -30,10 +30,12 @@ class DailyIssueWorkflowTests(unittest.TestCase):
 
     def test_publishes_dashboard_to_gh_pages(self):
         self.assertIn("contents: write", self.workflow)
+        self.assertIn("pages: write", self.workflow)
+        self.assertIn("id-token: write", self.workflow)
         self.assertIn("Publish dashboard to gh-pages", self.workflow)
-        self.assertIn("peaceiris/actions-gh-pages", self.workflow)
-        self.assertIn("publish_branch: gh-pages", self.workflow)
-        self.assertIn("publish_dir: public", self.workflow)
+        self.assertIn("actions/upload-pages-artifact", self.workflow)
+        self.assertIn("actions/deploy-pages", self.workflow)
+        self.assertIn("path: public", self.workflow)
 
 
 if __name__ == "__main__":
