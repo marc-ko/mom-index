@@ -36,6 +36,7 @@ class DailyIssueWorkflowTests(unittest.TestCase):
         self.assertIn("actions/upload-pages-artifact", self.workflow)
         self.assertIn("actions/deploy-pages", self.workflow)
         self.assertIn("path: public", self.workflow)
+        self.assertNotIn("environment:", self.workflow)
 
 
 if __name__ == "__main__":
