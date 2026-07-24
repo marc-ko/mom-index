@@ -29,18 +29,19 @@ function Invoke-LoggedNative {
     [string[]]$Arguments
   )
 
-  $nativeLog = Join-Path $logDir ("native-{0}.log" -f ([guid]::NewGuid().ToString("N")))
+  $script:LastLoggedNativeExitCode = 1
+  Write-Log "Running native command: $Command $($Arguments -join ' ')"
   try {
-    & $Command @Arguments *> $nativeLog
+    $output = & $Command @Arguments 2>&1
     $script:LastLoggedNativeExitCode = $LASTEXITCODE
-    if (Test-Path -LiteralPath $nativeLog) {
-      Get-Content -LiteralPath $nativeLog | Tee-Object -FilePath $logFile -Append
+    if ($null -ne $output) {
+      $output | Tee-Object -FilePath $logFile -Append
     }
-  } finally {
-    if (Test-Path -LiteralPath $nativeLog) {
-      Remove-Item -LiteralPath $nativeLog -Force
-    }
+  } catch {
+    Write-Log "Native command threw: $($_.Exception.Message)"
+    $script:LastLoggedNativeExitCode = 1
   }
+  Write-Log "Native command exit code: $script:LastLoggedNativeExitCode"
 }
 
 Write-Log "Starting Mom Index daily pipeline"

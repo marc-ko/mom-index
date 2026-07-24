@@ -122,6 +122,8 @@ class DailyIssueReportTests(unittest.TestCase):
 
         self.assertIn("function Invoke-LoggedNative", runner)
         self.assertIn("$script:LastLoggedNativeExitCode = $LASTEXITCODE", runner)
+        self.assertIn('Write-Log "Running native command:', runner)
+        self.assertIn('Write-Log "Native command exit code:', runner)
         self.assertIn("Invoke-LoggedNative git @('push', 'marcko', 'HEAD')", runner)
         self.assertIn("Invoke-LoggedNative git @('push', 'marcko', 'gh-pages')", runner)
         self.assertNotIn("git push marcko HEAD 2>&1 | Tee-Object", runner)
