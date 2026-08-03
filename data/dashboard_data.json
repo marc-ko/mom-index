@@ -1,26 +1,26 @@
 {
   "latest": {
-    "date": "2026-08-02",
-    "timestamp": "2026-08-02T09:58:43.464637",
+    "date": "2026-08-03",
+    "timestamp": "2026-08-03T08:41:32.456356",
     "sectors": {
       "nasdaq": {
-        "index": 42.2,
+        "index": 41.8,
         "interpretation": "🟡 开始升温 — 小白活跃度明显上升，需保持关注",
         "details": {
-          "total_posts": 98,
-          "valid_posts": 94,
+          "total_posts": 95,
+          "valid_posts": 91,
           "spam_posts": 4,
-          "newbie_posts": 27,
-          "pure_newbie": 21,
-          "newbie_ratio": 28.7,
-          "avg_newbie_score": 56.9,
-          "avg_sentiment": 23.9,
-          "purity_signal": 77.8,
-          "mom_buy_index": 32.9,
-          "mom_sell_index": 9.0,
-          "buy_sell_ratio": 5.5,
+          "newbie_posts": 29,
+          "pure_newbie": 20,
+          "newbie_ratio": 31.9,
+          "avg_newbie_score": 54.0,
+          "avg_sentiment": 26.2,
+          "purity_signal": 69.0,
+          "mom_buy_index": 31.2,
+          "mom_sell_index": 12.3,
+          "buy_sell_ratio": 11.0,
           "buy_count": 11,
-          "sell_count": 2
+          "sell_count": 1
         },
         "top_newbie_posts": [
           {
@@ -91,23 +91,23 @@
         ]
       },
       "gold": {
-        "index": 39.4,
+        "index": 39.8,
         "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
-          "total_posts": 91,
-          "valid_posts": 91,
-          "spam_posts": 0,
-          "newbie_posts": 23,
-          "pure_newbie": 17,
-          "newbie_ratio": 25.3,
-          "avg_newbie_score": 56.3,
-          "avg_sentiment": 20.4,
-          "purity_signal": 73.9,
-          "mom_buy_index": 14.8,
-          "mom_sell_index": 12.8,
-          "buy_sell_ratio": 1.0,
+          "total_posts": 89,
+          "valid_posts": 86,
+          "spam_posts": 3,
+          "newbie_posts": 20,
+          "pure_newbie": 15,
+          "newbie_ratio": 23.3,
+          "avg_newbie_score": 56.8,
+          "avg_sentiment": 25.2,
+          "purity_signal": 75.0,
+          "mom_buy_index": 15.7,
+          "mom_sell_index": 17.4,
+          "buy_sell_ratio": 0.7,
           "buy_count": 2,
-          "sell_count": 2
+          "sell_count": 3
         },
         "top_newbie_posts": [
           {
@@ -121,19 +121,6 @@
             "key_signals": [
               "语义判断: 作者像真实小白 (85/100)",
               "语义判断: 依赖他人决策 (70/100)"
-            ]
-          },
-          {
-            "title": "今年第一次买黄金，开盘买的，这算是把它买崩了吗，小",
-            "score": 72.2,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=80, 决策依赖=80, 基础缺口=80, 营销=0, 专业深度=0. 证据: 今年第一次买黄金, 开盘买的, 这算是把它买崩了吗.",
-            "sentiment": -0.3,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (80/100)"
             ]
           },
           {
@@ -163,11 +150,24 @@
             ]
           },
           {
-            "title": "能买吗",
-            "score": 69.2,
+            "title": "老某祥一口价金真的让我亏惨了",
+            "score": 68.0,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=0. 证据: 能买吗.",
-            "sentiment": 0.0,
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=60, 基础缺口=80, 营销=0, 专业深度=5. 证据: 老某祥一口价金, 真的让我亏惨了.",
+            "sentiment": -0.4,
+            "intent": "sell",
+            "intent_label": "🔴 卖出",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (85/100)",
+              "语义判断: 依赖他人决策 (60/100)"
+            ]
+          },
+          {
+            "title": "大黄接下来怎么走",
+            "score": 67.2,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 大黄, 接下来怎么走.",
+            "sentiment": 0.05,
             "intent": "neutral",
             "intent_label": "⚪ 观望",
             "key_signals": [
@@ -178,23 +178,23 @@
         ]
       },
       "cpo": {
-        "index": 37.7,
+        "index": 39.5,
         "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
-          "total_posts": 89,
-          "valid_posts": 88,
-          "spam_posts": 1,
-          "newbie_posts": 15,
+          "total_posts": 87,
+          "valid_posts": 85,
+          "spam_posts": 2,
+          "newbie_posts": 13,
           "pure_newbie": 11,
-          "newbie_ratio": 17.0,
-          "avg_newbie_score": 58.8,
-          "avg_sentiment": 26.0,
-          "purity_signal": 73.3,
-          "mom_buy_index": 23.0,
-          "mom_sell_index": 19.5,
-          "buy_sell_ratio": 1.3,
+          "newbie_ratio": 15.3,
+          "avg_newbie_score": 60.7,
+          "avg_sentiment": 27.7,
+          "purity_signal": 84.6,
+          "mom_buy_index": 28.5,
+          "mom_sell_index": 0.0,
+          "buy_sell_ratio": 4.0,
           "buy_count": 4,
-          "sell_count": 3
+          "sell_count": 0
         },
         "top_newbie_posts": [
           {
@@ -224,6 +224,19 @@
             ]
           },
           {
+            "title": "基金清仓后的跌幅，有点吓人",
+            "score": 71.2,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 跌幅, 有点吓人, 基金清仓.",
+            "sentiment": -0.6,
+            "intent": "neutral",
+            "intent_label": "⚪ 观望",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (85/100)",
+              "语义判断: 依赖他人决策 (70/100)"
+            ]
+          },
+          {
             "title": "站不上五日线嘛？",
             "score": 70.2,
             "level": "纯小白",
@@ -237,26 +250,13 @@
             ]
           },
           {
-            "title": "早盘开盘就进了，没想到还亏，真无语",
-            "score": 69.2,
+            "title": "保佑韩国股市大涨千万要涨啊，不然咋们这边又得吃挂面",
+            "score": 69.5,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=60, 基础缺口=80, 营销=0, 专业深度=0. 证据: 早盘开盘就进了, 没想到还亏, 真无语.",
-            "sentiment": -0.4,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (60/100)"
-            ]
-          },
-          {
-            "title": "可惜没在涨停板清仓，只卖了一半，太不坚挺了，下午开",
-            "score": 69.2,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=5, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 可惜没在涨停板清仓, 只卖了一半, 太不坚挺了.",
-            "sentiment": -0.4,
-            "intent": "sell",
-            "intent_label": "🔴 卖出",
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=5, 专业深度=10. 证据: 保佑, 韩国股市大涨, 千万.",
+            "sentiment": 0.6,
+            "intent": "buy",
+            "intent_label": "🟢 买入",
             "key_signals": [
               "语义判断: 作者像真实小白 (85/100)",
               "语义判断: 依赖他人决策 (70/100)"
@@ -265,23 +265,23 @@
         ]
       },
       "semiconductor": {
-        "index": 42.0,
-        "interpretation": "🟡 开始升温 — 小白活跃度明显上升，需保持关注",
+        "index": 35.9,
+        "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
-          "total_posts": 86,
-          "valid_posts": 84,
-          "spam_posts": 2,
-          "newbie_posts": 28,
-          "pure_newbie": 18,
-          "newbie_ratio": 33.3,
-          "avg_newbie_score": 54.1,
-          "avg_sentiment": 27.3,
-          "purity_signal": 64.3,
-          "mom_buy_index": 23.6,
-          "mom_sell_index": 12.4,
-          "buy_sell_ratio": 2.3,
-          "buy_count": 7,
-          "sell_count": 3
+          "total_posts": 85,
+          "valid_posts": 80,
+          "spam_posts": 5,
+          "newbie_posts": 21,
+          "pure_newbie": 12,
+          "newbie_ratio": 26.2,
+          "avg_newbie_score": 48.7,
+          "avg_sentiment": 23.3,
+          "purity_signal": 57.1,
+          "mom_buy_index": 24.0,
+          "mom_sell_index": 10.2,
+          "buy_sell_ratio": 3.0,
+          "buy_count": 6,
+          "sell_count": 2
         },
         "top_newbie_posts": [
           {
@@ -324,26 +324,26 @@
             ]
           },
           {
-            "title": "存储芯片连续大涨3天，还能不能上车？",
-            "score": 69.0,
+            "title": "看来快3个月的大佬发话了？能信吗？",
+            "score": 68.2,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=90, 决策依赖=80, 基础缺口=85, 营销=0, 专业深度=15. 证据: 存储芯片连续大涨3天，还能不能上车？, 板块：semiconductor.",
-            "sentiment": 0.3,
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=5, 专业深度=15. 证据: 看来快3个月的大佬发话了, 能信吗, 大佬.",
+            "sentiment": 0.6,
             "intent": "neutral",
             "intent_label": "⚪ 观望",
             "key_signals": [
               "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (80/100)"
+              "语义判断: 依赖他人决策 (70/100)"
             ]
           },
           {
-            "title": "昨天亏的今天都回来不了目前需要五个涨停才回到原来太",
-            "score": 68.8,
+            "title": "今天减了一点",
+            "score": 67.2,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=5, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 昨天亏的今天都回来不了, 目前需要五个涨停才回到原来太.",
-            "sentiment": -0.4,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
+            "reasoning": "语义分类: 作者小白=85, 面向小白=5, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 今天减了一点, 减了一点.",
+            "sentiment": -0.2,
+            "intent": "sell",
+            "intent_label": "🔴 卖出",
             "key_signals": [
               "语义判断: 作者像真实小白 (85/100)",
               "语义判断: 依赖他人决策 (70/100)"
@@ -538,6 +538,10 @@
       {
         "date": "2026-08-02",
         "index": 42.2
+      },
+      {
+        "date": "2026-08-03",
+        "index": 41.8
       }
     ],
     "gold": [
@@ -724,6 +728,10 @@
       {
         "date": "2026-08-02",
         "index": 39.4
+      },
+      {
+        "date": "2026-08-03",
+        "index": 39.8
       }
     ],
     "cpo": [
@@ -910,6 +918,10 @@
       {
         "date": "2026-08-02",
         "index": 37.7
+      },
+      {
+        "date": "2026-08-03",
+        "index": 39.5
       }
     ],
     "semiconductor": [
@@ -1096,8 +1108,12 @@
       {
         "date": "2026-08-02",
         "index": 42.0
+      },
+      {
+        "date": "2026-08-03",
+        "index": 35.9
       }
     ]
   },
-  "record_count": 46
+  "record_count": 47
 }
