@@ -8906,6 +8906,360 @@
           ]
         }
       }
+    },
+    {
+      "date": "2026-08-10",
+      "timestamp": "2026-08-10T10:25:38.947709",
+      "sectors": {
+        "nasdaq": {
+          "index": 35.4,
+          "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+          "details": {
+            "total_posts": 98,
+            "valid_posts": 93,
+            "spam_posts": 5,
+            "newbie_posts": 20,
+            "pure_newbie": 14,
+            "newbie_ratio": 21.5,
+            "avg_newbie_score": 52.7,
+            "avg_sentiment": 15.5,
+            "purity_signal": 70.0,
+            "mom_buy_index": 23.9,
+            "mom_sell_index": 0.0,
+            "buy_sell_ratio": 6.0,
+            "buy_count": 6,
+            "sell_count": 0
+          },
+          "top_newbie_posts": [
+            {
+              "title": "为啥还能涨啊",
+              "score": 70.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 为啥还能涨啊.",
+              "sentiment": 0.6,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "我持有这些标的，你怎么看？",
+              "score": 69.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=80, 基础缺口=75, 营销=0, 专业深度=10. 证据: 我持有这些标的, 你怎么看.",
+              "sentiment": 0.0,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (80/100)"
+              ]
+            },
+            {
+              "title": "请问，这只票，晚上看美股涨，早上这里买，走势一样吗",
+              "score": 67.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 请问, 这只票, 晚上看美股涨.",
+              "sentiment": 0.25,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "8.7操作记录",
+              "score": 66.5,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=15. 证据: 8.7, 操作记录.",
+              "sentiment": 0.05,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "现在每天等着美股开盘成了日常了内心也平静了，买了几",
+              "score": 66.5,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=60, 基础缺口=75, 营销=0, 专业深度=5. 证据: 现在每天等着美股开盘成了日常了, 内心也平静了, 买了几.",
+              "sentiment": 0.4,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            }
+          ]
+        },
+        "gold": {
+          "index": 38.0,
+          "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+          "details": {
+            "total_posts": 73,
+            "valid_posts": 70,
+            "spam_posts": 3,
+            "newbie_posts": 14,
+            "pure_newbie": 11,
+            "newbie_ratio": 20.0,
+            "avg_newbie_score": 56.7,
+            "avg_sentiment": 20.4,
+            "purity_signal": 78.6,
+            "mom_buy_index": 18.1,
+            "mom_sell_index": 0.0,
+            "buy_sell_ratio": 2.0,
+            "buy_count": 2,
+            "sell_count": 0
+          },
+          "top_newbie_posts": [
+            {
+              "title": "今晚上积存金是走是留等八点半",
+              "score": 69.5,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=80, 面向小白=10, 决策依赖=80, 基础缺口=80, 营销=0, 专业深度=0. 证据: 今晚上积存金是走是留等八点半.",
+              "sentiment": -0.3,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (80/100)",
+                "语义判断: 依赖他人决策 (80/100)"
+              ]
+            },
+            {
+              "title": "三金五金预算怎么分？把钱花在刀刃上！",
+              "score": 68.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=90, 面向小白=85, 决策依赖=70, 基础缺口=85, 营销=5, 专业深度=10. 证据: 板块：gold, 标题：三金五金预算怎么分？把钱花在刀刃上！.",
+              "sentiment": 0.0,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (90/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "白银lot要退市了，黄金有影响吗！",
+              "score": 66.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=75, 决策依赖=60, 基础缺口=80, 营销=0, 专业深度=10. 证据: 白银lot要退市了, 黄金有影响吗.",
+              "sentiment": 0.4,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            },
+            {
+              "title": "预判到了涨，但是没有料到涨这么多",
+              "score": 66.5,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=60, 基础缺口=70, 营销=0, 专业深度=15. 证据: 预判到了涨, 没有料到涨这么多.",
+              "sentiment": 0.75,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            },
+            {
+              "title": "尾盘入，明天走势会怎样？",
+              "score": 62.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=80, 面向小白=10, 决策依赖=60, 基础缺口=80, 营销=0, 专业深度=5. 证据: 尾盘入, 明天走势会怎样.",
+              "sentiment": 0.0,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (80/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            }
+          ]
+        },
+        "cpo": {
+          "index": 38.0,
+          "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+          "details": {
+            "total_posts": 91,
+            "valid_posts": 85,
+            "spam_posts": 6,
+            "newbie_posts": 18,
+            "pure_newbie": 13,
+            "newbie_ratio": 21.2,
+            "avg_newbie_score": 57.4,
+            "avg_sentiment": 21.7,
+            "purity_signal": 72.2,
+            "mom_buy_index": 16.9,
+            "mom_sell_index": 0.0,
+            "buy_sell_ratio": 3.0,
+            "buy_count": 3,
+            "sell_count": 0
+          },
+          "top_newbie_posts": [
+            {
+              "title": "七月一号入手的还有机会回本吗",
+              "score": 73.5,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=5, 决策依赖=80, 基础缺口=85, 营销=0, 专业深度=5. 证据: 七月一号, 入手的, 还有机会.",
+              "sentiment": -0.3,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (80/100)"
+              ]
+            },
+            {
+              "title": "还亏十个点，下周回本？",
+              "score": 72.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=15, 决策依赖=70, 基础缺口=85, 营销=0, 专业深度=0. 证据: 还亏十个点, 下周回本？.",
+              "sentiment": -0.4,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "周一低开5个点我就加十万。跌停我就加二十万",
+              "score": 71.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=15, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 周一低开5个点我就加十万, 跌停我就加二十万.",
+              "sentiment": 0.6,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "实盘操作晒一波，想听听大家的建议",
+              "score": 71.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=70, 决策依赖=80, 基础缺口=85, 营销=0, 专业深度=10. 证据: 实盘操作晒一波, 想听听大家的建议.",
+              "sentiment": 0.0,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (80/100)"
+              ]
+            },
+            {
+              "title": "Cpo是不是下周一要完蛋？这盘中来回跳水的？有谁知道",
+              "score": 71.0,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=75, 基础缺口=85, 营销=0, 专业深度=10. 证据: Cpo是不是下周一要完蛋？, 这盘中来回跳水的？, 有谁知道.",
+              "sentiment": -0.5,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (75/100)"
+              ]
+            }
+          ]
+        },
+        "semiconductor": {
+          "index": 41.6,
+          "interpretation": "🟡 开始升温 — 小白活跃度明显上升，需保持关注",
+          "details": {
+            "total_posts": 84,
+            "valid_posts": 80,
+            "spam_posts": 4,
+            "newbie_posts": 22,
+            "pure_newbie": 17,
+            "newbie_ratio": 27.5,
+            "avg_newbie_score": 56.0,
+            "avg_sentiment": 25.2,
+            "purity_signal": 77.3,
+            "mom_buy_index": 21.4,
+            "mom_sell_index": 15.8,
+            "buy_sell_ratio": 1.7,
+            "buy_count": 5,
+            "sell_count": 3
+          },
+          "top_newbie_posts": [
+            {
+              "title": "我是萌新，7月底进来的，11700本金亏了500了，回本不",
+              "score": 75.0,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=95, 面向小白=5, 决策依赖=80, 基础缺口=70, 营销=0, 专业深度=5. 证据: 我是萌新, 亏了500了, 回本不.",
+              "sentiment": -0.2,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (95/100)",
+                "语义判断: 依赖他人决策 (80/100)"
+              ]
+            },
+            {
+              "title": "本科0经验入行半导体了！！！",
+              "score": 71.5,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=90, 面向小白=20, 决策依赖=70, 基础缺口=90, 营销=0, 专业深度=10. 证据: 本科0经验入行半导体了！！！, 0经验.",
+              "sentiment": 0.0,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (90/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "可以了，撤，别太贪了，",
+              "score": 71.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 可以了, 撤, 别太贪了.",
+              "sentiment": 0.6,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "明天估计会跌吧",
+              "score": 69.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=5, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 明天估计会跌吧, 跌, 估计.",
+              "sentiment": -0.4,
+              "intent": "sell",
+              "intent_label": "🔴 卖出",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "MD，058没抢上！哎！手痒，想再买点！不然不够刺激",
+              "score": 66.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=5, 决策依赖=60, 基础缺口=80, 营销=0, 专业深度=10. 证据: 没抢上, 手痒, 想再买点.",
+              "sentiment": 0.4,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }
