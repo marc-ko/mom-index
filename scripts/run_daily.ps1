@@ -82,11 +82,12 @@ if ($LASTEXITCODE -ne 0) {
 Write-Log "Issue template generated"
 
 if ($PushReport) {
-  Write-Log "Preparing safe daily report commit for marcko"
+  Write-Log "Preparing safe daily repo-data commit for marcko"
   $reportPaths = @(
     ".github/ISSUE_TEMPLATE.md",
     "data/dashboard_data.json",
     "data/history.json",
+    "frontend/dashboard.html",
     "frontend/data/dashboard_data.json",
     "frontend/data/history.json"
   )
@@ -115,7 +116,7 @@ if ($PushReport) {
       Write-Log "Report push failed with exit code $script:LastLoggedNativeExitCode"
       exit $script:LastLoggedNativeExitCode
     }
-    Write-Log "Pushed safe daily report changes to marcko"
+    Write-Log "Pushed safe daily repo-data changes to marcko"
   }
 }
 
@@ -129,8 +130,9 @@ Write-Log "Preparing GitHub Pages payload"
 $tmpPublic = Join-Path $RepoRoot ".tmp-public-data"
 New-Item -ItemType Directory -Force -Path $tmpPublic | Out-Null
 
-Copy-Item -LiteralPath (Join-Path $RepoRoot "data\dashboard_data.json") -Destination (Join-Path $tmpPublic "dashboard_data.json") -Force
-Copy-Item -LiteralPath (Join-Path $RepoRoot "data\history.json") -Destination (Join-Path $tmpPublic "history.json") -Force
+Copy-Item -LiteralPath (Join-Path $RepoRoot "frontend\dashboard.html") -Destination (Join-Path $tmpPublic "dashboard.html") -Force
+Copy-Item -LiteralPath (Join-Path $RepoRoot "frontend\data\dashboard_data.json") -Destination (Join-Path $tmpPublic "dashboard_data.json") -Force
+Copy-Item -LiteralPath (Join-Path $RepoRoot "frontend\data\history.json") -Destination (Join-Path $tmpPublic "history.json") -Force
 
 if (-not (Test-Path -LiteralPath $PagesWorktree)) {
   Write-Log "Creating gh-pages worktree at $PagesWorktree"
@@ -147,13 +149,14 @@ if (-not (Test-Path -LiteralPath $PagesWorktree)) {
 }
 
 New-Item -ItemType Directory -Force -Path (Join-Path $PagesWorktree "data") | Out-Null
+Copy-Item -LiteralPath (Join-Path $tmpPublic "dashboard.html") -Destination (Join-Path $PagesWorktree "dashboard.html") -Force
 Copy-Item -LiteralPath (Join-Path $tmpPublic "dashboard_data.json") -Destination (Join-Path $PagesWorktree "data\dashboard_data.json") -Force
 Copy-Item -LiteralPath (Join-Path $tmpPublic "history.json") -Destination (Join-Path $PagesWorktree "data\history.json") -Force
 
 Push-Location -LiteralPath $PagesWorktree
 try {
   Invoke-LoggedNative git @('status', '--short')
-  Invoke-LoggedNative git @('add', 'data/dashboard_data.json', 'data/history.json')
+  Invoke-LoggedNative git @('add', 'dashboard.html', 'data/dashboard_data.json', 'data/history.json')
   if ($script:LastLoggedNativeExitCode -ne 0) {
     Write-Log "Pages stage failed with exit code $script:LastLoggedNativeExitCode"
     exit $script:LastLoggedNativeExitCode
