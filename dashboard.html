@@ -524,8 +524,30 @@ document.querySelectorAll('[data-lang-button]').forEach(button => {
 setStaticText();
 renderLegend();
 
-fetch('data/dashboard_data.json')
-  .then(r => r.json())
+const REPO_DASHBOARD_DATA_URL = 'https://raw.githubusercontent.com/marc-ko/mom-index/master/data/dashboard_data.json';
+
+function dashboardDataUrls() {
+  const localDataUrl = 'data/dashboard_data.json';
+  if (window.location.hostname.endsWith('github.io')) {
+    return [`${REPO_DASHBOARD_DATA_URL}?v=${Date.now()}`, localDataUrl];
+  }
+  return [localDataUrl];
+}
+
+function fetchDashboardData(urls) {
+  const [url, ...fallbacks] = urls;
+  return fetch(url)
+    .then(r => {
+      if (!r.ok) throw new Error(`${url} returned ${r.status}`);
+      return r.json();
+    })
+    .catch(err => {
+      if (!fallbacks.length) throw err;
+      return fetchDashboardData(fallbacks);
+    });
+}
+
+fetchDashboardData(dashboardDataUrls())
   .then(data => {
     dashboardData = data;
     renderAll();
