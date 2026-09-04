@@ -1,19 +1,19 @@
 ---
-title: Mom Index Daily Report - 2026-09-03
+title: Mom Index Daily Report - 2026-09-04
 labels: documentation
 ---
 
 # Mom Index Daily Report
 
-Date: 2026-09-03
+Date: 2026-09-04
 
 Dashboard: https://marc-ko.github.io/mom-index/dashboard.html
 
 | Sector | Mom Index | Mom Buy | Mom Sell | Posts | Newbie Posts | Interpretation |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| Nasdaq | 39.3 | 28.6 | 16.3 | 102 | 23 | 🟢 正常区间 — 小白参与度适中，无需特别操作 |
-| Gold | 38.3 | 27.9 | 0.0 | 94 | 24 | 🟢 正常区间 — 小白参与度适中，无需特别操作 |
-| CPO / Communications | 39.4 | 50.4 | 22.1 | 95 | 11 | 🟢 正常区间 — 小白参与度适中，无需特别操作 |
-| Semiconductor | 33.8 | 22.5 | 10.1 | 90 | 23 | 🟢 正常区间 — 小白参与度适中，无需特别操作 |
+| Nasdaq | 36.7 | 23.6 | 21.9 | 99 | 22 | 🟢 正常区间 — 小白参与度适中，无需特别操作 |
+| Gold | 36.5 | 23.6 | 13.4 | 88 | 19 | 🟢 正常区间 — 小白参与度适中，无需特别操作 |
+| CPO / Communications | 36.3 | 31.6 | 25.6 | 94 | 20 | 🟢 正常区间 — 小白参与度适中，无需特别操作 |
+| Semiconductor | 34.9 | 36.0 | 17.4 | 89 | 14 | 🟢 正常区间 — 小白参与度适中，无需特别操作 |
 
 Raw Rednote/Xiaohongshu post text is not published in this issue. Use the dashboard for the public snapshot and keep local scrape caches private.
