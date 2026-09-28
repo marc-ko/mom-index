@@ -18456,6 +18456,360 @@
           ]
         }
       }
+    },
+    {
+      "date": "2026-09-28",
+      "timestamp": "2026-09-28T08:52:24.595728",
+      "sectors": {
+        "nasdaq": {
+          "index": 31.4,
+          "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+          "details": {
+            "total_posts": 95,
+            "valid_posts": 93,
+            "spam_posts": 2,
+            "newbie_posts": 20,
+            "pure_newbie": 8,
+            "newbie_ratio": 21.5,
+            "avg_newbie_score": 47.4,
+            "avg_sentiment": 24.9,
+            "purity_signal": 40.0,
+            "mom_buy_index": 30.2,
+            "mom_sell_index": 20.4,
+            "buy_sell_ratio": 3.5,
+            "buy_count": 7,
+            "sell_count": 2
+          },
+          "top_newbie_posts": [
+            {
+              "title": "现在这个价位可以买吗？",
+              "score": 81.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=95, 面向小白=5, 决策依赖=80, 基础缺口=95, 营销=0, 专业深度=0. 证据: 现在, 这个价位, 可以买吗？.",
+              "sentiment": 0.3,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (95/100)",
+                "语义判断: 依赖他人决策 (80/100)"
+              ]
+            },
+            {
+              "title": "为什么停牌啊",
+              "score": 67.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 停牌, 为什么.",
+              "sentiment": -0.2,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "没得办法只能场内购买了",
+              "score": 67.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 没得办法, 只能场内购买了.",
+              "sentiment": -0.1,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "星期一我又要进场了，各位小心",
+              "score": 66.5,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=15. 证据: 星期一我又要进场了, 各位小心.",
+              "sentiment": -0.2,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "1000本金无脑跟着chatgpt 操作小实验，day3",
+              "score": 62.0,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=80, 面向小白=85, 决策依赖=80, 基础缺口=85, 营销=10, 专业深度=10. 证据: 板块：nasdaq, 1000本金无脑跟着chatgpt 操作小实验，day3.",
+              "sentiment": 0.0,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (80/100)",
+                "语义判断: 依赖他人决策 (80/100)"
+              ]
+            }
+          ]
+        },
+        "gold": {
+          "index": 37.2,
+          "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+          "details": {
+            "total_posts": 90,
+            "valid_posts": 86,
+            "spam_posts": 4,
+            "newbie_posts": 22,
+            "pure_newbie": 12,
+            "newbie_ratio": 25.6,
+            "avg_newbie_score": 49.6,
+            "avg_sentiment": 31.8,
+            "purity_signal": 54.5,
+            "mom_buy_index": 27.3,
+            "mom_sell_index": 13.9,
+            "buy_sell_ratio": 2.5,
+            "buy_count": 5,
+            "sell_count": 2
+          },
+          "top_newbie_posts": [
+            {
+              "title": "又做了无效t，从10.742降到10.741",
+              "score": 69.0,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=5. 证据: 又做了无效t, 从10.742降到10.741.",
+              "sentiment": -0.2,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "今日份猪脚饭到手，已美美取餐",
+              "score": 68.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=5, 专业深度=15. 证据: 今日份猪脚饭到手, 已美美取餐.",
+              "sentiment": 0.6,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "看不懂啊，为什么涨？comex黄金在跌，汇率飙升，上海",
+              "score": 68.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=60, 基础缺口=90, 营销=0, 专业深度=0. 证据: 看不懂啊, 为什么涨, comex黄金在跌.",
+              "sentiment": -0.2,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            },
+            {
+              "title": "一买你就这样",
+              "score": 67.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=5, 专业深度=15. 证据: 一买你就这样, 标题简短且缺乏具体说明, 标题中\"你就这样\"暗示盲目跟随操作.",
+              "sentiment": 0.6,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "9.9啥时候回本",
+              "score": 67.0,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=80, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=0. 证据: 板块：gold, 标题：9.9啥时候回本.",
+              "sentiment": -0.3,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (80/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            }
+          ]
+        },
+        "cpo": {
+          "index": 29.9,
+          "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+          "details": {
+            "total_posts": 92,
+            "valid_posts": 89,
+            "spam_posts": 3,
+            "newbie_posts": 14,
+            "pure_newbie": 7,
+            "newbie_ratio": 15.7,
+            "avg_newbie_score": 46.1,
+            "avg_sentiment": 22.9,
+            "purity_signal": 50.0,
+            "mom_buy_index": 19.3,
+            "mom_sell_index": 0.0,
+            "buy_sell_ratio": 3.0,
+            "buy_count": 3,
+            "sell_count": 0
+          },
+          "top_newbie_posts": [
+            {
+              "title": "这波回头到哪里？",
+              "score": 70.0,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=5. 证据: 这波回头到哪里？.",
+              "sentiment": -0.4,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "我持有这些标的，你怎么看？",
+              "score": 67.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=15, 决策依赖=70, 基础缺口=80, 营销=0, 专业深度=10. 证据: 我持有这些标的, 你怎么看.",
+              "sentiment": 0.0,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "多少人买呀，我680一直买不进",
+              "score": 66.5,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=75, 基础缺口=80, 营销=5, 专业深度=15. 证据: 多少人买呀, 我680一直买不进.",
+              "sentiment": 0.4,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (75/100)"
+              ]
+            },
+            {
+              "title": "0.8元的本，回本比登天还难呀！",
+              "score": 66.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=5, 专业深度=15. 证据: 0.8元的本, 回本比登天还难呀！.",
+              "sentiment": -0.4,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "该入手了，找个低点入吧，该6G概念了",
+              "score": 64.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=80, 营销=5, 专业深度=15. 证据: 该入手了, 找个低点入吧, 该6G概念了.",
+              "sentiment": 0.25,
+              "intent": "buy",
+              "intent_label": "🟢 买入",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            }
+          ]
+        },
+        "semiconductor": {
+          "index": 29.0,
+          "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
+          "details": {
+            "total_posts": 93,
+            "valid_posts": 89,
+            "spam_posts": 4,
+            "newbie_posts": 23,
+            "pure_newbie": 7,
+            "newbie_ratio": 25.8,
+            "avg_newbie_score": 39.8,
+            "avg_sentiment": 20.9,
+            "purity_signal": 30.4,
+            "mom_buy_index": 0.0,
+            "mom_sell_index": 10.7,
+            "buy_sell_ratio": 0.0,
+            "buy_count": 0,
+            "sell_count": 1
+          },
+          "top_newbie_posts": [
+            {
+              "title": "费城半导体都回818高点了，我们啥时候能回去",
+              "score": 69.8,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=70, 基础缺口=85, 营销=0, 专业深度=10. 证据: 费城半导体都回818高点了, 我们啥时候能回去.",
+              "sentiment": -0.4,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (70/100)"
+              ]
+            },
+            {
+              "title": "入行半导体要学什么知识点",
+              "score": 66.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=75, 决策依赖=60, 基础缺口=85, 营销=0, 专业深度=10. 证据: 入行半导体, 要学什么知识点.",
+              "sentiment": 0.0,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            },
+            {
+              "title": "满仓进被套了",
+              "score": 64.2,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=80, 面向小白=10, 决策依赖=60, 基础缺口=85, 营销=5, 专业深度=10. 证据: 板块：semiconductor, 标题：满仓进被套了.",
+              "sentiment": -0.6,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (80/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            },
+            {
+              "title": "多少年的尿性，遇到节假日，黑色星期四都会跌",
+              "score": 64.0,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=60, 基础缺口=75, 营销=0, 专业深度=15. 证据: 多少年的尿性, 遇到节假日, 黑色星期四都会跌.",
+              "sentiment": -0.4,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            },
+            {
+              "title": "工科混子拿半导体offer，说点xhs上搜不到的",
+              "score": 58.5,
+              "level": "纯小白",
+              "reasoning": "语义分类: 作者小白=85, 面向小白=15, 决策依赖=60, 基础缺口=70, 营销=5, 专业深度=20. 证据: 工科混子, 拿半导体offer, 说点xhs上搜不到的.",
+              "sentiment": 0.25,
+              "intent": "neutral",
+              "intent_label": "⚪ 观望",
+              "key_signals": [
+                "语义判断: 作者像真实小白 (85/100)",
+                "语义判断: 依赖他人决策 (60/100)"
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }
