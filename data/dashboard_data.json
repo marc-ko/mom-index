@@ -1,28 +1,41 @@
 {
   "latest": {
-    "date": "2026-11-08",
-    "timestamp": "2026-11-08T08:45:35.418913",
+    "date": "2026-11-09",
+    "timestamp": "2026-11-09T09:34:37.526147",
     "sectors": {
       "nasdaq": {
-        "index": 23.8,
+        "index": 30.3,
         "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
-          "total_posts": 94,
-          "valid_posts": 89,
-          "spam_posts": 5,
-          "newbie_posts": 16,
-          "pure_newbie": 2,
-          "newbie_ratio": 18.0,
-          "avg_newbie_score": 36.0,
-          "avg_sentiment": 28.4,
-          "purity_signal": 12.5,
-          "mom_buy_index": 20.7,
+          "total_posts": 91,
+          "valid_posts": 88,
+          "spam_posts": 3,
+          "newbie_posts": 24,
+          "pure_newbie": 6,
+          "newbie_ratio": 27.3,
+          "avg_newbie_score": 39.8,
+          "avg_sentiment": 28.5,
+          "purity_signal": 25.0,
+          "mom_buy_index": 22.0,
           "mom_sell_index": 0.0,
-          "buy_sell_ratio": 4.0,
-          "buy_count": 4,
+          "buy_sell_ratio": 6.0,
+          "buy_count": 6,
           "sell_count": 0
         },
         "top_newbie_posts": [
+          {
+            "title": "留学生第一支长持美股有推荐的吗",
+            "score": 74.2,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=85, 面向小白=5, 决策依赖=80, 基础缺口=85, 营销=0, 专业深度=0. 证据: 留学生第一支长持美股有推荐的吗.",
+            "sentiment": 0.0,
+            "intent": "buy",
+            "intent_label": "🟢 买入",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (85/100)",
+              "语义判断: 依赖他人决策 (80/100)"
+            ]
+          },
           {
             "title": "求求你们跌下来让我入场吧",
             "score": 70.0,
@@ -37,74 +50,63 @@
             ]
           },
           {
-            "title": "昨天买合算？还是今天买合算？",
-            "score": 50.5,
+            "title": "好纠结😖买美股，VOO和QQQ到底选哪个？",
+            "score": 65.3,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=60, 面向小白=10, 决策依赖=70, 基础缺口=60, 营销=0, 专业深度=0. 证据: 昨天买合算？还是今天买合算？.",
-            "sentiment": -0.2,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (60/100)",
-              "语义判断: 依赖他人决策 (70/100)"
-            ]
-          },
-          {
-            "title": "新手小白尝试基金定投的第1️⃣天",
-            "score": 47.2,
-            "level": "偏小白",
-            "reasoning": "语义分类: 作者小白=90, 面向小白=80, 决策依赖=15, 基础缺口=45, 营销=5, 专业深度=5. 证据: 新手小白尝试基金定投的第1️⃣天.",
+            "reasoning": "语义分类: 作者小白=85, 面向小白=95, 决策依赖=55, 基础缺口=85, 营销=0, 专业深度=10. 证据: 好纠结, 买美股, VOO和QQQ到底选哪个.",
             "sentiment": 0.0,
             "intent": "neutral",
             "intent_label": "⚪ 观望",
             "key_signals": [
-              "语义判断: 作者像真实小白 (90/100)"
+              "语义判断: 作者像真实小白 (85/100)",
+              "语义判断: 基础知识缺口 (85/100)"
             ]
           },
           {
-            "title": "不要怕，我成本2块多，随时加仓解套！周一高开5个点",
-            "score": 41.2,
-            "level": "偏小白",
-            "reasoning": "语义分类: 作者小白=75, 面向小白=30, 决策依赖=20, 基础缺口=65, 营销=5, 专业深度=25. 证据: 不要怕, 我成本2块多, 随时加仓解套.",
-            "sentiment": 0.3,
-            "intent": "buy",
-            "intent_label": "🟢 买入",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (75/100)",
-              "语义判断: 基础知识缺口 (65/100)"
-            ]
-          },
-          {
-            "title": "现在溢价这么高还买！",
-            "score": 39.0,
-            "level": "偏小白",
-            "reasoning": "语义分类: 作者小白=50, 面向小白=0, 决策依赖=50, 基础缺口=50, 营销=0, 专业深度=0. 证据: 现在溢价这么高还买！.",
-            "sentiment": -0.2,
+            "title": "刚接触美股，定投纳指亏麻了。还能投么",
+            "score": 61.5,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=95, 面向小白=95, 决策依赖=15, 基础缺口=90, 营销=0, 专业深度=10. 证据: 刚接触美股, 定投纳指亏麻了, 还能投么.",
+            "sentiment": 0.25,
             "intent": "neutral",
             "intent_label": "⚪ 观望",
             "key_signals": [
-              "语义置信度 40/100"
+              "语义判断: 作者像真实小白 (95/100)",
+              "语义判断: 基础知识缺口 (90/100)"
+            ]
+          },
+          {
+            "title": "纳斯达克100已经很高了，现在还能买吗？",
+            "score": 61.5,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=70, 面向小白=60, 决策依赖=80, 基础缺口=70, 营销=0, 专业深度=10. 证据: 纳斯达克100已经很高了，现在还能买吗？.",
+            "sentiment": -0.2,
+            "intent": "buy",
+            "intent_label": "🟢 买入",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (70/100)",
+              "语义判断: 依赖他人决策 (80/100)"
             ]
           }
         ]
       },
       "gold": {
-        "index": 29.9,
+        "index": 31.6,
         "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
-          "total_posts": 94,
+          "total_posts": 93,
           "valid_posts": 93,
-          "spam_posts": 1,
-          "newbie_posts": 19,
-          "pure_newbie": 7,
-          "newbie_ratio": 20.4,
-          "avg_newbie_score": 42.7,
-          "avg_sentiment": 27.4,
-          "purity_signal": 36.8,
-          "mom_buy_index": 13.1,
-          "mom_sell_index": 9.3,
-          "buy_sell_ratio": 2.0,
-          "buy_count": 2,
+          "spam_posts": 0,
+          "newbie_posts": 21,
+          "pure_newbie": 9,
+          "newbie_ratio": 22.6,
+          "avg_newbie_score": 43.5,
+          "avg_sentiment": 26.2,
+          "purity_signal": 42.9,
+          "mom_buy_index": 13.3,
+          "mom_sell_index": 9.0,
+          "buy_sell_ratio": 3.0,
+          "buy_count": 3,
           "sell_count": 1
         },
         "top_newbie_posts": [
@@ -148,16 +150,16 @@
             ]
           },
           {
-            "title": "9.6的本现在不敢动了理智告诉我应该出一部分下来再接",
-            "score": 66.8,
+            "title": "本想指望在你这挣点钱换手机，结果差不多把新手机的钱",
+            "score": 69.5,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=75, 面向小白=80, 决策依赖=80, 基础缺口=80, 营销=0, 专业深度=10. 证据: 9.6的本现在不敢动了理智告诉我应该出一部分下来再接.",
-            "sentiment": -0.5,
+            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=90, 基础缺口=70, 营销=5, 专业深度=10. 证据: 指望在你这挣点钱, 结果差不多把新手机的钱.",
+            "sentiment": -0.4,
             "intent": "neutral",
             "intent_label": "⚪ 观望",
             "key_signals": [
-              "语义判断: 作者像真实小白 (75/100)",
-              "语义判断: 依赖他人决策 (80/100)"
+              "语义判断: 作者像真实小白 (85/100)",
+              "语义判断: 依赖他人决策 (90/100)"
             ]
           },
           {
@@ -176,23 +178,23 @@
         ]
       },
       "cpo": {
-        "index": 28.6,
+        "index": 28.7,
         "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
           "total_posts": 93,
-          "valid_posts": 88,
-          "spam_posts": 5,
-          "newbie_posts": 20,
-          "pure_newbie": 5,
-          "newbie_ratio": 22.7,
-          "avg_newbie_score": 40.7,
-          "avg_sentiment": 28.0,
-          "purity_signal": 25.0,
-          "mom_buy_index": 14.7,
-          "mom_sell_index": 0.0,
-          "buy_sell_ratio": 3.0,
-          "buy_count": 3,
-          "sell_count": 0
+          "valid_posts": 87,
+          "spam_posts": 6,
+          "newbie_posts": 19,
+          "pure_newbie": 6,
+          "newbie_ratio": 21.8,
+          "avg_newbie_score": 40.6,
+          "avg_sentiment": 25.3,
+          "purity_signal": 31.6,
+          "mom_buy_index": 12.5,
+          "mom_sell_index": 19.3,
+          "buy_sell_ratio": 2.0,
+          "buy_count": 2,
+          "sell_count": 1
         },
         "top_newbie_posts": [
           {
@@ -209,29 +211,42 @@
             ]
           },
           {
-            "title": "啥时候到0.25啊",
-            "score": 75.5,
+            "title": "光模块和CPO傻傻分不清",
+            "score": 58.5,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=90, 面向小白=5, 决策依赖=80, 基础缺口=90, 营销=5, 专业深度=5. 证据: 啥时候到0.25啊.",
-            "sentiment": -0.4,
-            "intent": "buy",
-            "intent_label": "🟢 买入",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (90/100)",
-              "语义判断: 依赖他人决策 (80/100)"
-            ]
-          },
-          {
-            "title": "后复权价2.358元，便宜吗？",
-            "score": 67.5,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=75, 基础缺口=80, 营销=0, 专业深度=10. 证据: 后复权价2.358元，便宜吗？.",
+            "reasoning": "语义分类: 作者小白=95, 面向小白=95, 决策依赖=10, 基础缺口=95, 营销=5, 专业深度=0. 证据: 光模块, CPO, 傻傻分不清.",
             "sentiment": 0.0,
             "intent": "neutral",
             "intent_label": "⚪ 观望",
             "key_signals": [
-              "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 依赖他人决策 (75/100)"
+              "语义判断: 作者像真实小白 (95/100)",
+              "语义判断: 基础知识缺口 (95/100)"
+            ]
+          },
+          {
+            "title": "跌了快30个点，明天能涨3个点吗",
+            "score": 57.2,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=65, 面向小白=5, 决策依赖=80, 基础缺口=55, 营销=0, 专业深度=0. 证据: 跌了快30个点, 明天能涨3个点吗.",
+            "sentiment": -0.45,
+            "intent": "neutral",
+            "intent_label": "⚪ 观望",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (65/100)",
+              "语义判断: 依赖他人决策 (80/100)"
+            ]
+          },
+          {
+            "title": "周一能抄底吗？",
+            "score": 57.0,
+            "level": "纯小白",
+            "reasoning": "语义分类: 作者小白=70, 面向小白=30, 决策依赖=80, 基础缺口=60, 营销=0, 专业深度=10. 证据: 周一能抄底吗？.",
+            "sentiment": 0.2,
+            "intent": "buy",
+            "intent_label": "🟢 买入",
+            "key_signals": [
+              "语义判断: 作者像真实小白 (70/100)",
+              "语义判断: 依赖他人决策 (80/100)"
             ]
           },
           {
@@ -246,39 +261,26 @@
               "语义判断: 作者像真实小白 (70/100)",
               "语义判断: 依赖他人决策 (80/100)"
             ]
-          },
-          {
-            "title": "CPO、光模块、光通信，它们有什么区别？",
-            "score": 56.5,
-            "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=85, 面向小白=10, 决策依赖=10, 基础缺口=90, 营销=0, 专业深度=5. 证据: CPO、光模块、光通信, 它们有什么区别？.",
-            "sentiment": 0.0,
-            "intent": "neutral",
-            "intent_label": "⚪ 观望",
-            "key_signals": [
-              "语义判断: 作者像真实小白 (85/100)",
-              "语义判断: 基础知识缺口 (90/100)"
-            ]
           }
         ]
       },
       "semiconductor": {
-        "index": 28.2,
+        "index": 27.4,
         "interpretation": "🟢 正常区间 — 小白参与度适中，无需特别操作",
         "details": {
-          "total_posts": 92,
-          "valid_posts": 88,
-          "spam_posts": 4,
-          "newbie_posts": 13,
+          "total_posts": 91,
+          "valid_posts": 85,
+          "spam_posts": 6,
+          "newbie_posts": 14,
           "pure_newbie": 5,
-          "newbie_ratio": 14.8,
-          "avg_newbie_score": 44.5,
-          "avg_sentiment": 26.9,
-          "purity_signal": 38.5,
-          "mom_buy_index": 21.0,
-          "mom_sell_index": 14.9,
-          "buy_sell_ratio": 3.0,
-          "buy_count": 3,
+          "newbie_ratio": 16.5,
+          "avg_newbie_score": 43.2,
+          "avg_sentiment": 23.2,
+          "purity_signal": 35.7,
+          "mom_buy_index": 8.5,
+          "mom_sell_index": 14.5,
+          "buy_sell_ratio": 1.0,
+          "buy_count": 1,
           "sell_count": 1
         },
         "top_newbie_posts": [
@@ -296,16 +298,16 @@
             ]
           },
           {
-            "title": "重仓1000万芯片亏损30%，该怎么办？",
-            "score": 68.5,
+            "title": "存储芯片，光模块，CPO 暴跌！行业不行了吗？",
+            "score": 67.8,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=70, 面向小白=5, 决策依赖=90, 基础缺口=80, 营销=0, 专业深度=10. 证据: 重仓, 1000万, 芯片.",
-            "sentiment": -0.5,
+            "reasoning": "语义分类: 作者小白=80, 面向小白=70, 决策依赖=70, 基础缺口=80, 营销=5, 专业深度=10. 证据: 存储芯片，光模块，CPO 暴跌！, 行业不行了吗？.",
+            "sentiment": -0.7,
             "intent": "neutral",
             "intent_label": "⚪ 观望",
             "key_signals": [
-              "语义判断: 作者像真实小白 (70/100)",
-              "语义判断: 依赖他人决策 (90/100)"
+              "语义判断: 作者像真实小白 (80/100)",
+              "语义判断: 依赖他人决策 (70/100)"
             ]
           },
           {
@@ -322,16 +324,16 @@
             ]
           },
           {
-            "title": "感觉会红哦",
-            "score": 58.2,
+            "title": "第228集-美股科技大跌，半导体还能涨吗？",
+            "score": 62.8,
             "level": "纯小白",
-            "reasoning": "语义分类: 作者小白=70, 面向小白=20, 决策依赖=75, 基础缺口=80, 营销=0, 专业深度=10. 证据: 无明确短语.",
-            "sentiment": 0.4,
-            "intent": "buy",
-            "intent_label": "🟢 买入",
+            "reasoning": "语义分类: 作者小白=75, 面向小白=80, 决策依赖=60, 基础缺口=85, 营销=0, 专业深度=5. 证据: 第228集-美股科技大跌，半导体还能涨吗？, 美股科技大跌, 半导体还能涨吗.",
+            "sentiment": -0.3,
+            "intent": "neutral",
+            "intent_label": "⚪ 观望",
             "key_signals": [
-              "语义判断: 作者像真实小白 (70/100)",
-              "语义判断: 依赖他人决策 (75/100)"
+              "语义判断: 作者像真实小白 (75/100)",
+              "语义判断: 依赖他人决策 (60/100)"
             ]
           },
           {
@@ -720,6 +722,10 @@
       {
         "date": "2026-11-08",
         "index": 23.8
+      },
+      {
+        "date": "2026-11-09",
+        "index": 30.3
       }
     ],
     "gold": [
@@ -1090,6 +1096,10 @@
       {
         "date": "2026-11-08",
         "index": 29.9
+      },
+      {
+        "date": "2026-11-09",
+        "index": 31.6
       }
     ],
     "cpo": [
@@ -1460,6 +1470,10 @@
       {
         "date": "2026-11-08",
         "index": 28.6
+      },
+      {
+        "date": "2026-11-09",
+        "index": 28.7
       }
     ],
     "semiconductor": [
@@ -1830,8 +1844,12 @@
       {
         "date": "2026-11-08",
         "index": 28.2
+      },
+      {
+        "date": "2026-11-09",
+        "index": 27.4
       }
     ]
   },
-  "record_count": 92
+  "record_count": 93
 }
